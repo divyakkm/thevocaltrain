@@ -1,0 +1,19 @@
+<head>
+  <title>tvt_schema</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+
+  {{> hello}}
+  {{> insertBookForm}}
+</body>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>
+
+<template name="insertBookForm">
+ {{> quickForm collection="Volunteer" id="insertBookForm" type="insert"}}
+</template>
