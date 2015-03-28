@@ -3,3 +3,9 @@ Meteor.methods({
     Items.insert(params);
   }
 });
+
+Meteor.methods({
+  'CalEvents.insert': function (params) {
+    CalEvents.insert(params);
+  }
+});

@@ -13,3 +13,19 @@ Meteor.publishComposite("items", function() {
     // ]
   }
 });
+
+Meteor.publishComposite("calevents", function() {
+  return {
+    find: function() {
+      return CalEvents.find({});
+    }
+    // ,
+    // children: [
+    //   {
+    //     find: function(item) {
+    //       return [];
+    //     }
+    //   }
+    // ]
+  }
+});
