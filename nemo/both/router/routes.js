@@ -1,5 +1,14 @@
-Router.route('/', {
-  name: 'home'
-});
+//Router.route('/', {name: 'home'});
+//
+//Router.route('/about', {name: 'about'});
+//
+//Router.route('/contact', {name: 'contact'});
+//
+//Router.route('/dashboard', {name: 'dashboard'});
 
-Router.route('/dashboard');
+Router.map(function() {
+  this.route('home', {path: '/'});
+  this.route('about', {path: '/about'});
+  this.route('contact', {path: '/contact'});
+  this.route('dashboard', {path: '/dashboard'});
+});
