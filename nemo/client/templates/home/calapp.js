@@ -1,5 +1,3 @@
-// Create a new MongoDB collection for calendar events
-
 // Set session defaults
 Session.setDefault('editing_calevent', null);
 Session.setDefault('showEditEvent', false);
@@ -58,8 +56,8 @@ Template.calendar.rendered = function() {
                 'minTime': '08:00:00',
                 'maxTime': '20:00:00',
                 'firstDay': 1,
-                contentHeight: 500,
-                aspectRatio: 20,
+                contentHeight: 400,
+                aspectRatio: 1,
                 'hiddenDays': [7],
                 'slotDuration': '00:30:00',
                 'allDayDefault': false,
@@ -139,7 +137,8 @@ var updateCalEvent = function(id, title) {
         StudentVolunteer.insert({
                 student_id: id,
                 voluteer_id: Session.get('volunteer_id'),
-				start:CalEvents.findOne({_id : id},{start:1,_id:0})
+				//start:CalEvents.findOne({_id : id},{start:1,_id:0})
+			start:10
         });
         updateCalendar();
 }

@@ -29,3 +29,19 @@ Meteor.publishComposite("calevents", function() {
     // ]
   }
 });
+
+Meteor.publishComposite("studentvolunteer", function() {
+  return {
+    find: function() {
+      return studentvolunteer.find({});
+    }
+    // ,
+    // children: [
+    //   {
+    //     find: function(item) {
+    //       return [];
+    //     }
+    //   }
+    // ]
+  }
+});

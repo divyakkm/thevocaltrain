@@ -14,3 +14,7 @@ Items.before.insert(function (userId, doc) {
 CalEvents.before.insert(function (userId, doc) {
   doc.createdAt = moment().toDate();
 });
+
+StudentVolunteer.before.insert(function (userId, doc) {
+  doc.createdAt = moment().toDate();
+});
