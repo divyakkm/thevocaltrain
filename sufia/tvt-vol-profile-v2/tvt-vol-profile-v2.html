@@ -1,0 +1,23 @@
+<head>
+  <title>tvt-vol-profile-v2</title>
+</head>
+
+<body>
+  <h1>Volunteer Page!</h1>
+  {{> loginButtons}}
+  <br> <br>
+  {{> sessiontable_tab}}
+
+	<!-- {{> reactiveTable collection=myCollection}} -->
+
+</body>
+
+
+<template name="sessiontable">
+	{{> reactiveTable collection=myCollection}}
+</template>
+
+<template name="sessiontable_tab">
+	{{> tabular table=TabularTables.Books selector=selector class="table table-striped table-bordered table-condensed"}}
+<!-- 	{{> tabular table=TabularTables.Books selector=selector class="table table-striped table-bordered table-condensed"}} -->
+</template>
