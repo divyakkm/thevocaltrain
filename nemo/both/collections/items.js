@@ -1,6 +1,7 @@
 Items = new Mongo.Collection('items');
 // Create a new MongoDB collection for calendar events
 CalEvents = new Meteor.Collection('calevents');
+StudentVolunteer = new Meteor.Collection('student_volunteer');
 
 Items.helpers({
 

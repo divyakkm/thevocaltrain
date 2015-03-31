@@ -9,3 +9,10 @@ Meteor.methods({
     CalEvents.insert(params);
   }
 });
+
+Meteor.methods({
+  'StudentVolunteer.insert': function (params) {
+    StudentVolunteer.insert(params);
+  }
+});
+
