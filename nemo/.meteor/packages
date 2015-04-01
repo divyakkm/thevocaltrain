@@ -24,4 +24,7 @@ aldeed:simple-schema
 aldeed:collection2
 accounts-ui
 iron:router@1.0.0-pre4
+<<<<<<< Updated upstream
 aldeed:autoform
+=======
+>>>>>>> Stashed changes
