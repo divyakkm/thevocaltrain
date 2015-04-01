@@ -5,7 +5,7 @@ Template.schedule.rendered = function () {
 // Set session defaults
 Session.setDefault('editing_calevent', null);
 Session.setDefault('showEditEvent', false);
-Session.setDefault('volunteer_id', 90);
+Session.setDefault('volunteer_id', Meteor.userId());
 
 Template.schedule.showEditEvent = function () {
 	return Session.get('showEditEvent');
