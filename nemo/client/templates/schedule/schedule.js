@@ -2,20 +2,6 @@ Template.schedule.rendered = function () {
 
 };
 
-AppController = RouteController.extend({
-	layoutTemplate: 'appLayout'
-});
-
-AppController.events({
-	'click [data-action=logout]': function () {
-		AccountsTemplates.logout();
-	}
-});
-
-ScheduleController = AppController.extend({
-	layoutTemplate: 'appLayout'
-});
-
 // Set session defaults
 Session.setDefault('editing_calevent', null);
 Session.setDefault('showEditEvent', false);

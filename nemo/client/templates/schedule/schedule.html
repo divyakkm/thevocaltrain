@@ -23,15 +23,16 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-					<h4 class="modal-title">Student Details</h4>
+					<h4 class="modal-title">Student Detail</h4>
 				</div>
 				<div class="modal-body">
 					<!--			<label for="title">Student Name: </label>-->
 					<!--			  <input type="text" class="title" name="title" value="{{evt.title}}" id="title" readonly="readonly">-->
-					<label id="title">{{evt.title}}</label>
-					<label id="start">{{evt.start}}</label>
-					<label id="duration">1 hour each week, for 15 weeks</label>
-					<label>Please click Yes to confirm that you will be teaching {{evt.title}} for the mentioned duration. </label>
+					Student Name - {{evt.title}}
+					<br> Class time -{{evt.weekly_time}}
+					<br> Duration - {{evt.display_start}} - {{evt.display_end}} (1 hour each week, for 15 weeks at the same time)
+					<label><i>Please click Yes to confirm that you will be teaching {{evt.title}} for the mentioned duration. </i>
+					</label>
 					<!--			  <input type="text" class="title" name="title" value="{{evt.title}}" id="end" readonly="readonly">-->
 					<!--			  <label value="{{evt.title}}" id="title"></label>-->
 				</div>
