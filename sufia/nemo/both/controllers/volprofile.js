@@ -10,7 +10,8 @@ TabularTables.Books = new Tabular.Table({
 		{data: "date", title: "Date"},
 		{data: "time", title: "Time"},
 		{data: "assigned_student", title: "Student"},
-		{data: "session", title: "Session"}
+		{data: "session", title: "Session"},
+		{data: "this._id", hidden: true}
 // 	{
 //   tmpl: Meteor.isClient && Template.sessiontable
 // }
