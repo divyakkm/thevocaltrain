@@ -1,17 +1,8 @@
-// SessionList = new Mongo.Collection('session');
+// Set session defaults
+Session.setDefault('get_SessionRow', null);
+Session.setDefault('showModalEvent', false);
 
-// TabularTables = {};
-// TabularTables.Books = new Tabular.Table({
-// 	name: "Session List",
-// 	collection: SessionList,
-// 	columns: [
-// 		{data: "date", title: "Date"},
-// 		{data: "time", title: "Time"},
-// 		{data: "assigned_student", title: "Student"},
-// 		{data: "session", title: "Session"}
-// 	]
-// });
-
+// The helpers code allows the records in the table to filtered according to the user signed in
  Template.sessiontable.helpers({
   selector: function() {
   	console.log('inside the selector table');
