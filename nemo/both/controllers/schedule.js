@@ -1,11 +1,10 @@
 ScheduleController = AppController.extend({
 	waitOn: function () {
-		return this.subscribe('calevents');
+		return this.subscribe('calevents', 'studentvolunteer');
 	},
 	data: {
 		CalEvents: CalEvents.find({}),
 		StudentVolunteer: StudentVolunteer.find({})
-
 	},
 	onBeforeAction: function (pause) {
 		AccountsTemplates.ensureSignedIn.call(this, pause);

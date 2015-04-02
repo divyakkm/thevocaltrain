@@ -1,6 +1,4 @@
-Template.schedule.rendered = function () {
-
-};
+Template.schedule.rendered = function () {};
 
 // Set session defaults
 Session.setDefault('editing_calevent', null);
@@ -26,8 +24,9 @@ var updateCalendar = function () {
 // If something with a class of .save in the editEvent template is clicked, run this function
 Template.editEvent.events({
 	'click .save': function (evt, tmpl) {
-		console.log(evt);
+		//		console.log(evt);
 		//                updateCalEvent(Session.get('editing_calevent'), tmpl.find('.title').value);
+		console.log("in save event");
 		updateCalEvent(Session.get('editing_calevent'), 'true');
 		Session.set('editing_calevent', null);
 		Session.set('showEditEvent', false);
@@ -43,7 +42,7 @@ Template.editEvent.events({
 		Session.set('showEditEvent', false);
 		$('#EditEventModal').modal("hide");
 	}
-})
+});
 
 // Fullcalendar package
 // As soon as the calendar renders, it has to execute this function
@@ -91,7 +90,7 @@ Template.schedule.rendered = function () {
 			Session.set('showEditEvent', true);
 			//Trigger the modal bootstrap 3 box as defined in the calendar.html page
 			$('#EditEventModal').modal("show");
-
+			console.log("in eventclick");
 		},
 		eventDrop: function (calEvent) {
 			CalEvents.update(calEvent.id, {
@@ -141,7 +140,7 @@ var updateCalEvent = function (id, title) {
 	StudentVolunteer.insert({
 		student_id: id,
 		voluteer_id: Session.get('volunteer_id'),
-		//start:CalEvents.findOne({_id : id},{start:1,_id:0})
+		start:CalEvents.findOne({_id : id},{start:1,_id:0})
 		start: 10
 	});
 	updateCalendar();
