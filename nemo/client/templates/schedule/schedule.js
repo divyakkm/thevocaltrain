@@ -140,8 +140,13 @@ var updateCalEvent = function (id, title) {
 	StudentVolunteer.insert({
 		student_id: id,
 		voluteer_id: Session.get('volunteer_id'),
-		start:CalEvents.findOne({_id : id},{start:1,_id:0})
-		start: 10
+		start: CalEvents.findOne({
+				_id: id
+			}, {
+				start: 1,
+				_id: 0
+			})
+			//		start: 10
 	});
 	updateCalendar();
 }
