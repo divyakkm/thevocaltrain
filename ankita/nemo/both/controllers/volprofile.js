@@ -1,4 +1,3 @@
-
 // console.log("in both folder");
 TabularTables = {};
 Meteor.isClient && Template.registerHelper('TabularTables', TabularTables);
@@ -7,11 +6,26 @@ TabularTables.Books = new Tabular.Table({
 	name: "Session List",
 	collection: SessionList,
 	columns: [
-		{data: "date", title: "Date"},
-		{data: "time", title: "Time"},
-		{data: "assigned_student", title: "Student"},
-		{data: "session", title: "Session"},
-		{data: "this._id", hidden: true}
+		{
+			data: "date",
+			title: "Date"
+		},
+		{
+			data: "time",
+			title: "Time"
+		},
+		{
+			data: "assigned_student",
+			title: "Student"
+		},
+		{
+			data: "session",
+			title: "Session"
+		},
+		{
+			data: "this._id",
+			hidden: true
+		}
 // 	{
 //   tmpl: Meteor.isClient && Template.sessiontable
 // }
@@ -19,6 +33,9 @@ TabularTables.Books = new Tabular.Table({
 });
 
 VolprofileController = AppController.extend({
+	data: {
+		SessionList: SessionList.find({})
+	},
 	onBeforeAction: function (pause) {
 		AccountsTemplates.ensureSignedIn.call(this, pause);
 	},

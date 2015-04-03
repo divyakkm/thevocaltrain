@@ -2,177 +2,135 @@
 Session.setDefault('get_SessionRow', null);
 Session.setDefault('showModalEvent', false);
 Session.setDefault('volunteer_id', Meteor.userId());
-Session.setDefault('session_id', null);
-
+Session.setDefault('session_id', "551cae3cb1ddc9927db19e89");
 
 Template.sessiontable.showModalEvent = function () {
-  return Session.get('showModalEvent');
+	return Session.get('showModalEvent');
 }
 
+//Template.volprofile.temp = function () {
+//	console.log("Main yahan hoon in studentdetails" + Session.get('session_id'));
+//	var ref = SessionList.find({
+//		_id: "551cae3cb1ddc9927db19e89"
+//	});
+//	console.log(window.$log2 = ref);
+//	return (ref.fetch());
+//}
+//
+//Handlebars.registerHelper('json', function (obj) {
+//	return JSON.stringify(obj);
+//});
 
-Session.setDefault('volunteer_id', Meteor.userId());
-//Session.get('ref_session', session_id);
+//Template.sessiontable.temp = function () {
+//	console.log("Main yahan hoon in sessiontable" + Session.get('session_id'));
+//	var ref = SessionList.find({
+//		_id: "551cae3cb1ddc9927db19e89"
+//	});
+//	console.log(window.$log5 = ref);
+//	return (ref.fetch());
+//}
 
-Template.studentdetails.temp = function () {
-  // run a query to the database
-  console.log("Main yahan hoon");
-  var ref  = SessionList.find({
-    _id: Session.get('session_id')
-  });
-  console.log($log2=ref);
-  return ref;
-}
+//Template.showModal.evt = function () {
+//	console.log("Main yahan hoon in show modal" + Session.get('session_id'));
+//	var ref = SessionList.find({
+//		_id: "551cae3cb1ddc9927db19e89"
+//	});
+//	console.log(window.$log3 = ref);
+//	return ref;
+//}
 
+//Template.showModal.temp = function () {
+//	//	console.log("Main yahan hoon in show modal" + Session.get('session_id'));
+//	var ref = SessionList.findOne({
+//		_id: "551cae3cb1ddc9927db19e89"
+//	});
+//	//	console.log($log2 = ref);
+//	return (ref);
+//}
 
-Template.showModal.evt = function () {
-  // run a query to the database
-  // console.log(modalEvent);
-  var modalEvent = SessionList.findOne({
-    _id: Session.get('volunteer_id')
-  });
-  console.log(modalEvent);
-  return modalEvent;
-}
+//Template.showModal.helpers({
+//	temp: function () {
+//		console.log("in helper!");
+//		var ref = SessionList.findOne({
+//			_id: "551cae3cb1ddc9927db19e89"
+//		});
+//		console.log(ref);
+//		return (ref);
+//	}
+//})
 
-Template.sessiontable.events ({
-
-  'click tbody > tr': function (event, view) {
-
-    var dataTable = $(event.target).closest('table').DataTable();
-    // console.log('trying to find closest')
-    // console.log(dataTable);
-    // console.log(window.$log=dataTable);
-    var rowData = dataTable.row(event.currentTarget).data();
-    // console.log(rowData);
-    Session.set('session_id',rowData._id._str);
-    console.log(window.$log1=rowData);
-    // console.log('clicked row');
-    // // console.log(modalEvent);
-    // Session.set('get_SessionRow', modalEvent.id);
-    Session.set('showModalEvent', true);
-    $('#showModalid').modal("show");
-    }
-  });
-  
-
-
-// The helpers code allows the records in the table to filtered according to the user signed in
- Template.sessiontable.helpers({
-  selector: function() {
-    console.log('inside the selector table');
-    console.log(Meteor.userId());
-    return {volunteer_id: Meteor.userId()}
-    }
-  });
-
-
-// Template.sessiontable.rendered = function () {
-//  console.log('sessiontable rendered before');
-//  console.log('sessiontable rendered');
-
-// };
-
-Template.carousel.rendered = function() {
-
-$('#carousel').slick({
-  dots: true,
-  arrows: true
+Template.showModal.helpers({
+	temp: function () {
+		//		var ref = {
+		//				name: "Chunks",
+		//				class: "myClass anotherClass",
+		//				value: 123
+		//			}
+		var ref = SessionList.find({
+			_id: "551cae3cb1ddc9927db19e89"
+		}).fetch()[0];
+		console.log(ref);
+		return ref;
+	}
 });
 
-// $('#carousel').slick({
-//   infinite: true,
-//   slidesToShow: 3,
-//   slidesToScroll: 3
-// });
+Template.showModal.events({
+	'click .save': function (temp, tmpl) {
+		console.log("inside showmodal event");
+		console.log(temp);
+	}
+})
+
+//Template.showModal.evt = function () {
+//	// run a query to the database
+//	// console.log(modalEvent);
+//	var modalEvent = SessionList.findOne({
+//		_id: Session.get('volunteer_id')
+//	});
+//	console.log(modalEvent);
+//	return modalEvent;
+//}
+
+Template.sessiontable.events({
+	'click tbody > tr': function (event, view) {
+		var dataTable = $(event.target).closest('table').DataTable();
+		var rowData = dataTable.row(event.currentTarget).data();
+		Session.set('session_id', rowData._id._str);
+		//		console.log(window.$log1 = rowData);
+		Session.set('showModalEvent', true);
+		$('#showModalid').modal("show");
+	}
+})
+
+// The helpers code allows the records in the table to filtered according to the user signed in
+Template.sessiontable.helpers({
+	selector: function () {
+		//		console.log('inside the selector table');
+		//		console.log(Meteor.userId());
+		return {
+			volunteer_id: Meteor.userId()
+		}
+	}
+});
+
+Template.carousel.rendered = function () {
+
+	$('#carousel').slick({
+		dots: true,
+		arrows: true
+	});
 };
 
-
-
 AppController = RouteController.extend({
-  layoutTemplate: 'appLayout'
+	layoutTemplate: 'appLayout'
 });
 
 AppController.events({
-  'click [data-action=logout]': function () {
-    AccountsTemplates.logout();
-  }
+	'click [data-action=logout]': function () {
+		AccountsTemplates.logout();
+	}
 });
 
 VolProfileController = AppController.extend({
-  layoutTemplate: 'appLayout'
+	layoutTemplate: 'appLayout'
 });
-
-
-
-
-
-
-// // Set session defaults
-// Session.setDefault('get_SessionRow', null);
-// Session.setDefault('showModalEvent', false);
-
-
-// Template.sessiontable.events({
-//   'click tr': function (event) {   
-//    Modal.show('showModal');
-
-// }
-
-// // Template.sessionfeedbackform.rendered = function () {
-// //     //Modal.show('showModal');
-// //     //}
-//   });
-
-
-
-// // The helpers code allows the records in the table to filtered according to the user signed in
-//  Template.sessiontable.helpers({
-//   selector: function() {
-//   	console.log('inside the selector table');
-//   	console.log(Meteor.userId());
-//     return {volunteer_id: Meteor.userId()}
-//     }
-//   });
-
-
-//   Template.sessiontable.events({
-//    'click tr': function (event) {
-//      Modal.show('exampleModal');
-//      }
-//   });
-
-// // Template.sessiontable.rendered = function () {
-// // 	console.log('sessiontable rendered before');
-// // 	console.log('sessiontable rendered');
-
-// // };
-
-// Template.carousel.rendered = function() {
-
-// $('#carousel').slick({
-//   dots: true,
-//   arrows: true
-// });
-
-// // $('#carousel').slick({
-// //   infinite: true,
-// //   slidesToShow: 3,
-// //   slidesToScroll: 3
-// // });
-// };
-
-
-
-// AppController = RouteController.extend({
-// 	layoutTemplate: 'appLayout'
-// });
-
-// AppController.events({
-// 	'click [data-action=logout]': function () {
-// 		AccountsTemplates.logout();
-// 	}
-// });
-
-// VolProfileController = AppController.extend({
-// 	layoutTemplate: 'appLayout'
-// });
