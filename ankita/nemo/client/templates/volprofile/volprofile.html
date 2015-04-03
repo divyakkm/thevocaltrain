@@ -1,0 +1,124 @@
+<template name="volprofile">
+  <!-- {{#if showModalEvent}}  -->
+  {{>showModal}} 
+  <!-- {{/if}} -->
+	<div class="template-home">
+		<div class="page-header">
+			<h1>Volunteer Profile</h1>
+		</div>
+		<p> This is some text</p>
+		<br> <br>
+ 			{{> carousel}}
+ 		<br><br>
+  		{{> sessiontable}}
+	</div>
+</template>
+
+
+<template name="sessiontable">
+  <div id="sessiontable">
+	{{> tabular table=TabularTables.Books selector=selector class="table table-striped table-bordered table-condensed"}}
+<!-- 	{{> tabular table=TabularTables.Books selector=selector class="table table-striped table-bordered table-condensed"}} -->
+<!-- 	{{#if showEditEvent}}
+		{{>editEvent}}
+	{{/if}} -->
+    </div>
+</template>
+
+<!-- <template name = "sessionfeedbackform">
+{{> showModal}}
+</template> -->
+
+<template name="showModal">
+    <div class="modal fade" id="showModalid">
+
+        <div class="modal-dialog" style="width:1200px; height:1000px">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title">Session Feedback Form</h1>
+                </div>
+
+                <div class="modal-body">
+                  <div style="width: 250px; height:250px; margin-left: 50px">
+                    <h4>Student details</h4>
+                  {{> studentdetails}}
+                  </div>
+
+                  <div style="width: 250px; height:250px; margin-left: 50px">
+                  <h4>Resources</h4>
+                  {{> resources}}
+                  </div>
+
+                  <div style="width: 450px; height:250px; margin-left: 350px; margin-top: -520px; border: 1px solid #a1a1a1;">
+                  <h4>Lesson</h4>
+                  {{> lesson}}
+                  <br>
+                  {{> assessment}}
+                  <br>
+                  {{> comments}}
+                  </div>
+
+                  <!-- <div style="width: 250px; height:250px; margin-right: 100px; margin-top: -800px">
+                  <h3>Present remarks</h3>
+                  {{> presentremarks}}
+                  </div>
+
+                  <div style="width: 250px; height:250px">
+                  <h3>Past remarks</h3>
+                  {{> pastremarks}}
+                  </div> -->
+
+                <div class="modal-footer">
+                		<a href="#" class="btn btn-default" id="save" data-dismiss="modal">Save</a>
+										<a href="#" class="btn btn-default" id="cancel" data-dismiss="modal">Close</a>
+          <!--      <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+ -->                </div>
+
+            
+        </div>
+     </div>
+    </div>
+  </div>
+</template>
+
+
+<template name="carousel">  
+  <div id="carousel">
+    <div><img src="http://www.theteachingjourney.com/blog/wp-content/uploads/2013/07/IMG_0595.jpg" width = "200px"/></div>
+    <div><img src="http://www.theteachingjourney.com/blog/wp-content/uploads/2013/07/Reading.jpg" width="200px" /></div>
+    <div><img src="http://www.theteachingjourney.com/blog/wp-content/uploads/2013/08/Gaze.jpg" width="200px" /></div>
+  </div>
+</template>
+
+
+<template name = "lesson">
+  <p>something</p>
+</template>
+
+<template name = "assessment">
+  <p>something</p>
+</template>
+
+<template name = "comments">
+  <p>something</p>
+</template>
+
+<template name = "presentremarks">
+  <p>something</p>
+</template>
+
+<template name = "pastremarks">
+  <p>something</p>
+</template>
+
+<template name = "studentdetails">
+Name: {{temp.assigned_student}}
+<br>
+</template>
+
+<template name = "resources">
+  <p>something</p>
+</template>
+
