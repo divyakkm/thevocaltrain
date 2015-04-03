@@ -12,9 +12,9 @@ AccountsTemplates.configure({
     showForgotPasswordLink: true
 });
 
-// AccountsTemplates.addFields([
-//     {
-//         _id: 'phone',
-//         type: 'tel',
-//         displayName: "Landline Number",
-//     }])
+ AccountsTemplates.addFields([
+ 	{
+ 		_id: 'phone',
+ 		type: 'tel',
+ 		displayName: "Landline Number",
+     }])
