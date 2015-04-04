@@ -20,11 +20,10 @@ Router.map(function () {
 	this.route('schedule', {
 		path: '/schedule'
 	});
+	this.route('schedule_new', {
+		path: '/schedule_new'
+	});
 	this.route('resources', {
 		path: '/resources'
 	});
-	this.route('volsession', {
-		path: '/volsession'
-	});
-
 });

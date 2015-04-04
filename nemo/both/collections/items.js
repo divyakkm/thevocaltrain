@@ -3,16 +3,20 @@ Items = new Mongo.Collection('items');
 CalEvents = new Meteor.Collection('calevents');
 StudentVolunteer = new Meteor.Collection('student_volunteer');
 
-Items.helpers({});
+Items.helpers({
+
+});
 
 Items.before.insert(function (userId, doc) {
-	doc.createdAt = moment().toDate();
+  doc.createdAt = moment().toDate();
 });
 
 CalEvents.before.insert(function (userId, doc) {
-	doc.createdAt = moment().toDate();
+  doc.createdAt = moment().toDate();
 });
 
 StudentVolunteer.before.insert(function (userId, doc) {
-	doc.createdAt = moment().toDate();
+  doc.createdAt = moment().toDate();
 });
+
+SessionList = new Mongo.Collection('session');
