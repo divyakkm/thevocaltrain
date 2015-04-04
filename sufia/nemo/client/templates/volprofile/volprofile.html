@@ -83,10 +83,29 @@
     </div>
 </template> -->
 
-<template name="carousel">  
+<template name="carousel"> 
   <div id="carousel">
-    <div><img src="http://www.theteachingjourney.com/blog/wp-content/uploads/2013/07/IMG_0595.jpg" width = "200px"/></div>
+    <div id="student1"> 
+      <a href="{{pathFor 'studentprofile'}}"><img src="/images/avatar.png" width= "200px"></a>
+    </div>
+    <div id="student2"> 
+      <a href="{{pathFor 'studentprofile'}}"><img src="/images/avatar.png" width= "200px"></a>
+    </div>     
+    <div id="student3"> 
+      <a href="{{pathFor 'studentprofile'}}"><img src="/images/avatar.png" width= "200px"></a>
+    </div>
+  </div>
+
+</template>
+
+
+
+
+<!-- #########Working carousel code########### -->
+<!-- <template name="carousel">  
+  <div id="carousel">
+    <div><a href="{{ pathFor 'student_detail' }} ><img src="http://www.theteachingjourney.com/blog/wp-content/uploads/2013/07/IMG_0595.jpg" width = "200px"/></a></div>
     <div><img src="http://www.theteachingjourney.com/blog/wp-content/uploads/2013/07/Reading.jpg" width="200px" /></div>
     <div><img src="http://www.theteachingjourney.com/blog/wp-content/uploads/2013/08/Gaze.jpg" width="200px" /></div>
   </div>
-</template>
+</template> -->

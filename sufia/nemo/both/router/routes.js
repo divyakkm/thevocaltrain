@@ -23,4 +23,7 @@ Router.map(function () {
 	this.route('resources', {
 		path: '/resources'
 	});
+	this.route('studentprofile', {
+	path: '/studentprofile'
+	});
 });

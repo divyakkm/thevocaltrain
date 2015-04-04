@@ -20,3 +20,5 @@ StudentVolunteer.before.insert(function (userId, doc) {
 });
 
 SessionList = new Mongo.Collection('session');
+
+Student = new Mongo.Collection("student");

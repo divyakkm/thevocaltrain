@@ -8,20 +8,17 @@ AccountsTemplates.configureRoute('ensureSignedIn', {
 	layoutTemplate: 'appLayout'
 });
 
+
+
+
+//Code for Sign Up Volunteer Registration page -- custom fields were added to the SignUp page 
 AccountsTemplates.configure({
     showForgotPasswordLink: true,
     showPlaceholders: false
 });
 
-// AccountsTemplates.addFields([
-// 	{
-// 		_id: 'phone',
-// 		type: 'tel',
-// 		displayName: "Landline Number",
-//     }])
 
 AccountsTemplates.addFields([
-	// need to work to validate records 
 	{_id: 'status', //not working for now -- hidden value doesn't set with the default values 
     type: 'hidden',
     value: 'Pending'
@@ -81,7 +78,8 @@ AccountsTemplates.addFields([
 	//{{> timezonePicker class="form-control" selected=timezone}}
     _id: "current_timezone",
     type: "text",
-    displayName: "Current TimeZone"
+    displayName: "Current TimeZone",
+    required: true
 	},
 
 	{ 

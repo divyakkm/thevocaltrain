@@ -4,20 +4,22 @@ Session.setDefault('showModalEvent', false);
 Session.setDefault('volunteer_id', Meteor.userId());
 Session.setDefault('session_id', null);
 
+//Modal code 
 
 Template.sessiontable.showModalEvent = function () {
 	return Session.get('showModalEvent');
 }
 
-Template.showModal.evt = function () {
-	// run a query to the database
-	var modalEvent = session.findOne({
-		_id: Session.get('volunteer_id')
-	});
-	console.log(modalEvent);
-	return modalEvent;
-}
+// Template.showModal.evt = function () {
+// 	// run a query to the database
+// 	var modalEvent = session.findOne({
+// 		_id: Session.get('volunteer_id')
+// 	});
+// 	console.log(modalEvent);
+// 	return modalEvent;
+// }
 
+//Each click on a row is associated to a unique session
 Template.sessiontable.events ({
 
   'click tbody > tr': function (event, view) {
@@ -39,6 +41,42 @@ Template.sessiontable.events ({
   });
 	
 
+// Template.carousel.evt = function () {
+//   // run a query to the database
+//   var student_details = Student.find({
+//     volunteer_id: Session.get('volunteer_id')
+//   });
+//   return student_details;
+// }
+
+
+
+Template.carousel.events({
+  student_details: function (volunteer_id) {
+    // Create an empty array to store the events
+    var student_details = [];
+    // Variable to pass events to the calendar
+    // Gets us all of the calendar events and puts them in the array
+    //                        calEvents = CalEvents.find({assigned:null});
+    Student = Student.find({volunteer_id: Meteor.userId()});
+    console.log(Student);
+    // Do a for each loop and add what you find to events array
+    Student.forEach(function () {
+      student_details.push({
+        student_id: _id,
+        volunteer_id: volunteer_id,
+        name: name,
+        grade: grade
+      });
+    })
+  console.log(student_details);
+  },
+
+  'click #student1': function () {
+    console.log("clicked image number1");
+  }
+  })
+
 
 // The helpers code allows the records in the table to filtered according to the user signed in
  Template.sessiontable.helpers({
@@ -48,7 +86,6 @@ Template.sessiontable.events ({
     return {volunteer_id: Meteor.userId()}
     }
   });
-
 
 // Template.sessiontable.rendered = function () {
 // 	console.log('sessiontable rendered before');
@@ -61,7 +98,8 @@ Template.carousel.rendered = function() {
 $('#carousel').slick({
   dots: true,
   arrows: true
-});
+  })
+
 
 // $('#carousel').slick({
 //   infinite: true,
