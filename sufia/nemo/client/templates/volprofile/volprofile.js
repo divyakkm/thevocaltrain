@@ -1,3 +1,5 @@
+Meteor.subscribe('student');
+
 // Set session defaults
 Session.setDefault('get_SessionRow', null);
 Session.setDefault('showModalEvent', false);
@@ -50,30 +52,28 @@ Template.sessiontable.events ({
 // }
 
 
-
 Template.carousel.events({
-  student_details: function (volunteer_id) {
+
+  // 'click #student1': function () {
+  //   console.log("clicked image number1")},
+
+  'click #student1': function (volunteer_id) {
     // Create an empty array to store the events
     var student_details = [];
     // Variable to pass events to the calendar
     // Gets us all of the calendar events and puts them in the array
     //                        calEvents = CalEvents.find({assigned:null});
-    Student = Student.find({volunteer_id: Meteor.userId()});
-    console.log(Student);
+    StudentVolunteerDetails = StudentVolunteer.find({volunteer_id: Meteor.userId()}).fetch();
+    console.log(StudentVolunteerDetails);
     // Do a for each loop and add what you find to events array
-    Student.forEach(function () {
+    StudentVolunteerDetails.forEach(function (evt) {
       student_details.push({
-        student_id: _id,
-        volunteer_id: volunteer_id,
-        name: name,
-        grade: grade
+        student_id: evt.student_id
       });
-    })
-  console.log(student_details);
-  },
-
-  'click #student1': function () {
-    console.log("clicked image number1");
+    }); 
+    console.log(student_details[0]);
+    // CalEvents.find({student_id:});
+    return student_details;
   }
   })
 

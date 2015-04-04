@@ -16,3 +16,8 @@ Meteor.methods({
   }
 });
 
+Meteor.methods({
+  'Student.insert': function (params) {
+    Student.insert(params);
+  }
+});

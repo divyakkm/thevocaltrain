@@ -1,7 +1,7 @@
 Items = new Mongo.Collection('items');
 // Create a new MongoDB collection for calendar events
 CalEvents = new Meteor.Collection('calevents');
-StudentVolunteer = new Meteor.Collection('student_volunteer');
+StudentVolunteer = new Meteor.Collection('StudentVolunteer');
 
 Items.helpers({
 
@@ -20,5 +20,4 @@ StudentVolunteer.before.insert(function (userId, doc) {
 });
 
 SessionList = new Mongo.Collection('session');
-
-Student = new Mongo.Collection("student");
+Student = new Mongo.Collection('student');

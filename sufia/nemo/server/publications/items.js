@@ -30,10 +30,10 @@ Meteor.publishComposite("calevents", function() {
   }
 });
 
-Meteor.publishComposite("studentvolunteer", function() {
+Meteor.publishComposite("StudentVolunteer", function() {
   return {
     find: function() {
-      return studentvolunteer.find({});
+      return StudentVolunteer.find({});
     }
     // ,
     // children: [
@@ -45,3 +45,20 @@ Meteor.publishComposite("studentvolunteer", function() {
     // ]
   }
 });
+
+Meteor.publishComposite("Student", function() {
+  return {
+    find: function() {
+      return Student.find({});
+    }
+    // ,
+    // children: [
+    //   {
+    //     find: function(item) {
+    //       return [];
+    //     }
+    //   }
+    // ]
+  }
+});
+
