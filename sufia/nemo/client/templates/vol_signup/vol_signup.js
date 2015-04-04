@@ -13,67 +13,6 @@ VolSignUpController = AppController.extend({
 });
 
 
-  Schema = {};
-
-    Schema.UserProfile = new SimpleSchema({
-        firstName: {
-            type: String,
-            regEx: /^[a-zA-Z-]{2,25}$/
-        },
-        lastName: {
-            type: String,
-            regEx: /^[a-zA-Z]{2,25}$/
-        },
-        gender: {
-            type: String,
-            allowedValues: ['Male', 'Female']
-        },
-        bio: {
-            type: String,
-        },
-        avatar: {
-            type: String,
-        },
-        pinCode: {
-            type: Number,
-            min: 7,
-            max: 7
-        },
-        phoneNumber: {
-            type: Number,
-            min: 9,
-            max: 10
-        }
-    });
-
-    Schema.User = new SimpleSchema({
-        _id: {
-            type: String,
-            regEx: SimpleSchema.RegEx.Id
-        },
-        email: {
-            type: String,
-            regEx: SimpleSchema.RegEx.Email
-        },
-        createdAt: {
-            type: Date
-        },
-        profile: {
-            type: Schema.UserProfile,
-        },
-        services: {
-            type: Object,
-            optional: true,
-            blackbox: false
-        }
-    });
-
-    Meteor.users.attachSchema(Schema.User);
-
-
-
-
-
 // // Volunteer = new Mongo.Collection("volunteer");
 // currentUserId = function () {
 //   return Meteor.userId()};
