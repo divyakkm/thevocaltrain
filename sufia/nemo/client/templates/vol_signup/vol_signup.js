@@ -12,7 +12,7 @@ VolSignUpController = AppController.extend({
   layoutTemplate: 'appLayout'
 });
 
-
+// Autoform Vol Sign Up form 
 // // Volunteer = new Mongo.Collection("volunteer");
 // currentUserId = function () {
 //   return Meteor.userId()};
