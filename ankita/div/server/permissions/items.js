@@ -46,7 +46,19 @@ SessionList.allow({
 	}
 });
 
-LessonBlock.allow({
+Lesson.allow({
+	'insert': function (userId, doc) {
+		return userId;
+	},
+	'update': function (userId, doc, fields, modifier) {
+		return userId;
+	},
+	'remove': function (userId, doc) {
+		return userId;
+	}
+});
+
+Assessment.allow({
 	'insert': function (userId, doc) {
 		return userId;
 	},

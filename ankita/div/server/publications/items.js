@@ -65,7 +65,25 @@ Meteor.publishComposite("session", function () {
 Meteor.publishComposite("lesson", function () {
 	return {
 		find: function () {
-				return LessonBlock.find({});
+				console.log("inside publish!");
+				return Lesson.find({});
+			}
+			// ,
+			// children: [
+			//   {
+			//     find: function(item) {
+			//       return [];
+			//     }
+			//   }
+			// ]
+	}
+});
+
+Meteor.publishComposite("assessment", function () {
+	return {
+		find: function () {
+				console.log("inside publish!");
+				return Assessment.find({});
 			}
 			// ,
 			// children: [

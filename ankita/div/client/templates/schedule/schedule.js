@@ -111,15 +111,14 @@ Template.schedule.rendered = function () {
 			calEvents = CalEvents.find();
 			// Do a for each loop and add what you find to events array
 			calEvents.forEach(function (evt) {
-				events.push({
-					id: evt._id,
-					title: evt.title,
-					start: evt.start,
-					end: evt.end
-				});
-			})
-
-			// Callback to pass events back to the calendar
+					events.push({
+						id: evt._id,
+						title: evt.title,
+						start: evt.start,
+						end: evt.end
+					});
+				})
+				// Callback to pass events back to the calendar
 			callback(events);
 		},
 		editable: true

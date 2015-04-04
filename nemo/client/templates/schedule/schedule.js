@@ -72,9 +72,7 @@ Template.schedule.rendered = function () {
 		dayClick: function (date, allDay, jsEvent, view) {
 			// Insert the day someone's clicked on
 			var indate = date;
-			//                  var end                      = indate._d;
 			console.log(indate);
-			//                  console.log(end);
 			CalEvents.insert({
 				title: 'New Class',
 				start: date
