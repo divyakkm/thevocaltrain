@@ -7,7 +7,7 @@
 		<br>{{> carousel}}
 		<br>
 		<br>{{> sessiontable}}
-		
+
 	</div>
 </template>
 
@@ -27,121 +27,122 @@
 					<h4 class="modal-title">Student Detail</h4>
 				</div>
 				<div class="modal-body">
-<!-- 					Student Name - {{ temp.assigned_student }}
+					<!-- 					Student Name - {{ temp.assigned_student }}
 					<br> {{ temp.session }} {{ temp.date }} {{ temp.time }}
- -->				<!-- {{lsn}}
+ -->
+					<!-- {{lsn}}
  					{{act}} -->
 					<div class="parts" id="studentdetails">
-                  
-                    <h4>Student details</h4>
-                  	Student Name: {{ temp.title }}
-					<br>City: {{temp.current_city}} {{temp.current_state}}
-					<br>Grade: {{temp.Grade}}
-					<br>Interests: {{temp.likes}}
-                  </div>
 
-                  <div class="parts" id="rsrc">
-                    
-                  <h4>Resources</h4>
-                  
-                  </div>
+						<h4>Student details</h4> Student Name: {{ temp.title }}
+						<br>City: {{temp.current_city}} {{temp.current_state}}
+						<br>Grade: {{temp.Grade}}
+						<br>Interests: {{temp.likes}}
+					</div>
 
-                  <div class="parts" id="lessn">
-                
-                  <h4>Lesson: {{lsn.name}}</h4>
-                  <br>Objective: {{lsn.objective}}
-                  <br>{{lsn.lessoncontentbody}}
-                  <br>Activities: 
-                  <br>{{#each act}}
-                  <li>{{activitycontentbody}}</li>
-                  {{/each}}
+					<div class="parts" id="rsrc">
 
-                  	<form id="asmt">
-                  		
-						<fieldset>
-						<legend>Assessment</legend>
-						Enter score for this assessment:
-						<br><input type="text" value="0" id="score">/5
-						<br>
-						  <label>Engagement	
-						  	<input type="radio" name="Engagement" value="1">1			    
-						    <input type="radio" name="Engagement" value="2">2
-						    <input type="radio" name="Engagement" value="3">3
-						    <input type="radio" name="Engagement" value="4">4
-						    <input type="radio" name="Engagement" value="5" checked="checked">5
-						
-						    </label>
-						    <br>
-						    <label> Retention
-						    <input type="radio" name="Retention" value="1">1
-						    <input type="radio" name="Retention" value="2">2
-						    <input type="radio" name="Retention" value="3">3
-						    <input type="radio" name="Retention" value="4">4
-						    <input type="radio" name="Retention" value="5" checked="checked">5
-						    </label>
-						    <br>
-						    <label> Accuracy
-						    <input type="radio" name="Accuracy" value="1">1
-						    <input type="radio" name="Accuracy" value="2">2
-						    <input type="radio" name="Accuracy" value="3">3
-						    <input type="radio" name="Accuracy" value="4">4
-						    <input type="radio" name="Accuracy" value="5" checked="checked">5
-						    </label>
-						    <br>
-						    <label> Fluency
-						    <input type="radio" name="Fluency" value="1">1
-						    <input type="radio" name="Fluency" value="2">2
-						    <input type="radio" name="Fluency" value="3">3
-						    <input type="radio" name="Fluency" value="4">4
-						    <input type="radio" name="Fluency" value="5" checked="checked">5
-						    </label>
-						    <br>
-						    <label> Creativity
-						    <input type="radio" name="Creativity" value="1">1
-						    <input type="radio" name="Creativity" value="2">2
-						    <input type="radio" name="Creativity" value="3">3
-						    <input type="radio" name="Creativity" value="4">4
-						    <input type="radio" name="Creativity" value="5" checked="checked">5
-						    </label>
-						  </fieldset>
-						    <br>
-						    <br>
-						    <label> Comments
-						    <input type="textarea" value="Enter comments on this assessment here" id="commentstextarea">
-						  </label>
+						<h4>Resources</h4>
 
+					</div>
 
-						  <div class="parts" id="current">
+					<div class="parts" id="lessn">
 
-                  		  <h3>Notes</h3>
-                  		  <input type="textarea" value="something" id="currentnotes">
-                  		  
-                  		  </div>
+						<h4>Lesson: {{lsn.name}}</h4>
+						<br>Objective: {{lsn.objective}}
+						<br>{{lsn.lessoncontentbody}}
+						<br>Activities:
+						<br>{{#each act}}
+						<li>{{activitycontentbody}}</li>
+						{{/each}}
+
+						<form id="asmt">
+
+							<fieldset>
+								<legend>Assessment</legend>
+								Enter score for this assessment:
+								<br>
+								<input type="text" value="0" id="score">/5
+								<br>
+								<label>Engagement
+									<input type="radio" name="Engagement" value="1">1
+									<input type="radio" name="Engagement" value="2">2
+									<input type="radio" name="Engagement" value="3">3
+									<input type="radio" name="Engagement" value="4">4
+									<input type="radio" name="Engagement" value="5" checked="checked">5
+
+								</label>
+								<br>
+								<label> Retention
+									<input type="radio" name="Retention" value="1">1
+									<input type="radio" name="Retention" value="2">2
+									<input type="radio" name="Retention" value="3">3
+									<input type="radio" name="Retention" value="4">4
+									<input type="radio" name="Retention" value="5" checked="checked">5
+								</label>
+								<br>
+								<label> Accuracy
+									<input type="radio" name="Accuracy" value="1">1
+									<input type="radio" name="Accuracy" value="2">2
+									<input type="radio" name="Accuracy" value="3">3
+									<input type="radio" name="Accuracy" value="4">4
+									<input type="radio" name="Accuracy" value="5" checked="checked">5
+								</label>
+								<br>
+								<label> Fluency
+									<input type="radio" name="Fluency" value="1">1
+									<input type="radio" name="Fluency" value="2">2
+									<input type="radio" name="Fluency" value="3">3
+									<input type="radio" name="Fluency" value="4">4
+									<input type="radio" name="Fluency" value="5" checked="checked">5
+								</label>
+								<br>
+								<label> Creativity
+									<input type="radio" name="Creativity" value="1">1
+									<input type="radio" name="Creativity" value="2">2
+									<input type="radio" name="Creativity" value="3">3
+									<input type="radio" name="Creativity" value="4">4
+									<input type="radio" name="Creativity" value="5" checked="checked">5
+								</label>
+							</fieldset>
+							<br>
+							<br>
+							<label> Comments -
+								<input type="textarea" id="commentstextarea" name="commentstextarea" value={{cmt.notes}}>
+							</label>
 
 
+							<div class="parts" id="current">
 
-  				    </form>
-                  </div>
+								<h3>Notes</h3>
+								<input type="textarea" value="something" id="currentnotes">
 
-                  
+							</div>
 
-                  <div class="parts" id="past">
-                  
-                  <h3>Previous Session Notes</h3>
-                  
+
+
+						</form>
+					</div>
+
+
+
+					<div class="parts" id="past">
+
+						<h3>Previous Session Notes</h3>
+
+					</div>
+
+					<div class="modal-footer">
+						<!--			<a href="#" class="btn btn-danger remove">Delete</a>btn btn-primary save-->
+						<a href="#" class="btn btn-primary save" id="savesession">Save</a>
+						<a href="#" class="btn close" data-dismiss="modal">Cancel</a>
+					</div>
 				</div>
-
-				<div class="modal-footer">
-					<!--			<a href="#" class="btn btn-danger remove">Delete</a>btn btn-primary save-->
-					<a href="#" class="btn btn-primary save" id="savesession">Save</a>
-					<a href="#" class="btn close" data-dismiss="modal">Cancel</a>
-				</div>
+				<!-- /.modal-content -->
 			</div>
-			<!-- /.modal-content -->
+			<!-- /.modal-dialog -->
 		</div>
-		<!-- /.modal-dialog -->
 	</div>
-</div>
 	<!-- /.modal -->
 </template>
 

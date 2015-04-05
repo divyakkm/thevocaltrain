@@ -21,18 +21,18 @@ Template.showModal.helpers({
 		//				class: "myClass anotherClass",
 		//				value: 123
 		//			}
-		console.log("inside temp");
+		//		console.log("inside temp");
 		var ref = CalEvents.find({
 			title: SessionList.find({
 				_id: "551cae3cb1ddc9927db19e89"
 			}).fetch()[0].assigned_student
 		}).fetch()[0];
-		console.log(ref);
+		//		console.log(ref);
 		return ref;
 	},
 
 	lsn: function () {
-		console.log("inside lsn");
+		//		console.log("inside lsn");
 		var ref1 = LessonBlock.find({
 			_id: SessionList.find({
 				_id: "551cae3cb1ddc9927db19e89"
@@ -43,67 +43,58 @@ Template.showModal.helpers({
 		// 		class: "myClass anotherClass",
 		// 		value: 123
 		// 	}
-		console.log(ref1);
+		//		console.log(ref1);
 		return ref1;
 	},
 
 	act: function () {
-		console.log("inside act");
-		var ref2 = Activity.find({lesson_id: SessionList.find({_id: "551cae3cb1ddc9927db19e89"}).fetch()[0].lesson_id});
-		console.log(ref2);
+		//		console.log("inside act");
+		var ref2 = Activity.find({
+			lesson_id: SessionList.find({
+				_id: "551cae3cb1ddc9927db19e89"
+			}).fetch()[0].lesson_id
+		});
+		//		console.log(ref2);
 		return ref2;
 	},
 
 	cmt: function () {
-		console.log("WAITWUT");
-		
+		console.log("inside cmt");
 		// var content = $('#currentnotes').value;
 		// console.log(content);
-		// return content;
+		//		 var ref1 = {
+		//		 	name: "Chunks",
+		//		 	class: "myClass anotherClass",
+		//		 	value: 123
+		//		 }
+		var ref1 = SessionList.find({
+			_id: "551cae3cb1ddc9927db19e89"
+		}).fetch()[0];
+		console.log(ref1);
+		return ref1;
 	}
 });
 
 Template.showModal.events({
-	// 'click .save': function (temp, tmpl) {
-	// 	console.log("inside showmodal event");
-	// 	console.log(temp);
-	// },
-
-	'click .save': function () {
+	'click .save': function (evt, tmpl) {
 		console.log("step1");
-		updateSessionList();
+		console.log(tmpl.find('.commentstextarea').value);
+		updateSessionList("551cae3cb1ddc9927db19e89", tmpl.find('.commentstextarea').value);
 		//SessionList.update({_id: "551cae3cb1ddc9927db19e89"}, {$set: {notes: "5"}});
 		//console.log("step 2");
-
-	} 
+	}
 })
 
-
-
-// Template.editEvent.events({
-// 	'click .save': function (evt, tmpl) {
-// 		console.log(evt);
-// 		//                updateCalEvent(Session.get('editing_calevent'), tmpl.find('.title').value);
-// 		updateCalEvent(Session.get('editing_calevent'), 'true');
-// 		Session.set('editing_calevent', null);
-// 		Session.set('showEditEvent', false);
-// 	},
-// 	'click .close': function (evt, tmpl) {
-// 		Session.set('editing_calevent', null);
-// 		Session.set('showEditEvent', false);
-// 		$('#EditEventModal').modal("hide");
-// 	},
-// 	'click .remove': function (evt, tmpl) {
-// 		removeCalEvent(Session.get('editing_calevent'));
-// 		Session.set('editing_calevent', null);
-// 		Session.set('showEditEvent', false);
-// 		$('#EditEventModal').modal("hide");
-// 	}
-// })
-
-var updateSessionList = function () {
-	SessionList.update({_id: "551cae3cb1ddc9927db19e89"}, {$set: {notes: "17"}});
-	console.log("step2");
+var updateSessionList = function (id, value) {
+	console.log("inside updatesessionlist");
+	SessionList.update({
+		_id: id
+	}, {
+		$set: {
+			notes: value
+		}
+	});
+	console.log("done updatesessionlist");
 }
 
 // var updateCalEvent = function (id, title) {

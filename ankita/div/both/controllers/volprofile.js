@@ -37,8 +37,11 @@ TabularTables.Books = new Tabular.Table({
 			title: "Volunteer Id",
 			visible: false
 		},
-
-
+		{
+			data: "notes",
+			title: "Notes",
+			visible: false
+		},
 		{
 			data: "this._id",
 			visible: false
