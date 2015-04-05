@@ -1,12 +1,14 @@
 
+Meteor.subscribe("StudentVolunteer");
+Meteor.subscribe("calevents");
 
 
 ////////////////////////////// Set Session Defaults  //////////////////////////////////////////
 
 Session.setDefault('get_SessionRow', null);
 Session.setDefault('showModalEvent', false);
+Session.setDefault('showStudentModal', false);
 Session.setDefault('volunteer_id', Meteor.userId());
-Session.setDefault('session_id', null);
 Session.setDefault('student_id', null);
 
 
@@ -75,29 +77,46 @@ $('#carousel').slick({
 // });
 };
 
-Template.carousel.helpers ({
+Template.showStudentModal.helpers ({
   studentlist: function () {
-     console.log('inside studentid');
+     console.log('inside student modal helper');
      
      //Create an array to store all the student ids associated with this volunteer 
-     var student_details = [];
+     var studentIdList = [];
      
      //Query the StudentVolunteer table to get all student ids 
      StudentVolunteerDetails = StudentVolunteer.find({volunteer_id: Meteor.userId()}).fetch();
      
      //Push into array 
      StudentVolunteerDetails.forEach(function (evt) {
-      student_details.push({
+      studentIdList.push({
         student_id: evt.student_id});
-    }); 
+      }); 
 
      //Testing - need to change 
-     var test = student_details[0].student_id;
+     var test = studentIdList[0].student_id;
      console.log(test);
-     return test
-  } 
+     // return test
 
-})
+     var studentDetails = CalEvents.find({
+      _id: test
+      }).fetch()[0];
+
+     console.log('student name');
+     console.log(studentDetails);
+     return studentDetails 
+    } 
+  })
+
+
+    // var ref = CalEvents.find({
+    //   title: SessionList.find({
+    //     _id: "551cae3cb1ddc9927db19e89"
+    //   }).fetch()[0].assigned_student
+    // }).fetch()[0];
+    // console.log(ref);
+    // return ref;
+
 
 
 Template.carousel.events({
@@ -106,7 +125,8 @@ Template.carousel.events({
   //   console.log("clicked image number1")},
 
   'click #student1': function () {
-  Session.set('student_id', studentlist);
+    Session.set('showStudentModal', true);
+    $('#studentModalid').modal("show");
   }
   })
 

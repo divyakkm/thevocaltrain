@@ -15,7 +15,10 @@ Router.map(function () {
 		path: '/dashboard'
 	});
 	this.route('volprofile', {
-		path: '/volprofile'
+		path: '/volprofile',
+		data: function() {
+			return CalEvents.find();
+		}
 	});
 	this.route('schedule', {
 		path: '/schedule'

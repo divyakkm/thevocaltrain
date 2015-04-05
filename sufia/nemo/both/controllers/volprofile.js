@@ -25,6 +25,9 @@ VolprofileController = AppController.extend({
 	waitOn: function () {
 		return this.subscribe('StudentVolunteer');
 	},
+	waitOn: function () {
+	return this.subscribe('calevents');
+	},
 	data: {
 		CalEvents: CalEvents.find({}),
 		StudentVolunteer: StudentVolunteer.find({}),
