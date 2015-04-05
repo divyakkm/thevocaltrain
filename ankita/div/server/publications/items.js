@@ -65,8 +65,7 @@ Meteor.publishComposite("session", function () {
 Meteor.publishComposite("lesson", function () {
 	return {
 		find: function () {
-				console.log("inside publish!");
-				return Lesson.find({});
+				return LessonBlock.find({});
 			}
 			// ,
 			// children: [
@@ -82,7 +81,6 @@ Meteor.publishComposite("lesson", function () {
 Meteor.publishComposite("assessment", function () {
 	return {
 		find: function () {
-				console.log("inside publish!");
 				return Assessment.find({});
 			}
 			// ,

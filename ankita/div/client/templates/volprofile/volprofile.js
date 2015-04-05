@@ -1,8 +1,10 @@
+// Set session defaults
 Meteor.subscribe("lesson");
 Meteor.subscribe("assessment");
 Meteor.subscribe("session");
+Meteor.subscribe("activity");
 
-// Set session defaults
+
 Session.setDefault('get_SessionRow', null);
 Session.setDefault('showModalEvent', false);
 Session.setDefault('volunteer_id', Meteor.userId());
@@ -19,27 +21,31 @@ Template.showModal.helpers({
 		//				class: "myClass anotherClass",
 		//				value: 123
 		//			}
-		//		console.log("inside temp");
-		var ref = CalEvents.find({
-			title: SessionList.find({
-				_id: "551cae3cb1ddc9927db19e89"
-			}).fetch()[0].assigned_student
-		}).fetch()[0];
-		//		console.log(ref);
+		console.log("inside temp");
+		var ref = CalEvents.find({title: SessionList.find({_id:"551cae3cb1ddc9927db19e89"}).fetch()[0].assigned_student}).fetch()[0];
+		console.log(ref);
 		return ref;
 	},
+
 	lsn: function () {
 		console.log("inside lsn");
-		var ref1 = Lesson.find().fetch()[0];
-		//		var ref1 = {
-		//			name: "Divi",
-		//			class: "myClass anotherClass",
-		//			value: 123
-		//		}
+		var ref1 = LessonBlock.find({_id: SessionList.find({_id:"551cae3cb1ddc9927db19e89"}).fetch()[0].lesson_id}).fetch()[0];
+				// var ref1 = {
+				// 		name: "Chunks",
+				// 		class: "myClass anotherClass",
+				// 		value: 123
+				// 	}
 		console.log(ref1);
 		return ref1;
+	},
+
+	act: function () {
+		console.log("inside act");
+		var ref2 = Activity.find({_id: LessonBlock.find({_id: SessionList.find({id: "551cae3cb1ddc9927db19e89"}).fetch()[0].lesson_id}).fetch()[0].activity_id}).fetch()[0];
+		console.log(ref2);
+		return ref2;
 	}
-})
+});
 
 Template.showModal.events({
 	'click .save': function (temp, tmpl) {
@@ -47,6 +53,16 @@ Template.showModal.events({
 		console.log(temp);
 	}
 })
+
+//Template.showModal.evt = function () {
+//	// run a query to the database
+//	// console.log(modalEvent);
+//	var modalEvent = SessionList.findOne({
+//		_id: Session.get('volunteer_id')
+//	});
+//	console.log(modalEvent);
+//	return modalEvent;
+//}
 
 Template.sessiontable.events({
 	'click tbody > tr': function (event, view) {
@@ -59,8 +75,11 @@ Template.sessiontable.events({
 	}
 })
 
+// The helpers code allows the records in the table to filtered according to the user signed in
 Template.sessiontable.helpers({
 	selector: function () {
+		//		console.log('inside the selector table');
+		//		console.log(Meteor.userId());
 		return {
 			volunteer_id: Meteor.userId()
 		}
@@ -68,6 +87,7 @@ Template.sessiontable.helpers({
 });
 
 Template.carousel.rendered = function () {
+
 	$('#carousel').slick({
 		dots: true,
 		arrows: true

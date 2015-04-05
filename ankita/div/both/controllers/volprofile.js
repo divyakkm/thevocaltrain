@@ -1,27 +1,3 @@
-VolprofileController = AppController.extend({
-	waitOn: function () {
-		return this.subscribe('calevents');
-	},
-	onBeforeAction: function (pause) {
-		AccountsTemplates.ensureSignedIn.call(this, pause);
-	},
-	data: {
-		SessionList: SessionList.find({}),
-		CalEvents: CalEvents.find({}),
-		Lesson: Lesson.find({}),
-		Assessment: Assessment.find()
-	},
-	onAfterAction: function () {
-		Meta.setTitle('Volunteer Profile');
-	}
-});
-
-VolprofileController.events({
-	'click [data-action=doSomething]': function (event, template) {
-		event.preventDefault();
-	}
-});
-
 // console.log("in both folder");
 TabularTables = {};
 Meteor.isClient && Template.registerHelper('TabularTables', TabularTables);
@@ -47,11 +23,53 @@ TabularTables.Books = new Tabular.Table({
 			title: "Session"
 		},
 		{
+			data: "assigned_student_id",
+			title: "Student",
+			visible: false
+		},
+		{
+			data: "lesson_id",
+			title: "Lesson Id",
+			visible: false
+		},
+		{
+			data: "volunteer_id",
+			title: "Volunteer Id",
+			visible: false
+		},
+
+
+		{
 			data: "this._id",
-			hidden: true
+			visible: false
 		}
 // 	{
 //   tmpl: Meteor.isClient && Template.sessiontable
 // }
 	]
+});
+
+VolprofileController = AppController.extend({
+		waitOn: function () {
+		return this.subscribe('calevents');
+	},
+	onBeforeAction: function (pause) {
+		AccountsTemplates.ensureSignedIn.call(this, pause);
+	},
+	data:  {
+			SessionList: SessionList.find({}),
+			CalEvents: CalEvents.find({}),
+			StudentVolunteer: StudentVolunteer.find({}),
+			LessonBlock: LessonBlock.find({}),
+			Assessment: Assessment.find({})
+	},
+	onAfterAction: function () {
+		Meta.setTitle('Volunteer Profile');
+	}
+});
+
+VolprofileController.events({
+	'click [data-action=doSomething]': function (event, template) {
+		event.preventDefault();
+	}
 });
