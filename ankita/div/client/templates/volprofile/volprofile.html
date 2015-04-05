@@ -29,8 +29,8 @@
 				<div class="modal-body">
 <!-- 					Student Name - {{ temp.assigned_student }}
 					<br> {{ temp.session }} {{ temp.date }} {{ temp.time }}
- -->				{{lsn}}
- 					{{act}}
+ -->				<!-- {{lsn}}
+ 					{{act}} -->
 					<div class="parts" id="studentdetails">
                   
                     <h4>Student details</h4>
@@ -51,18 +51,25 @@
                   <h4>Lesson: {{lsn.name}}</h4>
                   <br>Objective: {{lsn.objective}}
                   <br>{{lsn.lessoncontentbody}}
-                  <br>Activities: {{act.activitycontentbody}}
+                  <br>Activities: 
+                  <br>{{#each act}}
+                  <li>{{activitycontentbody}}</li>
+                  {{/each}}
 
                   	<form id="asmt">
                   		
 						<fieldset>
 						<legend>Assessment</legend>
-						  <label> Engagement
-						    <input type="radio" name="Engagement" value="1">1
+						Enter score for this assessment:
+						<br><input type="text" value="0" id="score">/5
+						<br>
+						  <label>Engagement	
+						  	<input type="radio" name="Engagement" value="1">1			    
 						    <input type="radio" name="Engagement" value="2">2
 						    <input type="radio" name="Engagement" value="3">3
 						    <input type="radio" name="Engagement" value="4">4
 						    <input type="radio" name="Engagement" value="5" checked="checked">5
+						
 						    </label>
 						    <br>
 						    <label> Retention
@@ -102,24 +109,31 @@
 						    <label> Comments
 						    <input type="textarea" value="Enter comments on this assessment here" id="commentstextarea">
 						  </label>
+
+
+						  <div class="parts" id="current">
+
+                  		  <h3>Notes</h3>
+                  		  <input type="textarea" value="something" id="currentnotes">
+                  		  
+                  		  </div>
+
+
+
   				    </form>
                   </div>
 
-                  <div class="parts" id="currentnotes">
                   
-                  <h3>Notes</h3>
-                 
-                  </div>
 
-                  <div class="parts" id="pastnotes">
+                  <div class="parts" id="past">
                   
                   <h3>Previous Session Notes</h3>
                   
 				</div>
 
 				<div class="modal-footer">
-					<!--			<a href="#" class="btn btn-danger remove">Delete</a>-->
-					<a href="#" class="btn btn-primary save">Save</a>
+					<!--			<a href="#" class="btn btn-danger remove">Delete</a>btn btn-primary save-->
+					<a href="#" class="btn btn-primary save" id="savesession">Save</a>
 					<a href="#" class="btn close" data-dismiss="modal">Cancel</a>
 				</div>
 			</div>
