@@ -50,18 +50,19 @@ TabularTables.Books = new Tabular.Table({
 });
 
 VolprofileController = AppController.extend({
-		waitOn: function () {
+	waitOn: function () {
 		return this.subscribe('calevents');
 	},
 	onBeforeAction: function (pause) {
 		AccountsTemplates.ensureSignedIn.call(this, pause);
 	},
-	data:  {
-			SessionList: SessionList.find({}),
-			CalEvents: CalEvents.find({}),
-			StudentVolunteer: StudentVolunteer.find({}),
-			LessonBlock: LessonBlock.find({}),
-			Assessment: Assessment.find({})
+	data: {
+		SessionList: SessionList.find({}),
+		CalEvents: CalEvents.find({}),
+		StudentVolunteer: StudentVolunteer.find({}),
+		LessonBlock: LessonBlock.find({}),
+		Assessment: Assessment.find({}),
+		Activity: Activity.find({})
 	},
 	onAfterAction: function () {
 		Meta.setTitle('Volunteer Profile');

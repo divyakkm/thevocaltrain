@@ -22,26 +22,43 @@ Template.showModal.helpers({
 		//				value: 123
 		//			}
 		console.log("inside temp");
-		var ref = CalEvents.find({title: SessionList.find({_id:"551cae3cb1ddc9927db19e89"}).fetch()[0].assigned_student}).fetch()[0];
+		var ref = CalEvents.find({
+			title: SessionList.find({
+				_id: "551cae3cb1ddc9927db19e89"
+			}).fetch()[0].assigned_student
+		}).fetch()[0];
 		console.log(ref);
 		return ref;
 	},
 
 	lsn: function () {
 		console.log("inside lsn");
-		var ref1 = LessonBlock.find({_id: SessionList.find({_id:"551cae3cb1ddc9927db19e89"}).fetch()[0].lesson_id}).fetch()[0];
-				// var ref1 = {
-				// 		name: "Chunks",
-				// 		class: "myClass anotherClass",
-				// 		value: 123
-				// 	}
+		var ref1 = LessonBlock.find({
+			_id: SessionList.find({
+				_id: "551cae3cb1ddc9927db19e89"
+			}).fetch()[0].lesson_id
+		}).fetch()[0];
+		// var ref1 = {
+		// 		name: "Chunks",
+		// 		class: "myClass anotherClass",
+		// 		value: 123
+		// 	}
 		console.log(ref1);
 		return ref1;
 	},
 
 	act: function () {
 		console.log("inside act");
-		var ref2 = Activity.find({_id: LessonBlock.find({_id: SessionList.find({id: "551cae3cb1ddc9927db19e89"}).fetch()[0].lesson_id}).fetch()[0].activity_id}).fetch()[0];
+//		var ref2 = Activity.find({
+			//			_id: LessonBlock.find({
+			//				_id: SessionList.find({
+			//					id: "551cae3cb1ddc9927db19e89"
+			//				}).fetch()[0].lesson_id
+			//			}).fetch()[0].activity_id
+			//}).fetch()[0];
+		var ref2 = Activity.find({
+			_id: "L1.0.1"
+		}).fetch()[0];
 		console.log(ref2);
 		return ref2;
 	}

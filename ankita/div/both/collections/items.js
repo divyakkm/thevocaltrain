@@ -5,31 +5,30 @@ StudentVolunteer = new Meteor.Collection('student_volunteer');
 LessonBlock = new Mongo.Collection('lesson');
 SessionList = new Mongo.Collection('session');
 Assessment = new Mongo.Collection('assessment');
+Activity = new Mongo.Collection('activity');
 
 Items.helpers({
 
 });
 
 Items.before.insert(function (userId, doc) {
-  doc.createdAt = moment().toDate();
+	doc.createdAt = moment().toDate();
 });
 
 LessonBlock.before.insert(function (userId, doc) {
-  doc.createdAt = moment().toDate();
+	doc.createdAt = moment().toDate();
 });
 
 
 CalEvents.before.insert(function (userId, doc) {
-  doc.createdAt = moment().toDate();
+	doc.createdAt = moment().toDate();
 });
 
 StudentVolunteer.before.insert(function (userId, doc) {
-  doc.createdAt = moment().toDate();
+	doc.createdAt = moment().toDate();
 });
 
-  Assessment.before.insert(function (userId, doc) {
-  doc.createdAt = moment().toDate();
+Assessment.before.insert(function (userId, doc) {
+	doc.createdAt = moment().toDate();
 
 });
-
-
