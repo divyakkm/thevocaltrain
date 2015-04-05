@@ -1,4 +1,5 @@
-Session.setDefault('volunteer_id', Meteor.userId());
+Session.get('student_id', student_id);
+console.log(Session.get('student_id', student_id));
 
 
 Template.resources.rendered = function () {
