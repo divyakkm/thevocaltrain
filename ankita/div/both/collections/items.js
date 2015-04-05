@@ -4,6 +4,7 @@ CalEvents = new Meteor.Collection('calevents');
 StudentVolunteer = new Meteor.Collection('student_volunteer');
 LessonBlock = new Mongo.Collection('lesson');
 SessionList = new Mongo.Collection('session');
+Activity = new Mongo.Collection('activity');
 Assessment = new Mongo.Collection('assessment');
 
 Items.helpers({
@@ -32,4 +33,8 @@ StudentVolunteer.before.insert(function (userId, doc) {
 
 });
 
+Activity.before.insert(function (userId, doc) {
+  doc.createdAt = moment().toDate();
+
+});
 

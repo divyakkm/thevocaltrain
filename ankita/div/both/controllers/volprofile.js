@@ -61,7 +61,8 @@ VolprofileController = AppController.extend({
 			CalEvents: CalEvents.find({}),
 			StudentVolunteer: StudentVolunteer.find({}),
 			LessonBlock: LessonBlock.find({}),
-			Assessment: Assessment.find({})
+			Assessment: Assessment.find({}),
+			Activity: Activity.find({})
 	},
 	onAfterAction: function () {
 		Meta.setTitle('Volunteer Profile');

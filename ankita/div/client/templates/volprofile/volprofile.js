@@ -41,9 +41,9 @@ Template.showModal.helpers({
 
 	act: function () {
 		console.log("inside act");
-		var ref2 = Activity.find({_id: LessonBlock.find({_id: SessionList.find({id: "551cae3cb1ddc9927db19e89"}).fetch()[0].lesson_id}).fetch()[0].activity_id}).fetch()[0];
-		console.log(ref2);
-		return ref2;
+		//var ref2 = Activity.find({_id: LessonBlock.find({_id: SessionList.find({id: "551cae3cb1ddc9927db19e89"}).fetch()[0].lesson_id}).fetch()[0].activity_id}).fetch()[0];
+		//console.log(ref2);
+		//return ref2;
 	}
 });
 
