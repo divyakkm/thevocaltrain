@@ -24,6 +24,7 @@ Router.map(function () {
 		path: '/resources'
 	});
 	this.route('studentprofile', {
-	path: '/studentprofile'
+	path: '/studentprofile/:_id',
+	data: function() { return StudentVolunteer.findOne(this.params._id); }
 	});
 });

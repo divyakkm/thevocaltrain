@@ -5,6 +5,9 @@ Session.setDefault('get_SessionRow', null);
 Session.setDefault('showModalEvent', false);
 Session.setDefault('volunteer_id', Meteor.userId());
 Session.setDefault('session_id', null);
+Session.setDefault('test', null);
+
+var test = null;
 
 //Modal code 
 
@@ -71,9 +74,13 @@ Template.carousel.events({
         student_id: evt.student_id
       });
     }); 
-    console.log(student_details[0]);
+    
+    test = student_details[0].student_id;
+    console.log('test');
+    console.log(test);
+    console.log(student_details[0].student_id);
     // CalEvents.find({student_id:});
-    return student_details;
+    return test;
   }
   })
 

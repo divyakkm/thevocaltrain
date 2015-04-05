@@ -86,7 +86,9 @@
 <template name="carousel"> 
   <div id="carousel">
     <div id="student1"> 
-      <img src="/images/avatar.png" width= "200px">
+      <a href="{{pathFor 'studentprofile' _id= '1234' }}">
+        <img src="/images/avatar.png" width= "200px">
+      </a>
     </div>
     <div id="student2"> 
       <a href="{{pathFor 'studentprofile'}}"><img src="/images/avatar.png" width= "200px"></a>
