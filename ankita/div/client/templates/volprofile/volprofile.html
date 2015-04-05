@@ -56,72 +56,66 @@
 						<li>{{activitycontentbody}}</li>
 						{{/each}}
 
-						<form id="asmt">
-
-							<fieldset>
-								<legend>Assessment</legend>
-								Enter score for this assessment:
-								<br>
-								<input type="text" value="0" id="score">/5
-								<br>
-								<label>Engagement
-									<input type="radio" name="Engagement" value="1">1
-									<input type="radio" name="Engagement" value="2">2
-									<input type="radio" name="Engagement" value="3">3
-									<input type="radio" name="Engagement" value="4">4
-									<input type="radio" name="Engagement" value="5" checked="checked">5
-
-								</label>
-								<br>
-								<label> Retention
-									<input type="radio" name="Retention" value="1">1
-									<input type="radio" name="Retention" value="2">2
-									<input type="radio" name="Retention" value="3">3
-									<input type="radio" name="Retention" value="4">4
-									<input type="radio" name="Retention" value="5" checked="checked">5
-								</label>
-								<br>
-								<label> Accuracy
-									<input type="radio" name="Accuracy" value="1">1
-									<input type="radio" name="Accuracy" value="2">2
-									<input type="radio" name="Accuracy" value="3">3
-									<input type="radio" name="Accuracy" value="4">4
-									<input type="radio" name="Accuracy" value="5" checked="checked">5
-								</label>
-								<br>
-								<label> Fluency
-									<input type="radio" name="Fluency" value="1">1
-									<input type="radio" name="Fluency" value="2">2
-									<input type="radio" name="Fluency" value="3">3
-									<input type="radio" name="Fluency" value="4">4
-									<input type="radio" name="Fluency" value="5" checked="checked">5
-								</label>
-								<br>
-								<label> Creativity
-									<input type="radio" name="Creativity" value="1">1
-									<input type="radio" name="Creativity" value="2">2
-									<input type="radio" name="Creativity" value="3">3
-									<input type="radio" name="Creativity" value="4">4
-									<input type="radio" name="Creativity" value="5" checked="checked">5
-								</label>
-							</fieldset>
+						<fieldset>
+							<legend>Assessment</legend>
+							Enter score for this assessment:
 							<br>
+							<input type="text" value="0" id="score">/5
 							<br>
-							<label> Comments -
-								<input type="textarea" id="commentstextarea" name="commentstextarea" value={{cmt.notes}}>
+							<label>Engagement
+								<input type="radio" name="Engagement" value="1">1
+								<input type="radio" name="Engagement" value="2">2
+								<input type="radio" name="Engagement" value="3">3
+								<input type="radio" name="Engagement" value="4">4
+								<input type="radio" name="Engagement" value="5" checked="checked">5
+
 							</label>
+							<br>
+							<label> Retention
+								<input type="radio" name="Retention" value="1">1
+								<input type="radio" name="Retention" value="2">2
+								<input type="radio" name="Retention" value="3">3
+								<input type="radio" name="Retention" value="4">4
+								<input type="radio" name="Retention" value="5" checked="checked">5
+							</label>
+							<br>
+							<label> Accuracy
+								<input type="radio" name="Accuracy" value="1">1
+								<input type="radio" name="Accuracy" value="2">2
+								<input type="radio" name="Accuracy" value="3">3
+								<input type="radio" name="Accuracy" value="4">4
+								<input type="radio" name="Accuracy" value="5" checked="checked">5
+							</label>
+							<br>
+							<label> Fluency
+								<input type="radio" name="Fluency" value="1">1
+								<input type="radio" name="Fluency" value="2">2
+								<input type="radio" name="Fluency" value="3">3
+								<input type="radio" name="Fluency" value="4">4
+								<input type="radio" name="Fluency" value="5" checked="checked">5
+							</label>
+							<br>
+							<label> Creativity
+								<input type="radio" name="Creativity" value="1">1
+								<input type="radio" name="Creativity" value="2">2
+								<input type="radio" name="Creativity" value="3">3
+								<input type="radio" name="Creativity" value="4">4
+								<input type="radio" name="Creativity" value="5" checked="checked">5
+							</label>
+						</fieldset>
+						<br>
+						<br>
+						<label> Comments -
+							<input type="textarea" id="commentstextarea" name="commentstextarea" value={{cmt.notes}}>
+						</label>
 
 
-							<div class="parts" id="current">
+						<div class="parts" id="current">
+							<h3>Notes</h3>
+							<input type="textarea" value="something" id="currentnotes">
 
-								<h3>Notes</h3>
-								<input type="textarea" value="something" id="currentnotes">
+						</div>
 
-							</div>
-
-
-
-						</form>
 					</div>
 
 

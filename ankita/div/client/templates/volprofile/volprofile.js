@@ -77,12 +77,14 @@ Template.showModal.helpers({
 
 Template.showModal.events({
 	'click .save': function (evt, tmpl) {
-		console.log("step1");
-		console.log(tmpl.find('.commentstextarea').value);
-		updateSessionList("551cae3cb1ddc9927db19e89", tmpl.find('.commentstextarea').value);
+			console.log("step1");
+			console.log(tmpl);
+			comments = tmpl.find('#commentstextarea').value;
+			console.log(comments);
+			updateSessionList("551cae3cb1ddc9927db19e89", comments);
+		}
 		//SessionList.update({_id: "551cae3cb1ddc9927db19e89"}, {$set: {notes: "5"}});
 		//console.log("step 2");
-	}
 })
 
 var updateSessionList = function (id, value) {
