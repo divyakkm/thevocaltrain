@@ -1,14 +1,19 @@
-// Set session defaults
+////////////////////////////// Set Session Defaults  //////////////////////////////////////////
+
 Meteor.subscribe("lesson");
 Meteor.subscribe("assessment");
 Meteor.subscribe("session");
 Meteor.subscribe("activity");
 
-
 Session.setDefault('get_SessionRow', null);
 Session.setDefault('showModalEvent', false);
+Session.setDefault('showStudentModal', false);
 Session.setDefault('volunteer_id', Meteor.userId());
+Session.setDefault('student_id', null);
 Session.setDefault('session_id', "551cae3cb1ddc9927db19e89");
+
+////////////////////////////// Modal code - Session In Progress ///////////////////////////////////////////////////
+
 
 Template.sessiontable.showModalEvent = function () {
 	return Session.get('showModalEvent');
@@ -140,44 +145,64 @@ var updateSessionList = function (id, comments, notes, score, eng, ret, acc, flu
 	console.log("done updatesessionlist");
 }
 
-// var updateCalEvent = function (id, title) {
-// 	CalEvents.update(id, {
-// 		$set: {
-// 			assigned: 'true'
-// 		}
-// 	});
-// 	console.log(id + " " + Session.get('volunteer_id'));
-// 	StudentVolunteer.insert({
-// 		student_id: id,
-// 		voluteer_id: Session.get('volunteer_id'),
-// 		//start:CalEvents.findOne({_id : id},{start:1,_id:0})
-// 		start: 10
-// 	});
-// 	updateCalendar();
-// }
-//db.getCollection('session').find().sort({submittedAt: -1})
+//////////////////////////////Session Table code - Sufi////////////////////////////////////////////
 
-Template.sessiontable.events({
-	'click tbody > tr': function (event, view) {
-		var dataTable = $(event.target).closest('table').DataTable();
-		var rowData = dataTable.row(event.currentTarget).data();
-		Session.set('session_id', rowData._id._str);
-		//		console.log(window.$log1 = rowData);
-		Session.set('showModalEvent', true);
-		$('#showModalid').modal("show");
-	}
-})
+//Each click on a row is associated to a unique session
+Template.sessiontable.events ({
+
+  'click tbody > tr': function (event, view) {
+
+  	var dataTable = $(event.target).closest('table').DataTable();
+  	// console.log(dataTable);
+  	// console.log(window.$log=dataTable);
+    var rowData = dataTable.row(event.currentTarget).data();
+    // console.log(rowData);
+    Session.set('session_id',rowData._id._str);
+  	console.log(window.$log1=rowData);
+  	// console.log('clicked row');
+  	// // console.log(modalEvent);
+  	// Session.set('get_SessionRow', modalEvent.id);
+  	Session.set('showModalEvent', true);
+  	$('#showModalid').modal("show");
+    }
+  });
+	
 
 // The helpers code allows the records in the table to filtered according to the user signed in
-Template.sessiontable.helpers({
-	selector: function () {
-		//		console.log('inside the selector table');
-		//		console.log(Meteor.userId());
-		return {
-			volunteer_id: Meteor.userId()
-		}
-	}
-});
+ Template.sessiontable.helpers({
+  selector: function() {
+    // console.log('inside the selector table');
+    // console.log(Meteor.userId());
+    return {volunteer_id: Meteor.userId()}
+    }
+  });
+
+////////////////////////////// Old session table code ////////////////////////////////////////////
+
+// Template.sessiontable.events({
+// 	'click tbody > tr': function (event, view) {
+// 		var dataTable = $(event.target).closest('table').DataTable();
+// 		var rowData = dataTable.row(event.currentTarget).data();
+// 		Session.set('session_id', rowData._id._str);
+// 		//		console.log(window.$log1 = rowData);
+// 		Session.set('showModalEvent', true);
+// 		$('#showModalid').modal("show");
+// 	}
+// })
+
+// // The helpers code allows the records in the table to filtered according to the user signed in
+// Template.sessiontable.helpers({
+// 	selector: function () {
+// 		//		console.log('inside the selector table');
+// 		//		console.log(Meteor.userId());
+// 		return {
+// 			volunteer_id: Meteor.userId()
+// 		}
+// 	}
+// });
+
+
+////////////////////////////// Carousel code ////////////////////////////////////////////
 
 Template.carousel.rendered = function () {
 
@@ -185,7 +210,57 @@ Template.carousel.rendered = function () {
 		dots: true,
 		arrows: true
 	});
+
+	// $('#carousel').slick({
+//   infinite: true,
+//   slidesToShow: 3,
+//   slidesToScroll: 3
+// });
 };
+
+Template.carousel.events({
+  'click #student1': function () {
+  	console.log("clicked image number1");
+    Session.set('showStudentModal', true);
+    $('#studentModalid').modal("show");
+  }
+  });
+
+////////////////////////////// Show Student Modal ////////////////////////////////////////////
+
+Template.showStudentModal.helpers ({
+  studentlist: function () {
+     console.log('inside student modal helper');
+     
+     //Create an array to store all the student ids associated with this volunteer 
+     var studentIdList = [];
+     
+     //Query the StudentVolunteer table to get all student ids 
+     StudentVolunteerDetails = StudentVolunteer.find({volunteer_id: Meteor.userId()}).fetch();
+     
+     //Push into array 
+     StudentVolunteerDetails.forEach(function (evt) {
+      studentIdList.push({
+        student_id: evt.student_id});
+      }); 
+
+
+    //Testing - need to change 
+     var studentid = studentIdList[0].student_id;
+     console.log(studentid);
+     // return test
+
+      var studentDetails = CalEvents.find({
+      _id: studentid
+      }).fetch()[0];
+
+     console.log(studentDetails);
+     return studentDetails 
+    } 
+  })
+
+
+////////////////////////////// Common ////////////////////////////////////////////
 
 AppController = RouteController.extend({
 	layoutTemplate: 'appLayout'

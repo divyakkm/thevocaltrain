@@ -30,10 +30,10 @@ Meteor.publishComposite("calevents", function () {
 	}
 });
 
-Meteor.publishComposite("studentvolunteer", function () {
+Meteor.publishComposite("StudentVolunteer", function () {
 	return {
 		find: function () {
-				return studentvolunteer.find({});
+				return StudentVolunteer.find({});
 			}
 			// ,
 			// children: [

@@ -59,8 +59,11 @@ TabularTables.Books = new Tabular.Table({
 
 VolprofileController = AppController.extend({
 	waitOn: function () {
-		return this.subscribe('calevents');
+		return [
+		this.subscribe('StudentVolunteer'),
+		this.subscribe('calevents')]
 	},
+
 	onBeforeAction: function (pause) {
 		AccountsTemplates.ensureSignedIn.call(this, pause);
 	},
