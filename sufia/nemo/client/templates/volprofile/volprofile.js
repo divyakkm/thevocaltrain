@@ -93,16 +93,38 @@ Template.showStudentModal.helpers ({
         student_id: evt.student_id});
       }); 
 
-     //Testing - need to change 
+
+    //Testing - need to change 
      var test = studentIdList[0].student_id;
      console.log(test);
      // return test
 
-     var studentDetails = CalEvents.find({
+      var studentDetails = CalEvents.find({
       _id: test
       }).fetch()[0];
 
-     console.log('student name');
+     //Testing - for dynamic div population
+     // var studentDetails = [];
+
+     // var test1 = studentIdList[0].student_id;
+     // console.log(test1);
+     // // return test
+
+     //  studentDetails[0] = CalEvents.find({
+     //  _id: test1
+     //  }).fetch();
+
+     // var test2 = studentIdList[1].student_id;
+     // console.log(test2);
+     // // return test
+
+     //  studentDetails[1] = CalEvents.find({
+     //  _id: test2
+     //  }).fetch();
+
+     // console.log('studentDetails');
+     // console.log(studentDetails[0]);
+     // console.log(studentDetails[1]);
      console.log(studentDetails);
      return studentDetails 
     } 
