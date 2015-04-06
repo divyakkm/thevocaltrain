@@ -70,14 +70,15 @@ Template.showModal.helpers({
 	},
 
 	ass2: function () {
-				console.log("inside ass2");
+		console.log("inside ass2");
 		var ref4 = Assessment.find({
 			lesson_id: SessionList.find({
 				_id: "551cae3cb1ddc9927db19e89"
-			}).fetch()[0].lesson_id}).fetch()[0];
+			}).fetch()[0].lesson_id
+		}).fetch()[0];
 		//Assessment.find({lesson_id : SessionList.find({_id: "551cae3cb1ddc9927db19e89"}).fetch()[0].lesson_id}).fetch()[0]
 		//});
-				console.log(ref4);
+		console.log(ref4);
 		return ref4;
 	},
 
@@ -89,8 +90,12 @@ Template.showModal.helpers({
 		//		 	name: "Chunks",
 		//		 	class: "myClass anotherClass",
 		//		 	value: 123
-		//		 }
-		var reff = SessionList.find().sort({submittedAt: -1})[0];
+		//		 } DrawingHistory.find({}, {sort: {time: -1}});
+		var reff = SessionList.find({}, {
+			sort: {
+				submittedAt: -1
+			}
+		}).fetch()[0];
 		//console.log(reff);
 		return reff;
 	}
@@ -126,7 +131,7 @@ var updateSessionList = function (id, comments, notes, score, eng, ret, acc, flu
 			notes: notes,
 			mainscore: score,
 			engagement: eng,
-			retention: ret, 
+			retention: ret,
 			creativity: cre,
 			accuracy: acc,
 			fluency: flu
