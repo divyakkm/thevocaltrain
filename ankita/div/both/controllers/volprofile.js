@@ -45,7 +45,12 @@ TabularTables.Books = new Tabular.Table({
 		{
 			data: "this._id",
 			visible: false
+		},
+		{
+			data: "submittedAt",
+			title: "Submitted At"
 		}
+
 // 	{
 //   tmpl: Meteor.isClient && Template.sessiontable
 // }

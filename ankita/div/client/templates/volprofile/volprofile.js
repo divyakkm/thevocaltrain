@@ -58,8 +58,31 @@ Template.showModal.helpers({
 		return ref2;
 	},
 
-	cmt: function () {
-		console.log("inside cmt");
+	ass: function () {
+		//		console.log("inside act");
+		var ref3 = Assessment.find({
+			lesson_id: SessionList.find({
+				_id: "551cae3cb1ddc9927db19e89"
+			}).fetch()[0].lesson_id
+		});
+		//		console.log(ref2);
+		return ref3;
+	},
+
+	ass2: function () {
+				console.log("inside ass2");
+		var ref4 = Assessment.find({
+			lesson_id: SessionList.find({
+				_id: "551cae3cb1ddc9927db19e89"
+			}).fetch()[0].lesson_id}).fetch()[0];
+		//Assessment.find({lesson_id : SessionList.find({_id: "551cae3cb1ddc9927db19e89"}).fetch()[0].lesson_id}).fetch()[0]
+		//});
+				console.log(ref4);
+		return ref4;
+	},
+
+	dt: function () {
+		//console.log("inside dt");
 		// var content = $('#currentnotes').value;
 		// console.log(content);
 		//		 var ref1 = {
@@ -67,11 +90,9 @@ Template.showModal.helpers({
 		//		 	class: "myClass anotherClass",
 		//		 	value: 123
 		//		 }
-		var ref1 = SessionList.find({
-			_id: "551cae3cb1ddc9927db19e89"
-		}).fetch()[0];
-		console.log(ref1);
-		return ref1;
+		var reff = SessionList.find().sort({submittedAt: -1})[0];
+		//console.log(reff);
+		return reff;
 	}
 });
 
@@ -80,20 +101,35 @@ Template.showModal.events({
 			console.log("step1");
 			console.log(tmpl);
 			comments = tmpl.find('#commentstextarea').value;
-			console.log(comments);
-			updateSessionList("551cae3cb1ddc9927db19e89", comments);
+			notes = tmpl.find('#currentnotes').value;
+			score = tmpl.find('#score').value;
+			eng = tmpl.find('input:radio[name=Engagement]:checked').value;
+			ret = tmpl.find('input:radio[name=Retention]:checked').value;
+			acc = tmpl.find('input:radio[name=Accuracy]:checked').value;
+			flu = tmpl.find('input:radio[name=Fluency]:checked').value;
+			cre = tmpl.find('input:radio[name=Creativity]:checked').value;
+			console.log(eng);
+			updateSessionList("551cae3cb1ddc9927db19e89", comments, notes, score, eng, ret, acc, flu, cre);
 		}
 		//SessionList.update({_id: "551cae3cb1ddc9927db19e89"}, {$set: {notes: "5"}});
 		//console.log("step 2");
 })
 
-var updateSessionList = function (id, value) {
+var updateSessionList = function (id, comments, notes, score, eng, ret, acc, flu, cre) {
 	console.log("inside updatesessionlist");
 	SessionList.update({
 		_id: id
 	}, {
 		$set: {
-			notes: value
+			submittedAt: new Date(),
+			comments: comments,
+			notes: notes,
+			mainscore: score,
+			engagement: eng,
+			retention: ret, 
+			creativity: cre,
+			accuracy: acc,
+			fluency: flu
 		}
 	});
 	console.log("done updatesessionlist");
@@ -114,7 +150,7 @@ var updateSessionList = function (id, value) {
 // 	});
 // 	updateCalendar();
 // }
-
+//db.getCollection('session').find().sort({submittedAt: -1})
 
 Template.sessiontable.events({
 	'click tbody > tr': function (event, view) {

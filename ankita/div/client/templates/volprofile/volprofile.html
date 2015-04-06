@@ -58,16 +58,21 @@
 
 						<fieldset>
 							<legend>Assessment</legend>
-							Enter score for this assessment:
+							<ol>
+							<br>{{#each ass}}
+							<li>{{assessmentcontentbody}}</li>
+							{{/each}}
+							</ol>
+							<br>Enter score for this assessment:
 							<br>
-							<input type="text" value="0" id="score">/5
+							<input type="text" value="0" id="score">/{{ass2.maxscore}}
 							<br>
 							<label>Engagement
-								<input type="radio" name="Engagement" value="1">1
-								<input type="radio" name="Engagement" value="2">2
-								<input type="radio" name="Engagement" value="3">3
-								<input type="radio" name="Engagement" value="4">4
-								<input type="radio" name="Engagement" value="5" checked="checked">5
+								<input type="radio" name="Engagement" class = "eng" value="1">1
+								<input type="radio" name="Engagement" class = "eng" value="2">2
+								<input type="radio" name="Engagement" class = "eng" value="3">3
+								<input type="radio" name="Engagement" class = "eng" value="4">4
+								<input type="radio" name="Engagement" class = "eng" value="5" checked="checked">5
 
 							</label>
 							<br>
@@ -122,8 +127,8 @@
 
 					<div class="parts" id="past">
 
-						<h3>Previous Session Notes</h3>
-
+					<h3>Previous Session Notes</h3>
+					{{dt.notes}}
 					</div>
 
 					<div class="modal-footer">
