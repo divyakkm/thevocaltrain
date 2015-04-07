@@ -69,7 +69,6 @@ $('#carousel').slick({
   arrows: true
   })
 
-
 // $('#carousel').slick({
 //   infinite: true,
 //   slidesToShow: 3,
@@ -95,12 +94,12 @@ Template.showStudentModal.helpers ({
 
 
     //Testing - need to change 
-     var test = studentIdList[0].student_id;
-     console.log(test);
+     var studentid = studentIdList[0].student_id;
+     console.log(studentid);
      // return test
 
       var studentDetails = CalEvents.find({
-      _id: test
+      _id: studentid
       }).fetch()[0];
 
      //Testing - for dynamic div population

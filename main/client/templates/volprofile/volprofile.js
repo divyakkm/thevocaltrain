@@ -206,16 +206,16 @@ Template.sessiontable.events ({
 
 Template.carousel.rendered = function () {
 
-	$('#carousel').slick({
-		dots: true,
-		arrows: true
-	});
-
 	// $('#carousel').slick({
-//   infinite: true,
-//   slidesToShow: 3,
-//   slidesToScroll: 3
-// });
+	// 	dots: true,
+	// 	arrows: true
+	// });
+
+	$('#carousel').slick({
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 3
+});
 };
 
 Template.carousel.events({
@@ -223,7 +223,18 @@ Template.carousel.events({
   	console.log("clicked image number1");
     Session.set('showStudentModal', true);
     $('#studentModalid').modal("show");
-  }
+  },
+  'click #student2': function () {
+  	console.log("clicked image number2");
+    Session.set('showStudentModal', true);
+    $('#studentModalid').modal("show");
+  },
+	'click #student3': function () {
+	console.log("clicked image number3");
+	Session.set('showStudentModal', true);
+	$('#studentModalid').modal("show");
+  },
+
   });
 
 ////////////////////////////// Show Student Modal ////////////////////////////////////////////
