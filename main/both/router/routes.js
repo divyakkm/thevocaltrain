@@ -15,15 +15,20 @@ Router.map(function () {
 		path: '/dashboard'
 	});
 	this.route('volprofile', {
-		path: '/volprofile'
+		path: '/volprofile'//,
+		// data: function () {
+		// 	return StudentVolunteer.find();
+		// }
 	});
 	this.route('schedule', {
 		path: '/schedule'
 	});
-	this.route('schedulenew', {
-		path: '/schedulenew'
-	});
 	this.route('resources', {
 		path: '/resources'
 	});
+	this.route('volsession', {
+		path: '/volsession'
+	})
 });
+
+

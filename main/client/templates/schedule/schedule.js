@@ -1,4 +1,4 @@
-Template.schedulenew.rendered = function () {
+Template.schedule.rendered = function () {
 
 };
 
@@ -7,11 +7,11 @@ Session.setDefault('editing_calevent', null);
 Session.setDefault('showEditEvent', false);
 Session.setDefault('volunteer_id', Meteor.userId());
 
-Template.schedulenew.showEditEventNew = function () {
+Template.schedule.showEditEvent = function () {
 	return Session.get('showEditEvent');
 }
 
-Template.editEventNew.evt = function () {
+Template.editEvent.evt = function () {
 	// run a query to the database
 	var calEvent = CalEvents.findOne({
 		_id: Session.get('editing_calevent')
@@ -20,7 +20,7 @@ Template.editEventNew.evt = function () {
 }
 
 var updateCalendar = function () {
-	$('#calendarnew').fullCalendar('refetchEvents');
+	$('#calendar').fullCalendar('refetchEvents');
 }
 
 // If something with a class of .save in the editEvent template is clicked, run this function
@@ -47,9 +47,9 @@ Template.editEvent.events({
 
 // Fullcalendar package
 // As soon as the calendar renders, it has to execute this function
-Template.schedulenew.rendered = function () {
+Template.schedule.rendered = function () {
 	updateCalendar();
-	$('#calendarnew').fullCalendar({
+	$('#calendar').fullCalendar({
 		header: {
 			left: 'prev,next today',
 			center: 'title',

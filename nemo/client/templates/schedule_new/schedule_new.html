@@ -1,4 +1,4 @@
-<template name="schedule_new">
+<template name="schedulenew">
 	{{#if showEditEvent}} {{>editEvent}} {{/if}}
 	<div class="template-home">
 		<div class="page-header">
@@ -13,19 +13,17 @@
 			<div class="col-md-2">
 			</div>
 			<div class="col-md-8" style="width:100%">
-				<div id="calendar">
+				<div id="calendarnew">
 				</div>
 			</div>
 			<div class="col-md-2">
 			</div>
 		</div>
 	</div>
-
 </template>
 
-<template name="editEvent">
-	<!--Modal Dialog-->
-	<div class="modal" id="EditEventModal">
+<template name="editEventNew">
+	<div class="modal" id="EditEventModalNew">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -33,15 +31,11 @@
 					<h4 class="modal-title">Student Detail</h4>
 				</div>
 				<div class="modal-body">
-					<!--			<label for="title">Student Name: </label>-->
-					<!--			  <input type="text" class="title" name="title" value="{{evt.title}}" id="title" readonly="readonly">-->
 					Student Name - {{evt.title}}
 					<br> Class time -{{evt.weekly_time}}
 					<br> Duration - {{evt.display_start}} - {{evt.display_end}} (1 hour each week, for 15 weeks at the same time)
 					<label><i>Please click Yes to confirm that you will be teaching {{evt.title}} for the mentioned duration. </i>
 					</label>
-					<!--			  <input type="text" class="title" name="title" value="{{evt.title}}" id="end" readonly="readonly">-->
-					<!--			  <label value="{{evt.title}}" id="title"></label>-->
 				</div>
 				<div class="modal-footer">
 					<!--			<a href="#" class="btn btn-danger remove">Delete</a>-->
@@ -49,9 +43,6 @@
 					<a href="#" class="btn close" data-dismiss="modal">No</a>
 				</div>
 			</div>
-			<!-- /.modal-content -->
 		</div>
-		<!-- /.modal-dialog -->
 	</div>
-	<!-- /.modal -->
 </template>
