@@ -6,11 +6,15 @@ Meteor.subscribe("session");
 Meteor.subscribe("activity");
 
 Session.setDefault('get_SessionRow', null);
-Session.setDefault('showModalEvent', false);
-Session.setDefault('showStudentModal', false);
+// Session.setDefault('showStudentModal', false);
 Session.setDefault('volunteer_id', Meteor.userId());
 Session.setDefault('student_id', null);
 Session.setDefault('session_id', "551cae3cb1ddc9927db19e89");
+
+Session.setDefault('showModalEvent1', false);
+Session.setDefault('showModalEvent2', false);
+Session.setDefault('showModalEvent3', false);
+
 
 ////////////////////////////// Modal code - Session In Progress ///////////////////////////////////////////////////
 
@@ -221,17 +225,17 @@ Template.carousel.rendered = function () {
 Template.carousel.events({
   'click #student1': function () {
   	console.log("clicked image number1");
-    Session.set('showStudentModal', true);
+    Session.set('showStudentModal1', true);
     $('#studentModalid').modal("show");
   },
   'click #student2': function () {
   	console.log("clicked image number2");
-    Session.set('showStudentModal', true);
+    Session.set('showStudentModal2', true);
     $('#studentModalid').modal("show");
   },
 	'click #student3': function () {
 	console.log("clicked image number3");
-	Session.set('showStudentModal', true);
+	Session.set('showStudentModal3', true);
 	$('#studentModalid').modal("show");
   },
 
@@ -241,7 +245,11 @@ Template.carousel.events({
 
 Template.showStudentModal.helpers ({
   studentlist: function () {
-     console.log('inside student modal helper');
+
+  	if (Session.get('showModalEvent1') == true) {
+
+  		console.log('inside if statement');
+  		console.log(Session.get('showModalEvent1'));
      
      //Create an array to store all the student ids associated with this volunteer 
      var studentIdList = [];
@@ -268,6 +276,7 @@ Template.showStudentModal.helpers ({
      console.log(studentDetails);
      return studentDetails 
     } 
+  }
   })
 
 
