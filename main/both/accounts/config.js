@@ -1,5 +1,6 @@
 AccountsTemplates.configureRoute('signIn', {
-	layoutTemplate: 'appLayout'
+	layoutTemplate: 'appLayout',
+  redirect: 'volprofile'
 });
 AccountsTemplates.configureRoute('signUp', {
 	layoutTemplate: 'appLayout'
@@ -7,6 +8,8 @@ AccountsTemplates.configureRoute('signUp', {
 AccountsTemplates.configureRoute('ensureSignedIn', {
 	layoutTemplate: 'appLayout'
 });
+
+
 
 //////Code for Sign Up Volunteer Registration page -- custom fields were added to the SignUp page 
 AccountsTemplates.configure({

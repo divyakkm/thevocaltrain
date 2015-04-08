@@ -225,17 +225,17 @@ Template.carousel.rendered = function () {
 Template.carousel.events({
   'click #student1': function () {
   	console.log("clicked image number1");
-    Session.set('showStudentModal1', true);
+    Session.set('showModalEvent1', true);
     $('#studentModalid').modal("show");
   },
   'click #student2': function () {
   	console.log("clicked image number2");
-    Session.set('showStudentModal2', true);
+    Session.set('showModalEvent2', true);
     $('#studentModalid').modal("show");
   },
 	'click #student3': function () {
 	console.log("clicked image number3");
-	Session.set('showStudentModal3', true);
+	Session.set('showModalEvent3', true);
 	$('#studentModalid').modal("show");
   },
 
@@ -246,10 +246,10 @@ Template.carousel.events({
 Template.showStudentModal.helpers ({
   studentlist: function () {
 
-  	if (Session.get('showModalEvent1') == true) {
 
-  		console.log('inside if statement');
-  		console.log(Session.get('showModalEvent1'));
+  	console.log('inside if statement');
+  	
+  	console.log(Session.get('showModalEvent1'));
      
      //Create an array to store all the student ids associated with this volunteer 
      var studentIdList = [];
@@ -263,6 +263,7 @@ Template.showStudentModal.helpers ({
         student_id: evt.student_id});
       }); 
 
+    if (Session.get('showModalEvent1') == true) {
 
     //Testing - need to change 
      var studentid = studentIdList[0].student_id;
@@ -273,10 +274,40 @@ Template.showStudentModal.helpers ({
       _id: studentid
       }).fetch()[0];
 
-     console.log(studentDetails);
-     return studentDetails 
+    console.log(studentDetails);
+   	return studentDetails;
     } 
-  }
+
+    else if (Session.get('showModalEvent2') == true) {
+
+    //Testing - need to change 
+     var studentid = studentIdList[1].student_id;
+     console.log(studentid);
+     // return test
+
+      var studentDetails = CalEvents.find({
+      _id: studentid
+      }).fetch()[1];
+
+    console.log(studentDetails);
+   	return studentDetails;
+   };
+
+   //  else (Session.get('showModalEvent3') == true) {
+
+   //  //Testing - need to change 
+   //   var studentid = studentIdList[2].student_id;
+   //   console.log(studentid);
+   //   // return test
+
+   //    var studentDetails = CalEvents.find({
+   //    _id: studentid
+   //    }).fetch()[2];
+
+   //  console.log(studentDetails);
+   // 	return studentDetails;
+   // };
+	}
   })
 
 
