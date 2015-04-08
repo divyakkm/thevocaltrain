@@ -109,3 +109,18 @@ Meteor.publishComposite("activity", function () {
 			// ]
 	}
 });
+Meteor.publishComposite("student_volunteer", function () {
+	return {
+		find: function () {
+				return StudentVolunteer.find({});
+			}
+			// ,
+			// children: [
+			//   {
+			//     find: function(item) {
+			//       return [];
+			//     }
+			//   }
+			// ]
+	}
+});

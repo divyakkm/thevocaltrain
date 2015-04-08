@@ -3,14 +3,14 @@ Meteor.subscribe('student_volunteer');
 
 // Set session defaults
 Session.setDefault('editing_calevent', null);
-Session.setDefault('showEditEvent', false);
+Session.setDefault('showEditEventNew', false);
 Session.setDefault('volunteer_id', Meteor.userId());
 
-Template.schedule.showEditEvent = function () {
-	return Session.get('showEditEvent');
+Template.schedulenew.showEditEventNew = function () {
+	return Session.get('showEditEventNew');
 }
 
-Template.editEvent.evt = function () {
+Template.editEventNew.evt = function () {
 	// run a query to the database
 	var calEvent = CalEvents.findOne({
 		_id: Session.get('editing_calevent')
@@ -19,36 +19,36 @@ Template.editEvent.evt = function () {
 }
 
 var updateCalendar = function () {
-	$('#calendar').fullCalendar('refetchEvents');
+	$('#calendarnew').fullCalendar('refetchEvents');
 }
 
 // If something with a class of .save in the editEvent template is clicked, run this function
-Template.editEvent.events({
+Template.editEventNew.events({
 	'click .save': function (evt, tmpl) {
 		console.log(evt);
 		//                updateCalEvent(Session.get('editing_calevent'), tmpl.find('.title').value);
 		updateCalEvent(Session.get('editing_calevent'), 'true');
 		Session.set('editing_calevent', null);
-		Session.set('showEditEvent', false);
+		Session.set('showEditEventNew', false);
+
 	},
 	'click .close': function (evt, tmpl) {
 		Session.set('editing_calevent', null);
-		Session.set('showEditEvent', false);
-		$('#EditEventModal').modal("hide");
+		Session.set('showEditEventNew', false);
+		$('#EditEventModalNew').modal("hide");
 	},
 	'click .remove': function (evt, tmpl) {
 		removeCalEvent(Session.get('editing_calevent'));
 		Session.set('editing_calevent', null);
-		Session.set('showEditEvent', false);
-		$('#EditEventModal').modal("hide");
+		Session.set('showEditEventNew', false);
+		$('#EditEventModalNew').modal("hide");
 	}
 })
 
 // Fullcalendar package
 // As soon as the calendar renders, it has to execute this function
-Template.schedule.rendered = function () {
-	updateCalendar();
-	$('#calendar').fullCalendar({
+Template.schedulenew.rendered = function () {
+	$('#calendarnew').fullCalendar({
 		header: {
 			left: 'prev,next today',
 			center: 'title',
@@ -80,15 +80,14 @@ Template.schedule.rendered = function () {
 		//			});
 		//			// Refreshes the calendar
 		//			updateCalendar();
-		//		},
+		//		},		
 		eventClick: function (calEvent, jsEvent, view) {
 			// Set the editing_calevent variable to equal the calEvent.id
 			Session.set('editing_calevent', calEvent.id);
-			// Set the showEditEvent variable to true
-			Session.set('showEditEvent', true);
+			// Set the showEditEventNew variable to true
+			Session.set('showEditEventNew', true);
 			//Trigger the modal bootstrap 3 box as defined in the calendar.html page
-			$('#EditEventModal').modal("show");
-
+			$('#EditEventModalNew').modal("show");
 		},
 		eventDrop: function (calEvent) {
 			CalEvents.update(calEvent.id, {
@@ -105,22 +104,25 @@ Template.schedule.rendered = function () {
 			// Variable to pass events to the calendar
 			// Gets us all of the calendar events and puts them in the array
 			//                        calEvents = CalEvents.find({assigned:null});
-			calEvents = CalEvents.find();
+			calEvents = CalEvents.find({
+				assigned: "false"
+			});
 			// Do a for each loop and add what you find to events array
 			calEvents.forEach(function (evt) {
-				events.push({
-					id: evt._id,
-					title: evt.title,
-					start: evt.start,
-					end: evt.end
-				});
-			})
-
-			// Callback to pass events back to the calendar
+					events.push({
+						id: evt._id,
+						title: evt.title,
+						start: evt.start,
+						end: evt.end
+					});
+				})
+				// Callback to pass events back to the calendar
 			callback(events);
 		},
-		editable: true
+		editable: false
 	});
+	updateCalendar();
+
 }
 var removeCalEvent = function (id, title) {
 	CalEvents.remove({
@@ -139,7 +141,7 @@ var updateCalEvent = function (id, title) {
 		student_id: id,
 		volunteer_id: Session.get('volunteer_id'),
 		//start:CalEvents.findOne({_id : id},{start:1,_id:0})
-		start: 10
+		//		start: 10
 	});
-	updateCalendar();
+	//	updateCalendar();
 }

@@ -1,4 +1,5 @@
-Template.schedule.rendered = function () {};
+Meteor.subscribe('calevents');
+Meteor.subscribe('student_volunteer');
 
 // Set session defaults
 Session.setDefault('editing_calevent', null);
@@ -69,17 +70,17 @@ Template.schedule.rendered = function () {
 		forceEventDuration: true,
 		defaultTimedEventDuration: '00:60:00',
 		// Event triggered when someone clicks on a day in the calendar
-		dayClick: function (date, allDay, jsEvent, view) {
-			// Insert the day someone's clicked on
-			var indate = date;
-			console.log(indate);
-			CalEvents.insert({
-				title: 'New Class',
-				start: date
-			});
-			// Refreshes the calendar
-			updateCalendar();
-		},
+		//		dayClick: function (date, allDay, jsEvent, view) {
+		//			// Insert the day someone's clicked on
+		//			var indate = date;
+		//			console.log(indate);
+		//			CalEvents.insert({
+		//				title: 'New Class',
+		//				start: date
+		//			});
+		//			// Refreshes the calendar
+		//			updateCalendar();
+		//		},
 		eventClick: function (calEvent, jsEvent, view) {
 			// Set the editing_calevent variable to equal the calEvent.id
 			Session.set('editing_calevent', calEvent.id);
@@ -136,7 +137,7 @@ var updateCalEvent = function (id, title) {
 	console.log(id + " " + Session.get('volunteer_id'));
 	StudentVolunteer.insert({
 		student_id: id,
-		voluteer_id: Session.get('volunteer_id'),
+		volunteer_id: Session.get('volunteer_id'),
 		//start:CalEvents.findOne({_id : id},{start:1,_id:0})
 		start: 10
 	});
