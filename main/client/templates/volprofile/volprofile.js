@@ -6,14 +6,14 @@ Meteor.subscribe("session");
 Meteor.subscribe("activity");
 
 Session.setDefault('get_SessionRow', null);
-// Session.setDefault('showStudentModal', false);
+Session.setDefault('showModalEvent', false);
 Session.setDefault('volunteer_id', Meteor.userId());
 Session.setDefault('student_id', null);
 Session.setDefault('session_id', "551cae3cb1ddc9927db19e89");
 
-Session.setDefault('showModalEvent1', false);
-Session.setDefault('showModalEvent2', false);
-Session.setDefault('showModalEvent3', false);
+Session.setDefault('showStudentModal1', false);
+Session.setDefault('showStudentModal2', false);
+Session.setDefault('showStudentModal3', false);
 
 
 ////////////////////////////// Modal code - Session In Progress ///////////////////////////////////////////////////
@@ -225,17 +225,17 @@ Template.carousel.rendered = function () {
 Template.carousel.events({
   'click #student1': function () {
   	console.log("clicked image number1");
-    Session.set('showModalEvent1', true);
+    Session.set('showStudentModal1', true);
     $('#studentModalid').modal("show");
   },
   'click #student2': function () {
   	console.log("clicked image number2");
-    Session.set('showModalEvent2', true);
+    Session.set('showStudentModal2', true);
     $('#studentModalid').modal("show");
   },
 	'click #student3': function () {
 	console.log("clicked image number3");
-	Session.set('showModalEvent3', true);
+	Session.set('showStudentModal3', true);
 	$('#studentModalid').modal("show");
   },
 
@@ -249,7 +249,7 @@ Template.showStudentModal.helpers ({
 
   	console.log('inside if statement');
   	
-  	console.log(Session.get('showModalEvent1'));
+  	console.log(Session.get('showStudentModal1'));
      
      //Create an array to store all the student ids associated with this volunteer 
      var studentIdList = [];
@@ -263,14 +263,14 @@ Template.showStudentModal.helpers ({
         student_id: evt.student_id});
       }); 
 
-    if (Session.get('showModalEvent1') == true) {
+    if (Session.get('showStudentModal1') == true) {
 
     //Testing - need to change 
      var studentid = studentIdList[0].student_id;
      console.log(studentid);
      // return test
 
-      var studentDetails = CalEvents.find({
+     var studentDetails = CalEvents.find({
       _id: studentid
       }).fetch()[0];
 
@@ -278,10 +278,12 @@ Template.showStudentModal.helpers ({
    	return studentDetails;
     } 
 
-    else if (Session.get('showModalEvent2') == true) {
+    else if (Session.get('showStudentModal2') == true) {
+    	Session.set('showStudentModal1', false);
 
     //Testing - need to change 
      var studentid = studentIdList[1].student_id;
+     console.log('inside student 2 if');
      console.log(studentid);
      // return test
 
