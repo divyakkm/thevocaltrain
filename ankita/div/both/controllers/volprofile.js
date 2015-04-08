@@ -61,7 +61,8 @@ VolprofileController = AppController.extend({
 	waitOn: function () {
 		return [
 		this.subscribe('StudentVolunteer'),
-		this.subscribe('calevents')]
+		this.subscribe('calevents'),
+		this.subscribe ('session')]
 	},
 
 	onBeforeAction: function (pause) {

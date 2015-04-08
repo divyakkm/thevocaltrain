@@ -171,7 +171,7 @@
 
 </template>
 
-<template name="showStudentModal">
+<template name="showStudentModal1">
   <!--Modal Dialog-->
   <div class="modal" id="studentModalid">
     <div class="modal-dialog">
@@ -212,7 +212,87 @@
   <!-- /.modal -->
 </template>
 
+<template name="showStudentModal2">
+  <!--Modal Dialog-->
+  <div class="modal" id="studentModalid">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title">Student Detail</h4>
+        </div>
 
+          <div class="modal-body">
+<!--          Student Name - {{ temp.assigned_student }}
+          <br> {{ temp.session }} {{ temp.date }} {{ temp.time }}
+ --> 
+            <div class="parts" id="studentdetails">                
+              <h4>Student details</h4>
+              <br>Student Name: {{ studentlist.title }}
+              <br>City: {{studentlist.current_city}} {{studentlist.current_state}}
+              <br>Grade: {{studentlist.Grade}}
+              <br>Interests: {{studentlist.likes}}
+            </div>
+
+
+            <div class="parts" id="pastnotes">
+              <h3>Previous Session Notes</h3>
+          </div>
+
+        <div class="modal-footer">
+          <!--      <a href="#" class="btn btn-danger remove">Delete</a>-->
+          <a href="#" class="btn btn-primary save">Save</a>
+          <a href="#" class="btn close" data-dismiss="modal">Cancel</a>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+</div>
+  <!-- /.modal -->
+</template>
+
+<template name="showStudentModal3">
+  <!--Modal Dialog-->
+  <div class="modal" id="studentModalid">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title">Student Detail</h4>
+        </div>
+
+          <div class="modal-body">
+<!--          Student Name - {{ temp.assigned_student }}
+          <br> {{ temp.session }} {{ temp.date }} {{ temp.time }}
+ --> 
+            <div class="parts" id="studentdetails">                
+              <h4>Student details</h4>
+              <br>Student Name: {{ studentlist.title }}
+              <br>City: {{studentlist.current_city}} {{studentlist.current_state}}
+              <br>Grade: {{studentlist.Grade}}
+              <br>Interests: {{studentlist.likes}}
+            </div>
+
+
+            <div class="parts" id="pastnotes">
+              <h3>Previous Session Notes</h3>
+          </div>
+
+        <div class="modal-footer">
+          <!--      <a href="#" class="btn btn-danger remove">Delete</a>-->
+          <a href="#" class="btn btn-primary save">Save</a>
+          <a href="#" class="btn close" data-dismiss="modal">Cancel</a>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+</div>
+  <!-- /.modal -->
+</template>
 <!-- <template name = "studentdetails">
 					Student Name - {{ temp.assigned_student }}
 					<br>City: 
