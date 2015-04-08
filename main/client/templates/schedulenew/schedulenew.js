@@ -88,6 +88,8 @@ Template.schedulenew.rendered = function () {
 			Session.set('showEditEventNew', true);
 			//Trigger the modal bootstrap 3 box as defined in the calendar.html page
 			$('#EditEventModalNew').modal("show");
+			$('.modal-backdrop').remove();
+
 		},
 		eventDrop: function (calEvent) {
 			CalEvents.update(calEvent.id, {

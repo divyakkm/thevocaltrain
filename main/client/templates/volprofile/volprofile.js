@@ -152,34 +152,38 @@ var updateSessionList = function (id, comments, notes, score, eng, ret, acc, flu
 //////////////////////////////Session Table code - Sufi////////////////////////////////////////////
 
 //Each click on a row is associated to a unique session
-Template.sessiontable.events ({
+Template.sessiontable.events({
 
-  'click tbody > tr': function (event, view) {
+	'click tbody > tr': function (event, view) {
 
-  	var dataTable = $(event.target).closest('table').DataTable();
-  	// console.log(dataTable);
-  	// console.log(window.$log=dataTable);
-    var rowData = dataTable.row(event.currentTarget).data();
-    // console.log(rowData);
-    Session.set('session_id',rowData._id._str);
-  	console.log(window.$log1=rowData);
-  	// console.log('clicked row');
-  	// // console.log(modalEvent);
-  	// Session.set('get_SessionRow', modalEvent.id);
-  	Session.set('showModalEvent', true);
-  	$('#showModalid').modal("show");
-    }
-  });
-	
+		var dataTable = $(event.target).closest('table').DataTable();
+		// console.log(dataTable);
+		// console.log(window.$log=dataTable);
+		var rowData = dataTable.row(event.currentTarget).data();
+		// console.log(rowData);
+		Session.set('session_id', rowData._id._str);
+		console.log(window.$log1 = rowData);
+		// console.log('clicked row');
+		// // console.log(modalEvent);
+		// Session.set('get_SessionRow', modalEvent.id);
+		Session.set('showModalEvent', true);
+		$('#showModalid').modal("show");
+		$('.modal-backdrop').remove();
+
+	}
+});
+
 
 // The helpers code allows the records in the table to filtered according to the user signed in
- Template.sessiontable.helpers({
-  selector: function() {
-    // console.log('inside the selector table');
-    // console.log(Meteor.userId());
-    return {volunteer_id: Meteor.userId()}
-    }
-  });
+Template.sessiontable.helpers({
+	selector: function () {
+		// console.log('inside the selector table');
+		// console.log(Meteor.userId());
+		return {
+			volunteer_id: Meteor.userId()
+		}
+	}
+});
 
 ////////////////////////////// Old session table code ////////////////////////////////////////////
 
@@ -216,101 +220,108 @@ Template.carousel.rendered = function () {
 	// });
 
 	$('#carousel').slick({
-  infinite: true,
-  slidesToShow: 3,
-  slidesToScroll: 3
-});
+		infinite: true,
+		slidesToShow: 3,
+		slidesToScroll: 3
+	});
 };
 
 Template.carousel.events({
-  'click #student1': function () {
-  	console.log("clicked image number1");
-    Session.set('showStudentModal1', true);
-    $('#studentModalid').modal("show");
-  },
-  'click #student2': function () {
-  	console.log("clicked image number2");
-    Session.set('showStudentModal2', true);
-    $('#studentModalid').modal("show");
-  },
-	'click #student3': function () {
-	console.log("clicked image number3");
-	Session.set('showStudentModal3', true);
-	$('#studentModalid').modal("show");
-  },
+	'click #student1': function () {
+		console.log("clicked image number1");
+		Session.set('showStudentModal1', true);
+		$('#studentModalid').modal("show");
+		$('.modal-backdrop').remove();
 
-  });
+	},
+	'click #student2': function () {
+		console.log("clicked image number2");
+		Session.set('showStudentModal2', true);
+		$('#studentModalid').modal("show");
+		$('.modal-backdrop').remove();
+
+	},
+	'click #student3': function () {
+		console.log("clicked image number3");
+		Session.set('showStudentModal3', true);
+		$('#studentModalid').modal("show");
+		$('.modal-backdrop').remove();
+
+	},
+
+});
 
 ////////////////////////////// Show Student Modal ////////////////////////////////////////////
 
-Template.showStudentModal.helpers ({
-  studentlist: function () {
+Template.showStudentModal.helpers({
+	studentlist: function () {
 
 
-  	console.log('inside if statement');
-  	
-  	console.log(Session.get('showStudentModal1'));
-     
-     //Create an array to store all the student ids associated with this volunteer 
-     var studentIdList = [];
-     
-     //Query the StudentVolunteer table to get all student ids 
-     StudentVolunteerDetails = StudentVolunteer.find({volunteer_id: Meteor.userId()}).fetch();
-     
-     //Push into array 
-     StudentVolunteerDetails.forEach(function (evt) {
-      studentIdList.push({
-        student_id: evt.student_id});
-      }); 
+		console.log('inside if statement');
 
-    if (Session.get('showStudentModal1') == true) {
+		console.log(Session.get('showStudentModal1'));
 
-    //Testing - need to change 
-     var studentid = studentIdList[0].student_id;
-     console.log(studentid);
-     // return test
+		//Create an array to store all the student ids associated with this volunteer 
+		var studentIdList = [];
 
-     var studentDetails = CalEvents.find({
-      _id: studentid
-      }).fetch()[0];
+		//Query the StudentVolunteer table to get all student ids 
+		StudentVolunteerDetails = StudentVolunteer.find({
+			volunteer_id: Meteor.userId()
+		}).fetch();
 
-    console.log(studentDetails);
-   	return studentDetails;
-    } 
+		//Push into array 
+		StudentVolunteerDetails.forEach(function (evt) {
+			studentIdList.push({
+				student_id: evt.student_id
+			});
+		});
 
-    else if (Session.get('showStudentModal2') == true) {
-    	Session.set('showStudentModal1', false);
+		if (Session.get('showStudentModal1') == true) {
 
-    //Testing - need to change 
-     var studentid = studentIdList[1].student_id;
-     console.log('inside student 2 if');
-     console.log(studentid);
-     // return test
+			//Testing - need to change 
+			var studentid = studentIdList[0].student_id;
+			console.log(studentid);
+			// return test
 
-      var studentDetails = CalEvents.find({
-      _id: studentid
-      }).fetch()[1];
+			var studentDetails = CalEvents.find({
+				_id: studentid
+			}).fetch()[0];
 
-    console.log(studentDetails);
-   	return studentDetails;
-   };
+			console.log(studentDetails);
+			return studentDetails;
+		} else if (Session.get('showStudentModal2') == true) {
+			Session.set('showStudentModal1', false);
 
-   //  else (Session.get('showModalEvent3') == true) {
+			//Testing - need to change 
+			var studentid = studentIdList[1].student_id;
+			console.log('inside student 2 if');
+			console.log(studentid);
+			// return test
 
-   //  //Testing - need to change 
-   //   var studentid = studentIdList[2].student_id;
-   //   console.log(studentid);
-   //   // return test
+			var studentDetails = CalEvents.find({
+				_id: studentid
+			}).fetch()[1];
 
-   //    var studentDetails = CalEvents.find({
-   //    _id: studentid
-   //    }).fetch()[2];
+			console.log(studentDetails);
+			return studentDetails;
+		};
 
-   //  console.log(studentDetails);
-   // 	return studentDetails;
-   // };
+		//  else (Session.get('showModalEvent3') == true) {
+
+		//  //Testing - need to change 
+		//   var studentid = studentIdList[2].student_id;
+		//   console.log(studentid);
+		//   // return test
+
+		//    var studentDetails = CalEvents.find({
+		//    _id: studentid
+		//    }).fetch()[2];
+
+		//  console.log(studentDetails);
+		// 	return studentDetails;
+		// };
 	}
-  })
+})
 
 
 ////////////////////////////// Common ////////////////////////////////////////////
