@@ -1,5 +1,5 @@
 <template name="_header">
-
+	<link rel="stylesheet" href="/fonts/css/font-awesome.min.css">
 	<nav class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="container">
 
@@ -33,22 +33,22 @@
 				</div>
 				{{/if}} {{#if currentUser}}
 				<ul class="nav navbar-nav navbar-right">
-					<li class="{{ isActiveRoute regex='home' }}"><a href="{{ pathFor 'home' }}"><i class="fa fa-home"></i> Home</a>
+					<li class="{{ isActiveRoute regex='home' }}"><a href="{{ pathFor 'home' }}"><i class="fa fa-home fa-lg"></i>  Home</a>
 					</li>
-					<li class="{{ isActiveRoute regex='volprofile' }}"><a href="{{ pathFor 'volprofile' }}"><i class="fa fa-home"></i> Profile</a>
+					<li class="{{ isActiveRoute regex='volprofile' }}"><a href="{{ pathFor 'volprofile' }}"><i class="fa fa-th-list fa-lg"></i>  Profile</a>
 					</li>
-					<li class="{{ isActiveRoute regex='schedule' }}"><a href="{{ pathFor 'schedule' }}"><i class="fa fa-gear"></i> Schedule</a>
+					<li class="{{ isActiveRoute regex='schedule' }}"><a href="{{ pathFor 'schedule' }}"><i class="fa fa-calendar-o  fa-lg"></i>   Schedule</a>
 					</li>
-					<li class="{{ isActiveRoute regex='resources' }}"><a href="{{ pathFor 'resources' }}"><i class="fa fa-home"></i> Resources</a>
+					<li class="{{ isActiveRoute regex='resources' }}"><a href="{{ pathFor 'resources' }}"><i class="fa fa-file-image-o fa-lg"></i>   Resources</a>
 					</li>
 				</ul>
 				{{else}}
 				<ul class="nav navbar-nav navbar-right">
-					<li class="{{ isActiveRoute regex='home' }}"><a href="{{ pathFor 'home' }}"><i class="fa fa-home"></i> Home</a>
+					<li class="{{ isActiveRoute regex='home' }}"><a href="{{ pathFor 'home' }}"><i class="fa fa-home fa-lg"></i> Home</a>
 					</li>
-					<li class="{{ isActiveRoute regex='about' }}"><a href="{{ pathFor 'about' }}"><i class="fa fa-gear"></i> About</a>
+					<li class="{{ isActiveRoute regex='about' }}"><a href="{{ pathFor 'about' }}"><i class="fa fa-gear fa-lg"></i> About</a>
 					</li>
-					<li class="{{ isActiveRoute regex='contact' }}"><a href="{{ pathFor 'contact' }}"><i class="fa fa-home"></i> Contact</a>
+					<li class="{{ isActiveRoute regex='contact' }}"><a href="{{ pathFor 'contact' }}"><i class="fa fa-envelope-o fa-lg"></i> Contact</a>
 					</li>
 					<!--<li class="{{ isActiveRoute regex='dashboard' }}"><a href="{{ pathFor 'dashboard' }}"><i class="fa fa-gear"></i> Dashboard</a>
 </li>-->
