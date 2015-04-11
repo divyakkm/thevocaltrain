@@ -1993,7 +1993,7 @@ pre code {
 
 @media (min-width: 1200px) {
 	.container {
-		width: 1170px;
+		width: 95%;
 	}
 }
 
@@ -2003,6 +2003,13 @@ pre code {
 	padding-left: 15px;
 	padding-right: 15px;
 }
+
+/*.container-session-fluid {
+	margin-right: auto;
+	margin-left: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+} */
 
 .row {
 	margin-left: -15px;
@@ -6854,15 +6861,30 @@ button.close {
 
 .modal {
 	display: none;
+	/*width:100%;*/
 	overflow: hidden;
 	position: fixed;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
+	/*margin-left: auto;
+	margin-right: auto;
+	left: 5%;*/
 	z-index: 1050;
 	-webkit-overflow-scrolling: touch;
 	outline: 0;
+}
+
+.span12{
+    -moz-box-shadow: 0 0 2px black;
+    -webkit-box-shadow: 0 0 2px black;
+    /*box-shadow: 0 0 2px black;*/
+    box-shadow: 1px solid #e5e5e5;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 20px;
 }
 
 .modal.fade .modal-dialog {
@@ -6889,12 +6911,17 @@ button.close {
 
 .modal-dialog {
 	position: relative;
-	width: auto;
+	/*width: auto;*/
+	width: 100%;
+	/*height: 100%;
+	padding: 0;*/
 	margin: 10px;
 }
 
 .modal-content {
 	position: relative;
+	/*height: auto;*/
+	width: 100%;
 	background-color: #ffffff;
 	border: 1px solid #999999;
 	border: 1px solid rgba(0, 0, 0, 0.2);
@@ -6912,7 +6939,7 @@ button.close {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 1040;
+	z-index: 1030;
 	background-color: #000000;
 }
 
@@ -6973,9 +7000,10 @@ button.close {
 	overflow: scroll;
 }
 
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
 	.modal-dialog {
-		width: 600px;
+		/*width: 600px;*/
+		/*width: 100%;
 		margin: 30px auto;
 	}
 	.modal-content {
@@ -6985,7 +7013,7 @@ button.close {
 	.modal-sm {
 		width: 300px;
 	}
-}
+}*/
 
 @media (min-width: 992px) {
 	.modal-lg {

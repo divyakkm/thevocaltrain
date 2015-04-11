@@ -9,7 +9,7 @@ Session.setDefault('get_SessionRow', null);
 Session.setDefault('showModalEvent', false);
 Session.setDefault('volunteer_id', Meteor.userId());
 Session.setDefault('student_id', null);
-Session.setDefault('session_id', "551cae3cb1ddc9927db19e89");
+Session.setDefault('session_id', null);
 
 Session.setDefault('showStudentModal', 0);
 
@@ -23,18 +23,15 @@ Template.sessiontable.showModalEvent = function () {
 
 Template.showModal.helpers({
 	temp: function () {
-		//		var ref = {
-		//				name: "Chunks",
-		//				class: "myClass anotherClass",
-		//				value: 123
-		//			}
-		//		console.log("inside temp");
+		//		
+		console.log("inside temp");
+		console.log("mera session id "+Session.get('session_id'));
 		var ref = CalEvents.find({
 			title: SessionList.find({
-				_id: "551cae3cb1ddc9927db19e89"
+				_id: Session.get('session_id')
 			}).fetch()[0].assigned_student
 		}).fetch()[0];
-		//		console.log(ref);
+				console.log(ref);
 		return ref;
 	},
 
@@ -42,7 +39,7 @@ Template.showModal.helpers({
 		//		console.log("inside lsn");
 		var ref1 = LessonBlock.find({
 			_id: SessionList.find({
-				_id: "551cae3cb1ddc9927db19e89"
+				_id: Session.get('session_id')
 			}).fetch()[0].lesson_id
 		}).fetch()[0];
 		// var ref1 = {
@@ -58,7 +55,7 @@ Template.showModal.helpers({
 		//		console.log("inside act");
 		var ref2 = Activity.find({
 			lesson_id: SessionList.find({
-				_id: "551cae3cb1ddc9927db19e89"
+				_id: Session.get('session_id')
 			}).fetch()[0].lesson_id
 		});
 		//		console.log(ref2);
@@ -69,7 +66,7 @@ Template.showModal.helpers({
 		//		console.log("inside act");
 		var ref3 = Assessment.find({
 			lesson_id: SessionList.find({
-				_id: "551cae3cb1ddc9927db19e89"
+				_id: Session.get('session_id')
 			}).fetch()[0].lesson_id
 		});
 		//		console.log(ref2);
@@ -80,7 +77,7 @@ Template.showModal.helpers({
 		console.log("inside ass2");
 		var ref4 = Assessment.find({
 			lesson_id: SessionList.find({
-				_id: "551cae3cb1ddc9927db19e89"
+				_id: Session.get('session_id')
 			}).fetch()[0].lesson_id
 		}).fetch()[0];
 		//Assessment.find({lesson_id : SessionList.find({_id: "551cae3cb1ddc9927db19e89"}).fetch()[0].lesson_id}).fetch()[0]
@@ -121,7 +118,7 @@ Template.showModal.events({
 			flu = tmpl.find('input:radio[name=Fluency]:checked').value;
 			cre = tmpl.find('input:radio[name=Creativity]:checked').value;
 			console.log(eng);
-			updateSessionList("551cae3cb1ddc9927db19e89", comments, notes, score, eng, ret, acc, flu, cre);
+			updateSessionList(Session.get('session_id'), comments, notes, score, eng, ret, acc, flu, cre);
 		}
 		//SessionList.update({_id: "551cae3cb1ddc9927db19e89"}, {$set: {notes: "5"}});
 		//console.log("step 2");
@@ -160,12 +157,13 @@ Template.sessiontable.events({
 		// console.log(window.$log=dataTable);
 		var rowData = dataTable.row(event.currentTarget).data();
 		// console.log(rowData);
-		Session.set('session_id', rowData._id._str);
+		Session.set('session_id', rowData._id);
 		console.log(window.$log1 = rowData);
+		console.log("yahan ka session id "+Session.get('session_id'));
 		// console.log('clicked row');
 		// // console.log(modalEvent);
 		// Session.set('get_SessionRow', modalEvent.id);
-		Session.set('showModalEvent', true);
+		Session.set('showModalEvent', true);		
 		$('#showModalid').modal("show");
 		$('.modal-backdrop').remove();
 
