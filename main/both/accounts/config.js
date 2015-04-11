@@ -2,8 +2,10 @@ AccountsTemplates.configureRoute('signIn', {
 	layoutTemplate: 'appLayout',
   redirect: 'volprofile'
 });
+
 AccountsTemplates.configureRoute('signUp', {
-	layoutTemplate: 'appLayout'
+	layoutTemplate: 'appLayout',
+  redirect: 'volprofile' //change to new volprofile after signup
 });
 AccountsTemplates.configureRoute('ensureSignedIn', {
 	layoutTemplate: 'appLayout'
