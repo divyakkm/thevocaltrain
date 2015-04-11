@@ -252,7 +252,6 @@ Template.carousel.events({
 
 ////////////////////////////// Show Student Modal ////////////////////////////////////////////
 
-<<<<<<< Updated upstream
 Template.showStudentModal.helpers({
 	studentlist: function () {
 
