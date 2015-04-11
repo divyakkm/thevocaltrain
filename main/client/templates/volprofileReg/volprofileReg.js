@@ -1,4 +1,4 @@
-Template.volprofile_reg.rendered = function () {
+Template.volprofileReg.rendered = function () {
 
 };
 
