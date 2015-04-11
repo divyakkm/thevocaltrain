@@ -153,18 +153,18 @@
   <div id="carousel">
     <div id="student1"> 
       <!-- <a href="{{pathFor 'studentprofile' student_id= studentlist }}"> -->
-        <img src="/images/icon1.png" width= "200px" height= "200px">
+        <img src="/images/icon1.png" width= "100px" height= "100px">
       <!-- </a> -->
-      <p> Devarshree </p>
+      <p> {{studentlist.title}} </p>
     </div>
     
     <div id="student2"> 
-      <img src="/images/icon2.png" width= "200px" height= "200px">
-      <p> Sita </p>
+      <img src="/images/icon2.png" width= "100px" height= "100px">
+      <p> {{studentlist.title}} </p>
     </div>     
     <div id="student3"> 
-      <img src="/images/icon3.png" width= "200px" height= "200px">
-      <p> Tara </p>
+      <img src="/images/icon3.png" width= "100px" height= "100px">
+      <p> {{studentlist.title}} </p>
     </div>
   </div>
 
@@ -181,7 +181,6 @@
         </div>
 
       <div class="modal-body">
-
         <div class="parts" id="studentdetails">                
 <!--           <h4>{{studentlist.title}}</h4>
           <br>Student Name: {{ studentlist.title }} -->

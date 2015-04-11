@@ -223,9 +223,11 @@ Template.carousel.rendered = function () {
 		slidesToShow: 3,
 		slidesToScroll: 3,
 		arrows: true,
-		dots: true
+		dots: true,
+		centerMode: true,
+		centerPadding: '20%'
 	});
-};
+}
 
 
 Template.carousel.events({
