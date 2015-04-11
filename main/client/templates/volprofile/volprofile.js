@@ -11,7 +11,9 @@ Session.setDefault('volunteer_id', Meteor.userId());
 Session.setDefault('student_id', null);
 Session.setDefault('session_id', "551cae3cb1ddc9927db19e89");
 
-Session.setDefault('showStudentModal', 0);
+Session.setDefault('showStudentModal1', false);
+Session.setDefault('showStudentModal2', false);
+Session.setDefault('showStudentModal3', false);
 
 
 ////////////////////////////// Modal code - Session In Progress ///////////////////////////////////////////////////
@@ -150,30 +152,6 @@ var updateSessionList = function (id, comments, notes, score, eng, ret, acc, flu
 //////////////////////////////Session Table code - Sufi////////////////////////////////////////////
 
 //Each click on a row is associated to a unique session
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-Template.sessiontable.events ({
-
-  'click tbody > tr': function (event, view) {
-
-  	var dataTable = $(event.target).closest('table').DataTable();
-  	// console.log(dataTable);
-  	// console.log(window.$log=dataTable);
-    var rowData = dataTable.row(event.currentTarget).data();
-    // console.log(rowData);
-    Session.set('session_id',rowData._id);
-  	console.log(window.$log1=rowData);
-  	// console.log('clicked row');
-  	// // console.log(modalEvent);
-  	// Session.set('get_SessionRow', modalEvent.id);
-  	Session.set('showModalEvent', true);
-  	$('#showModalid').modal("show");
-    }
-  });
-	
-=======
->>>>>>> Stashed changes
 Template.sessiontable.events({
 
 	'click tbody > tr': function (event, view) {
@@ -195,10 +173,6 @@ Template.sessiontable.events({
 	}
 });
 
-<<<<<<< Updated upstream
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
 
 // The helpers code allows the records in the table to filtered according to the user signed in
 Template.sessiontable.helpers({
@@ -253,7 +227,6 @@ Template.carousel.rendered = function () {
 };
 
 Template.carousel.events({
-<<<<<<< Updated upstream
 	'click #student1': function () {
 		console.log("clicked image number1");
 		Session.set('showStudentModal1', true);
@@ -271,59 +244,15 @@ Template.carousel.events({
 	'click #student3': function () {
 		console.log("clicked image number3");
 		Session.set('showStudentModal3', true);
-=======
-<<<<<<< HEAD
-  'click #student1': function () {
-  	console.log("clicked image number1");
-    Session.set('showStudentModal', 0);
-    Session.set('showStudentModal', 1);
-    $('#studentModalid').modal("show");
-  },
-  'click #student2': function () {
-  	console.log("clicked image number2");
-    Session.set('showStudentModal', 0);
-    Session.set('showStudentModal', 2);
-    $('#studentModalid').modal("show");
-  },
-	'click #student3': function () {
-	console.log("clicked image number3");
-  Session.set('showStudentModal', 0);	
-	Session.set('showStudentModal', 3);
-	$('#studentModalid').modal("show");
-  },
-=======
-	'click #student1': function () {
-		console.log("clicked image number1");
-		Session.set('showStudentModal1', true);
->>>>>>> Stashed changes
 		$('#studentModalid').modal("show");
 		$('.modal-backdrop').remove();
 
 	},
-<<<<<<< Updated upstream
-=======
-	'click #student2': function () {
-		console.log("clicked image number2");
-		Session.set('showStudentModal2', true);
-		$('#studentModalid').modal("show");
-		$('.modal-backdrop').remove();
-
-	},
-	'click #student3': function () {
-		console.log("clicked image number3");
-		Session.set('showStudentModal3', true);
-		$('#studentModalid').modal("show");
-		$('.modal-backdrop').remove();
->>>>>>> origin/master
-
-	},
->>>>>>> Stashed changes
 
 });
 
 ////////////////////////////// Show Student Modal ////////////////////////////////////////////
 
-<<<<<<< Updated upstream
 Template.showStudentModal.helpers({
 	studentlist: function () {
 
@@ -393,236 +322,6 @@ Template.showStudentModal.helpers({
 		// };
 	}
 })
-=======
-
-
-Template.showStudentModal.helpers ({
-
-  	// var studentIdList = function (){
-   //   //Create an array to store all the student ids associated with this volunteer 
-   //   var studentIdList = [];
-     
-   //   //Query the StudentVolunteer table to get all student ids 
-   //   StudentVolunteerDetails = StudentVolunteer.find({volunteer_id: Meteor.userId()}).fetch();
-     
-   //   //Push into array 
-   //   StudentVolunteerDetails.forEach(function (evt) {
-   //    studentIdList.push({
-   //      student_id: evt.student_id});
-   //    }); 
-
-   //   return studentIdList;
-  	// }
-
-  studentlist: function () {
-     //Create an array to store all the student ids associated with this volunteer 
-     var studentIdList = [];
-     
-     //Query the StudentVolunteer table to get all student ids 
-     StudentVolunteerDetails = StudentVolunteer.find({volunteer_id: Meteor.userId()}).fetch();
-     
-     //Push into array 
-     StudentVolunteerDetails.forEach(function (evt) {
-      studentIdList.push({
-        student_id: evt.student_id});
-      }); 
-
-    if (Session.get('showStudentModal') == 1) {
-
-    //Testing - need to change 
-     var studentid = studentIdList[0].student_id;
-     console.log(studentid);
-     // return test
-
-     var studentDetails = CalEvents.find({
-      _id: studentid
-      }).fetch()[0];
-
-     var notes = SessionList.find({assigned_student_id: studentid},{sort: {submittedAt: -1}
-   							}).fetch()[0].notes;
-     console.log('notes');
-     console.log(notes);
-
-    console.log(studentDetails);
-   	return studentDetails;
-    } 
-
-    else if (Session.get('showStudentModal') == 2) {
-
-    //Testing - need to change 
-     var studentid = studentIdList[1].student_id;
-     console.log('inside student 2 if');
-     console.log(studentid);
-     // return test
-
-      var studentDetails = CalEvents.find({
-      _id: studentid
-      }).fetch()[0];
-
-    console.log(studentDetails);
-   	return studentDetails;
-   }
-
-    else if (Session.get('showStudentModal') == 3) {
-
-    //Testing - need to change 
-     var studentid = studentIdList[2].student_id;
-     console.log(studentid);
-     // return test
-
-      var studentDetails = CalEvents.find({
-      _id: studentid
-      }).fetch()[0];
-
-    console.log(studentDetails);
-   	return studentDetails;
-   };
-	},
-
-	columnDemo: function () {
-		return builtColumn();
-	}
-
-  })
-=======
-Template.showStudentModal.helpers({
-	studentlist: function () {
-
-
-		console.log('inside if statement');
-
-		console.log(Session.get('showStudentModal1'));
-
-		//Create an array to store all the student ids associated with this volunteer 
-		var studentIdList = [];
-
-		//Query the StudentVolunteer table to get all student ids 
-		StudentVolunteerDetails = StudentVolunteer.find({
-			volunteer_id: Meteor.userId()
-		}).fetch();
-
-		//Push into array 
-		StudentVolunteerDetails.forEach(function (evt) {
-			studentIdList.push({
-				student_id: evt.student_id
-			});
-		});
-
-		if (Session.get('showStudentModal1') == true) {
-
-			//Testing - need to change 
-			var studentid = studentIdList[0].student_id;
-			console.log(studentid);
-			// return test
-
-			var studentDetails = CalEvents.find({
-				_id: studentid
-			}).fetch()[0];
-
-			console.log(studentDetails);
-			return studentDetails;
-		} else if (Session.get('showStudentModal2') == true) {
-			Session.set('showStudentModal1', false);
-
-			//Testing - need to change 
-			var studentid = studentIdList[1].student_id;
-			console.log('inside student 2 if');
-			console.log(studentid);
-			// return test
-
-			var studentDetails = CalEvents.find({
-				_id: studentid
-			}).fetch()[1];
-
-			console.log(studentDetails);
-			return studentDetails;
-		};
-
-		//  else (Session.get('showModalEvent3') == true) {
-
-		//  //Testing - need to change 
-		//   var studentid = studentIdList[2].student_id;
-		//   console.log(studentid);
-		//   // return test
-
-		//    var studentDetails = CalEvents.find({
-		//    _id: studentid
-		//    }).fetch()[2];
-
-		//  console.log(studentDetails);
-		// 	return studentDetails;
-		// };
-	}
-})
->>>>>>> origin/master
-
-////////////////////////////// Chart within Student Modal ////////////////////////////////////////////
-
-function builtColumn() {
-
-    return {
-        chart: {type: 'column'},
-        
-        title: {
-            text: 'Progress Summary'
-        },
-        
-        xAxis: {
-            title: {text: 'Sessions in this Module'}, 
-            categories: ['1', '2', '3', '4', '5', '6']
-        },
-        
-		yAxis: {
-            title: {text: 'Score'},
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },	
-        
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
-        
-        series: [
-
-            {
-            name: 'Engagement',
-            data: [3, 3, 3, 4, 3, 4]},
-
-            {
-            name: 'Retention',
-            data: [5, 5, 5, 5, 4, 4]}, 
-
-            {
-            name: 'Accuracy',
-            data: [2, 4, 3, 3, 3, 4]},
-           
-           {
-            name: 'Fluency',
-            data: [2, 2, 3, 3, 3, 3]},
-           
-           {
-            name: 'Creativity',
-            data: [5, 5, 5, 4, 4, 4]}
-            ]
-    	}
-	}
-
->>>>>>> Stashed changes
 
 
 ////////////////////////////// Common ////////////////////////////////////////////

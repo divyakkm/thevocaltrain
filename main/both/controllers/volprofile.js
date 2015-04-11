@@ -15,12 +15,12 @@ TabularTables.Books = new Tabular.Table({
 			title: "Time"
 		},
 		{
-			data: "lesson_name",
-			title: "Lesson"
-		},
-		{
 			data: "assigned_student",
 			title: "Student"
+		},
+		{
+			data: "session",
+			title: "Session"
 		},
 		{
 			data: "assigned_student_id",
@@ -48,8 +48,7 @@ TabularTables.Books = new Tabular.Table({
 		},
 		{
 			data: "submittedAt",
-			title: "Submitted At",
-			visible: false
+			title: "Submitted At"
 		}
 
 // 	{
