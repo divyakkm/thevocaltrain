@@ -221,9 +221,12 @@ Template.carousel.rendered = function () {
 	$('#carousel').slick({
 		infinite: true,
 		slidesToShow: 3,
-		slidesToScroll: 3
+		slidesToScroll: 3,
+		arrows: true,
+		dots: true
 	});
 };
+
 
 Template.carousel.events({
 
@@ -251,76 +254,6 @@ Template.carousel.events({
 });
 
 ////////////////////////////// Show Student Modal ////////////////////////////////////////////
-
-Template.showStudentModal.helpers({
-	studentlist: function () {
-
-
-		console.log('inside if statement');
-
-		console.log(Session.get('showStudentModal1'));
-
-		//Create an array to store all the student ids associated with this volunteer 
-		var studentIdList = [];
-
-		//Query the StudentVolunteer table to get all student ids 
-		StudentVolunteerDetails = StudentVolunteer.find({
-			volunteer_id: Meteor.userId()
-		}).fetch();
-
-		//Push into array 
-		StudentVolunteerDetails.forEach(function (evt) {
-			studentIdList.push({
-				student_id: evt.student_id
-			});
-		});
-
-		if (Session.get('showStudentModal1') == true) {
-
-			//Testing - need to change 
-			var studentid = studentIdList[0].student_id;
-			console.log(studentid);
-			// return test
-
-			var studentDetails = CalEvents.find({
-				_id: studentid
-			}).fetch()[0];
-
-			console.log(studentDetails);
-			return studentDetails;
-		} else if (Session.get('showStudentModal2') == true) {
-			Session.set('showStudentModal1', false);
-
-			//Testing - need to change 
-			var studentid = studentIdList[1].student_id;
-			console.log('inside student 2 if');
-			console.log(studentid);
-			// return test
-
-			var studentDetails = CalEvents.find({
-				_id: studentid
-			}).fetch()[1];
-
-			console.log(studentDetails);
-			return studentDetails;
-		};
-
-		//  else (Session.get('showModalEvent3') == true) {
-
-		//  //Testing - need to change 
-		//   var studentid = studentIdList[2].student_id;
-		//   console.log(studentid);
-		//   // return test
-
-		//    var studentDetails = CalEvents.find({
-		//    _id: studentid
-		//    }).fetch()[2];
-
-		//  console.log(studentDetails);
-		// 	return studentDetails;
-		// };
-	}
-});
 
 Template.showStudentModal.helpers ({
 
@@ -461,8 +394,6 @@ function builtColumn() {
             ]
     	}
 	}
-
-
 
 ////////////////////////////// Common ////////////////////////////////////////////
 
