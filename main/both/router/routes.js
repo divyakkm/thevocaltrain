@@ -18,6 +18,9 @@ Router.map(function () {
 	this.route('volprofile', {
 		path: '/volprofile'
 	});
+	this.route('volprofile_reg', {
+	path: '/volprofile_reg',
+	});
 	this.route('schedule', {
 		path: '/schedule'
 	});

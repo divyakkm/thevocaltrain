@@ -2,7 +2,7 @@
 TabularTables = {};
 Meteor.isClient && Template.registerHelper('TabularTables', TabularTables);
 
-TabularTables.Books = new Tabular.Table({
+TabularTables.Sessions = new Tabular.Table({
 	name: "Session List",
 	collection: SessionList,
 	columns: [

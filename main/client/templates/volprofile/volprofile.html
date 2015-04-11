@@ -1,12 +1,12 @@
 <template name="volprofile">
+
 	<!-- {{#if showModalEvent}}  -->
 	{{>showModal}}
 	<!-- {{/if}} -->
 	<div class="template-home">
 		<div class="page-header"> <h1>Volunteer Profile</h1> </div>
-		<br>
+		<p> In the carousel below, you can click on the images to view details of the students that you are responsible for. Upcoming classes that you have taught or are about to teach are in the table below </p>
 		<br> {{> carousel}} {{> showStudentModal}}
-		<br>
 		<br> {{> sessiontable}}
 	</div>
 </template>
@@ -14,7 +14,9 @@
 
 <template name="sessiontable">
 	<div id="sessiontable">
-		{{> tabular table=TabularTables.Books selector=selector class="table table-striped table-bordered table-condensed"}}
+		<h4> Sesssion Table </h4>
+		<p> Upcoming classes that you have taught or are about to teach are in the table below </p>
+		{{> tabular table=TabularTables.Sessions selector=selector class="table table-striped table-bordered table-condensed"}}
 	</div>
 </template>
 
