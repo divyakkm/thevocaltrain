@@ -39,14 +39,15 @@
 					<!-- {{lsn}}
  					{{act}} -->
  					<div class="container">
- 					<div class="col-md-3">
+ 					<div class="col-md-2">
 					<div class="span12" id="studentdetails">
 						<div id="student1">
 						<!-- <a href="{{pathFor 'studentprofile' student_id= studentlist }}"> -->
 						<!-- </a> -->
 						</div>
-						<h3>Student details</h3>
+						<h4>Student details</h4>
 						<img src="/images/student1.jpg" width="100px" height="100px"> 
+						<br>
 						<br>Name: {{ temp.title }}
 						<br>City: {{temp.current_city}} {{temp.current_state}}
 						<br>Grade: {{temp.Grade}}
@@ -55,23 +56,24 @@
 					<br>
 					<br>
 					<br>
+					<!-- <br>
+					<br> -->
+					<!-- <br>
 					<br>
-					<br>
-					<br>
-					<br>
-					<br>
+					<br> -->
 
 					<div class="span12" id="rsrc">
 
-						<h3>Resources</h3>
-
+						<h4>Resources</h4>
+						<br>
+						<a href="http://www.teach-this.com/resources/esl/introductions-personal-information">Resource1</a>
 					</div>
 					</div>
 					<div class="col-md-6">
 
 					<div class="span12" id="lessn">
 
-						<h3>Lesson: {{lsn.name}}</h3>
+						<h4>Lesson: {{lsn.name}}</h4>
 						<br>Objective: {{lsn.objective}}
 						<br>{{lsn.lessoncontentbody}}
 						<br>
@@ -82,7 +84,7 @@
 						<br>
 						
 						
-						<h3>Assessment</h3>
+						<h4>Assessment</h4>
 							<ol>
 								<br>{{#each ass}}
 								<li>{{assessmentcontentbody}}</li>
@@ -98,7 +100,7 @@
 							</ol> -->
 							<legend>Enter scores for this assessment:</legend>
 							
-							<input type="text" value="0" id="score">/{{ass2.maxscore}}
+							<input type="text" size="3" value="0" id="score">/ {{ass2.maxscore}}
 							<br>
 							<br>
 							<label>Engagement
@@ -144,16 +146,17 @@
 						</fieldset>
 						<br>
 						<br>
-						<h3>Comments</h3>
+						<h4>Comments</h4>
 							<textarea rows="5" cols="80" id="commentstextarea" name="commentstextarea" value={{cmt.notes}}>
 							</textarea>
 						
 
 					</div>
 				</div>
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<div class="span12" id="current">
-							<h3>Notes</h3>
+							<h4>Notes</h4>
+							<br>
 							<textarea rows="5" cols="40" id="currentnotes" name="currentnotes" value="Type notes for this session">
 							</textarea>
 							<!-- <input type="textarea" value="something" id="currentnotes"> -->
@@ -172,7 +175,8 @@
 
 					<div class="span12" id="past">
 
-						<h3>Previous Session Notes</h3> {{dt.notes}}
+						<h4>Previous Session Notes</h4> 
+						<br>{{dt.notes}}
 					</div>
 				</div>
 			</div>
