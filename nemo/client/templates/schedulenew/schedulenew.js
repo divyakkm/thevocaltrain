@@ -1,5 +1,6 @@
 Meteor.subscribe('calevents');
 Meteor.subscribe('student_volunteer');
+Meteor.subscribe('session');
 
 // Set session defaults
 Session.setDefault('editing_calevent', null);
@@ -124,7 +125,6 @@ Template.schedulenew.rendered = function () {
 		editable: false
 	});
 	updateCalendar();
-
 }
 var removeCalEvent = function (id, title) {
 	CalEvents.remove({
@@ -144,6 +144,22 @@ var updateCalEvent = function (id, title) {
 		volunteer_id: Session.get('volunteer_id'),
 		//start:CalEvents.findOne({_id : id},{start:1,_id:0})
 		//		start: 10
+	});
+
+	var studentDetails = CalEvents.find({
+		_id: id
+	}).fetch()[0];
+
+	console.log("for session.... ");
+	console.log(studentDetails);
+
+	SessionList.insert({
+		assigned_student_id: id,
+		volunteer_id: Session.get('volunteer_id'),
+		date: studentDetails.display_start,
+		time: studentDetails.weekly_time,
+		lesson_id: "L1.0",
+		assigned_student: studentDetails.title
 	});
 	//	updateCalendar();
 }
