@@ -2,6 +2,7 @@ Router.map(function () {
 	this.route('home', {
 		path: '/'
 	});
+	
 	this.route('about', {
 		path: '/about'
 	});
@@ -17,6 +18,9 @@ Router.map(function () {
 	this.route('volprofile', {
 		path: '/volprofile'
 	});
+	this.route('volprofileReg', {
+	path: '/volprofileReg',
+	});
 	this.route('schedule', {
 		path: '/schedule'
 	});
@@ -26,4 +30,7 @@ Router.map(function () {
 	this.route('resources', {
 		path: '/resources'
 	});
+	this.route('volsession', {
+		path: '/volsession'
+	})
 });

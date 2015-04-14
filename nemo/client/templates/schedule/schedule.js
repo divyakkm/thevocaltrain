@@ -88,7 +88,7 @@ Template.schedule.rendered = function () {
 			Session.set('showEditEvent', true);
 			//Trigger the modal bootstrap 3 box as defined in the calendar.html page
 			$('#EditEventModal').modal("show");
-
+			$('.modal-backdrop').remove();
 		},
 		eventDrop: function (calEvent) {
 			CalEvents.update(calEvent.id, {
@@ -100,23 +100,39 @@ Template.schedule.rendered = function () {
 			updateCalendar();
 		},
 		events: function (start, end, callback) {
+			var studentIdList = [];
+			StudentVolunteerDetails = StudentVolunteer.find({
+				volunteer_id: Meteor.userId()
+			}, {
+				"student_id": 1,
+				"_id": 0,
+				"volunteer_id": 0
+			}).fetch();
+			console.log(StudentVolunteerDetails);
+			StudentVolunteerDetails.forEach(function (evt) {
+				studentIdList.push(evt.student_id);
+			});
+			console.log(studentIdList);
 			// Create an empty array to store the events
 			var events = [];
 			// Variable to pass events to the calendar
 			// Gets us all of the calendar events and puts them in the array
 			//                        calEvents = CalEvents.find({assigned:null});
-			calEvents = CalEvents.find();
+			calEvents = CalEvents.find({
+				_id: {
+					$in: studentIdList
+				}
+			});
 			// Do a for each loop and add what you find to events array
 			calEvents.forEach(function (evt) {
-				events.push({
-					id: evt._id,
-					title: evt.title,
-					start: evt.start,
-					end: evt.end
-				});
-			})
-
-			// Callback to pass events back to the calendar
+					events.push({
+						id: evt._id,
+						title: evt.title,
+						start: evt.start,
+						end: evt.end
+					});
+				})
+				// Callback to pass events back to the calendar
 			callback(events);
 		},
 		editable: true
