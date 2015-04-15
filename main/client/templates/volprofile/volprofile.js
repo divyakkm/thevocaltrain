@@ -228,106 +228,172 @@ Template.carousel.rendered = function () {
 }
 
 
+// Template.carousel.events({
+
+//   'click #student1': function () {
+//   	console.log("clicked image number1");
+//     Session.set('showStudentModal', 0);
+//     Session.set('showStudentModal', 1);
+//     $('#studentModalid').modal("show");
+//     $('.modal-backdrop').remove();
+//   },
+//   'click #student2': function () {
+//   	console.log("clicked image number2");
+//     Session.set('showStudentModal', 0);
+//     Session.set('showStudentModal', 2);
+//     $('#studentModalid').modal("show");
+//     $('.modal-backdrop').remove();
+//   },
+// 	'click #student3': function () {
+// 	console.log("clicked image number3");
+//   Session.set('showStudentModal', 0);	
+// 	Session.set('showStudentModal', 3);
+// 	$('#studentModalid').modal("show");
+// 	$('.modal-backdrop').remove();
+//   }
+// });
+
+// ////////////////////////////// Show Student Modal ////////////////////////////////////////////
+
+// Template.showStudentModal.helpers ({
+
+//   studentlist: function () {
+//      //Create an array to store all the student ids associated with this volunteer 
+//      var studentIdList = [];
+     
+//      //Query the StudentVolunteer table to get all student ids 
+//      StudentVolunteerDetails = StudentVolunteer.find({volunteer_id: Meteor.userId()}).fetch();
+     
+//      //Push into array 
+//      StudentVolunteerDetails.forEach(function (evt) {
+//       studentIdList.push({
+//         student_id: evt.student_id});
+//       }); 
+
+//     if (Session.get('showStudentModal') == 1) {
+
+//     //Testing - need to change 
+//      var studentid = studentIdList[0].student_id;
+//      console.log(studentid);
+//      // return test
+
+//      var studentDetails = CalEvents.find({
+//       _id: studentid
+//       }).fetch()[0];
+
+//      var notes = SessionList.find({assigned_student_id: studentid},{sort: {submittedAt: -1}
+//    							}).fetch()[0].notes;
+//      console.log('notes');
+//      console.log(notes);
+
+//     console.log(studentDetails);
+//    	return studentDetails;
+//     } 
+
+//     else if (Session.get('showStudentModal') == 2) {
+
+//     //Testing - need to change 
+//      var studentid = studentIdList[1].student_id;
+//      console.log('inside student 2 if');
+//      console.log(studentid);
+//      // return test
+
+//       var studentDetails = CalEvents.find({
+//       _id: studentid
+//       }).fetch()[0];
+
+//     console.log(studentDetails);
+//    	return studentDetails;
+//    }
+
+//     else if (Session.get('showStudentModal') == 3) {
+
+//     //Testing - need to change 
+//      var studentid = studentIdList[2].student_id;
+//      console.log(studentid);
+//      // return test
+
+//       var studentDetails = CalEvents.find({
+//       _id: studentid
+//       }).fetch()[0];
+
+//     console.log(studentDetails);
+//    	return studentDetails;
+//    };
+// 	},
+
+// 	columnDemo: function () {
+// 		return builtColumn();
+// 	}
+
+//   })
+////////////////////////////// Dynamic Rendering with Divs ////////////////////////////////////////////
+
 Template.carousel.events({
 
-  'click #student1': function () {
-  	console.log("clicked image number1");
-    Session.set('showStudentModal', 0);
-    Session.set('showStudentModal', 1);
-    $('#studentModalid').modal("show");
-    $('.modal-backdrop').remove();
-  },
-  'click #student2': function () {
-  	console.log("clicked image number2");
-    Session.set('showStudentModal', 0);
-    Session.set('showStudentModal', 2);
-    $('#studentModalid').modal("show");
-    $('.modal-backdrop').remove();
-  },
-	'click #student3': function () {
-	console.log("clicked image number3");
-  Session.set('showStudentModal', 0);	
-	Session.set('showStudentModal', 3);
-	$('#studentModalid').modal("show");
-	$('.modal-backdrop').remove();
-  }
+	'click .student_div': function () {
+		var student_id = event.target.id;
+		Session.set('student_id', student_id);
+		$('#studentModalid').modal("show");
+		$('.modal-backdrop').remove();
+		// Testing statements
+		// var test = event.currentTarget;
+		// console.log('test');
+		// console.log(test);
+		// var test2 = event.target.id;
+		// console.log('test2');
+		// console.log(test2);
+	}
+})
+
+
+
+Template.carousel.helpers({
+
+	studentlist: function () {
+		//Create an array to store all the student ids associated with this volunteer 
+		var studentIdList = [];
+
+		//Query the StudentVolunteer table to get all student ids 
+		StudentVolunteerDetails = StudentVolunteer.find({
+			volunteer_id: Meteor.userId()
+		}).fetch();
+
+		console.log("trying divs");
+		console.log(StudentVolunteerDetails);
+		return StudentVolunteerDetails;
+	},
 });
 
-////////////////////////////// Show Student Modal ////////////////////////////////////////////
+Template.showStudentModal.helpers({
+	studentdetails: function () {
 
-Template.showStudentModal.helpers ({
-
-  studentlist: function () {
-     //Create an array to store all the student ids associated with this volunteer 
-     var studentIdList = [];
-     
-     //Query the StudentVolunteer table to get all student ids 
-     StudentVolunteerDetails = StudentVolunteer.find({volunteer_id: Meteor.userId()}).fetch();
-     
-     //Push into array 
-     StudentVolunteerDetails.forEach(function (evt) {
-      studentIdList.push({
-        student_id: evt.student_id});
-      }); 
-
-    if (Session.get('showStudentModal') == 1) {
-
-    //Testing - need to change 
-     var studentid = studentIdList[0].student_id;
+		var studentid = Session.get('student_id');
      console.log(studentid);
-     // return test
 
      var studentDetails = CalEvents.find({
       _id: studentid
       }).fetch()[0];
 
-     var notes = SessionList.find({assigned_student_id: studentid},{sort: {submittedAt: -1}
-   							}).fetch()[0].notes;
-     console.log('notes');
-     console.log(notes);
-
     console.log(studentDetails);
    	return studentDetails;
-    } 
-
-    else if (Session.get('showStudentModal') == 2) {
-
-    //Testing - need to change 
-     var studentid = studentIdList[1].student_id;
-     console.log('inside student 2 if');
-     console.log(studentid);
-     // return test
-
-      var studentDetails = CalEvents.find({
-      _id: studentid
-      }).fetch()[0];
-
-    console.log(studentDetails);
-   	return studentDetails;
-   }
-
-    else if (Session.get('showStudentModal') == 3) {
-
-    //Testing - need to change 
-     var studentid = studentIdList[2].student_id;
-     console.log(studentid);
-     // return test
-
-      var studentDetails = CalEvents.find({
-      _id: studentid
-      }).fetch()[0];
-
-    console.log(studentDetails);
-   	return studentDetails;
-   };
 	},
 
-	columnDemo: function () {
+	notes: function () {
+		var studentid = Session.get('student_id');
+     console.log(studentid);
+
+  	var notes = SessionList.find({assigned_student_id: studentid}).fetch();
+     console.log('notes');
+     console.log(notes);
+  	
+  	return notes;
+	},
+
+		columnDemo: function () {
 		return builtColumn();
 	}
-
-  })
-
+});
 
 ////////////////////////////// Chart within Student Modal ////////////////////////////////////////////
 
@@ -371,26 +437,25 @@ function builtColumn() {
         },
         
         series: [
+            {
+            name: 'Sync Lesson 0',
+            data: [3]},
 
             {
-            name: 'Engagement',
-            data: [3, 3, 3, 4, 3, 4]},
+            name: 'Async A1',
+            data: [3]},
 
             {
-            name: 'Retention',
-            data: [5, 5, 5, 5, 4, 4]}, 
+            name: 'Async A2',
+            data: [4]}, 
 
             {
-            name: 'Accuracy',
-            data: [2, 4, 3, 3, 3, 4]},
+            name: 'Async A3',
+            data: [2]},
            
            {
-            name: 'Fluency',
-            data: [2, 2, 3, 3, 3, 3]},
-           
-           {
-            name: 'Creativity',
-            data: [5, 5, 5, 4, 4, 4]}
+            name: 'Sync Lesson 1',
+            data: [3]}
             ]
     	}
 	}
