@@ -39,6 +39,7 @@
  -->
 					<!-- {{lsn}}
  					{{act}} -->
+<<<<<<< Updated upstream
 					<div class="container">
 						<div class="col-md-2">
 							<div class="span12" id="studentdetails">
@@ -58,6 +59,27 @@
 							<br>
 							<br>
 							<!-- <br>
+=======
+ 					<div class="container">
+ 					<div class="col-md-3">
+					<div class="span12" id="studentdetails">
+						<div id="student1">
+						<!-- <a href="{{pathFor 'studentprofile' student_id= studentlist }}"> -->
+						<!-- </a> -->
+						</div>
+						<h4>Student details</h4>
+						<img src="/images/student1.jpg" width="100px" height="100px"> 
+						<br>
+						<br>Name: {{ temp.title }}
+						<br>City: {{temp.current_city}} {{temp.current_state}}
+						<br>Grade: {{temp.Grade}}
+						<br>Interests: {{temp.likes}}
+					</div>
+					<br>
+					<br>
+					<br>
+					<!-- <br>
+>>>>>>> Stashed changes
 					<br> -->
 							<!-- <br>
 					<br>
@@ -65,12 +87,21 @@
 
 							<div class="span12" id="rsrc">
 
+<<<<<<< Updated upstream
 								<h4>Resources</h4>
 								<br>
 								<a href="http://www.teach-this.com/resources/esl/introductions-personal-information">Resource1</a>
 							</div>
 						</div>
 						<div class="col-md-6">
+=======
+						<h4>Resources</h4>
+						<br>
+						<a href="http://www.teach-this.com/resources/esl/introductions-personal-information">Resource1</a>
+					</div>
+					</div>
+					<div class="col-md-5">
+>>>>>>> Stashed changes
 
 							<div class="span12" id="lessn">
 
@@ -168,11 +199,62 @@
 							<br>
 							<br>
 							<br>
+<<<<<<< Updated upstream
+=======
+							<!-- <label>Engagement
+								<input type="radio" name="Engagement" class="eng" value="1">1
+								<input type="radio" name="Engagement" class="eng" value="2">2
+								<input type="radio" name="Engagement" class="eng" value="3">3
+								<input type="radio" name="Engagement" class="eng" value="4">4
+								<input type="radio" name="Engagement" class="eng" value="5" checked="checked">5
+
+							</label>
+>>>>>>> Stashed changes
 							<br>
 							<br>
 							<br>
 							<br>
+<<<<<<< Updated upstream
 							<br>
+=======
+							<label> Creativity
+								<input type="radio" name="Creativity" value="1">1
+								<input type="radio" name="Creativity" value="2">2
+								<input type="radio" name="Creativity" value="3">3
+								<input type="radio" name="Creativity" value="4">4
+								<input type="radio" name="Creativity" value="5" checked="checked">5
+							</label> -->
+						</fieldset>
+						<br>
+						<br>
+						<h4>Comments</h4>
+							<textarea rows="5" cols="40" id="commentstextarea" name="commentstextarea" value={{cmt.notes}}>
+							</textarea>
+						
+
+					</div>
+				</div>
+					<div class="col-md-4">
+						<div class="span12" id="current">
+							<h4>Notes</h4>
+							<br>
+							<textarea rows="5" cols="30" id="currentnotes" name="currentnotes" value="Type notes for this session">
+							</textarea>
+							<!-- <input type="textarea" value="something" id="currentnotes"> -->
+
+						</div>
+						<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<!-- <br>
+					<br>
+					<br>
+					<br>
+					<br> -->
+>>>>>>> Stashed changes
 
 							<div class="span12" id="past">
 
@@ -183,7 +265,7 @@
 					</div>
 					<div class="modal-footer">
 						<!--			<a href="#" class="btn btn-danger remove">Delete</a>btn btn-primary save-->
-						<a href="#" class="btn btn-primary save" id="savesession">Save</a>
+						<a href="#" class="btn btn-primary save" id="savesession" data-dismiss="modal">Save</a>
 						<a href="#" class="btn close" data-dismiss="modal">Cancel</a>
 					</div>
 				</div>
