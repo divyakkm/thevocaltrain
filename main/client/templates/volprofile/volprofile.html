@@ -40,7 +40,7 @@
 					<!-- {{lsn}}
  					{{act}} -->
 					<div class="container">
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<div class="span12" id="studentdetails">
 								<div id="student1">
 									<!-- <a href="{{pathFor 'studentprofile' student_id= studentlist }}"> -->
@@ -99,12 +99,12 @@
 								<li>{{assessmentcontentbody}}</li>
 								{{/each}}
 							</ol> -->
-									<legend>Enter scores for this assessment:</legend>
+									<legend>Enter score for this assessment:</legend>
 
 									<input type="text" size="3" value="0" id="score">/ {{ass2.maxscore}}
 									<br>
 									<br>
-									<label>Engagement
+									<!-- <label>Engagement
 										<input type="radio" name="Engagement" class="eng" value="1">1
 										<input type="radio" name="Engagement" class="eng" value="2">2
 										<input type="radio" name="Engagement" class="eng" value="3">3
@@ -143,22 +143,22 @@
 										<input type="radio" name="Creativity" value="3">3
 										<input type="radio" name="Creativity" value="4">4
 										<input type="radio" name="Creativity" value="5" checked="checked">5
-									</label>
+									</label> -->
 								</fieldset>
 								<br>
 								<br>
 								<h4>Comments</h4>
-								<textarea rows="5" cols="80" id="commentstextarea" name="commentstextarea" value={{cmt.notes}}>
+								<textarea rows="5" cols="40" id="commentstextarea" name="commentstextarea" value={{cmt.notes}}>
 								</textarea>
 
 
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<div class="span12" id="current">
 								<h4>Notes</h4>
 								<br>
-								<textarea rows="5" cols="40" id="currentnotes" name="currentnotes" value="Type notes for this session">
+								<textarea rows="5" cols="25" id="currentnotes" name="currentnotes" value="Type notes for this session">
 								</textarea>
 								<!-- <input type="textarea" value="something" id="currentnotes"> -->
 
@@ -169,10 +169,12 @@
 							<br>
 							<br>
 							<br>
+							<!-- <br>
 							<br>
 							<br>
 							<br>
 							<br>
+							<br> -->
 
 							<div class="span12" id="past">
 
@@ -183,7 +185,7 @@
 					</div>
 					<div class="modal-footer">
 						<!--			<a href="#" class="btn btn-danger remove">Delete</a>btn btn-primary save-->
-						<a href="#" class="btn btn-primary save" id="savesession">Save</a>
+						<a href="#" class="btn btn-primary save" id="savesession" data-dismiss="modal">Save</a>
 						<a href="#" class="btn close" data-dismiss="modal">Cancel</a>
 					</div>
 				</div>
