@@ -155,7 +155,7 @@ var updateCalEvent = function (id, title) {
 
 	SessionList.insert({
 		assigned_student_id: id,
-		volunteer_id: Session.get('volunteer_id'),
+		volunteer_id: Meteor.userId(),
 		date: studentDetails.display_start,
 		time: studentDetails.weekly_time,
 		lesson_id: "L1.0",
