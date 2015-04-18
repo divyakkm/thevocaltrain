@@ -116,13 +116,15 @@ Template.schedulenew.rendered = function () {
 						id: evt._id,
 						title: evt.title,
 						start: evt.start,
-						end: evt.end
+						end: evt.end,
+						backgroundColor: '#ff0000'
 					});
 				})
 				// Callback to pass events back to the calendar
 			callback(events);
 		},
-		editable: false
+		editable: false,
+		backgroundColor: '#ff0000'
 	});
 	updateCalendar();
 }
@@ -142,8 +144,6 @@ var updateCalEvent = function (id, title) {
 	StudentVolunteer.insert({
 		student_id: id,
 		volunteer_id: Meteor.userId()
-			//start:CalEvents.findOne({_id : id},{start:1,_id:0})
-			//		start: 10
 	});
 
 	var studentDetails = CalEvents.find({
