@@ -112,11 +112,11 @@ Template.showModal.events({
 			comments = tmpl.find('#commentstextarea').value;
 			notes = tmpl.find('#currentnotes').value;
 			score = tmpl.find('#score').value;
-			eng = tmpl.find('input:radio[name=Engagement]:checked').value;
-			ret = tmpl.find('input:radio[name=Retention]:checked').value;
-			acc = tmpl.find('input:radio[name=Accuracy]:checked').value;
-			flu = tmpl.find('input:radio[name=Fluency]:checked').value;
-			cre = tmpl.find('input:radio[name=Creativity]:checked').value;
+			// eng = tmpl.find('input:radio[name=Engagement]:checked').value;
+			// ret = tmpl.find('input:radio[name=Retention]:checked').value;
+			// acc = tmpl.find('input:radio[name=Accuracy]:checked').value;
+			// flu = tmpl.find('input:radio[name=Fluency]:checked').value;
+			// cre = tmpl.find('input:radio[name=Creativity]:checked').value;
 			console.log(eng);
 			updateSessionList(Session.get('session_id'), comments, notes, score, eng, ret, acc, flu, cre);
 		}
@@ -134,11 +134,11 @@ var updateSessionList = function (id, comments, notes, score, eng, ret, acc, flu
 			comments: comments,
 			notes: notes,
 			mainscore: score,
-			engagement: eng,
-			retention: ret,
-			creativity: cre,
-			accuracy: acc,
-			fluency: flu
+			// engagement: eng,
+			// retention: ret,
+			// creativity: cre,
+			// accuracy: acc,
+			// fluency: flu
 		}
 	});
 	console.log("done updatesessionlist");

@@ -26,175 +26,145 @@
 <template name="showModal">
 	<!--Modal Dialog-->
 	<div class="modal" id="showModalid">
+
 		<div class="modal-dialog">
+
 			<div class="modal-content">
+
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 					<h2 class="modal-title">Session Feedback Form</h2>
 				</div>
 
 				<div class="modal-body">
-					<!-- 					Student Name - {{ temp.assigned_student }}
-					<br> {{ temp.session }} {{ temp.date }} {{ temp.time }}
- -->
-					<!-- {{lsn}}
- 					{{act}} -->
+					
 					<div class="container">
-						<div class="col-md-3">
+						
+						<div class="row">
+							
+							<div class="col-md-4">
 							<div class="span12" id="studentdetails">
-								<div id="student1">
+								<!-- <div id="student1"> -->
 									<!-- <a href="{{pathFor 'studentprofile' student_id= studentlist }}"> -->
 									<!-- </a> -->
-								</div>
+								<!-- </div> -->
 								<h4>Student details</h4>
-								<img src="/images/student1.jpg" width="100px" height="100px">
+								<img src="/images/student1.jpg" width="100px" height="100px" align="left">
+								&nbsp;&nbsp;&nbsp;&nbsp;{{ temp.title }}
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;{{temp.current_city}}, {{temp.current_state}}
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;Grade {{temp.Grade}}
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;Likes {{temp.likes}}
+								</div>
 								<br>
-								<br>Name: {{ temp.title }}
-								<br>City: {{temp.current_city}} {{temp.current_state}}
-								<br>Grade: {{temp.Grade}}
-								<br>Interests: {{temp.likes}}
 							</div>
-							<br>
-							<br>
-							<br>
-							<!-- <br>
-					<br> -->
-							<!-- <br>
-					<br>
-					<br> -->
+							
 
-							<div class="span12" id="rsrc">
 
-								<h4>Resources</h4>
+							<div class="col-md-4">
+							<div class="span6" style="padding-right:20px; border-right: 1px solid #ccc;">
+							<div class="span12" id="past">
+								<h4>Previous Session Notes</h4>
+								<br>{{dt.notes}}
+								</div>
 								<br>
-								<a href="http://www.teach-this.com/resources/esl/introductions-personal-information">Resource1</a>
 							</div>
-						</div>
-						<div class="col-md-6">
+							</div>
 
-							<div class="span12" id="lessn">
+							<div class="col-md-4">
 
+								<div class="span12" id="current">
+								<h4>Current Session Notes</h4>
+								<p>(Notes for self and future volunteers)</p>
+								<textarea rows="5" cols="30" id="currentnotes" name="currentnotes" placeholder="Start typing here"></textarea>
+								</div>
+								<br>
+
+							</div>
+							
+
+						</div> <!-- First Row Ends -->
+
+							<div class="row">
+
+							<div class="col-md-8">
+							<div class="span6" style="padding-right:20px; border-right: 1px solid #ccc;">
+
+
+								<div class="span12" id="lessn">
 								<h4>Lesson: {{lsn.name}}</h4>
 								<br>Objective: {{lsn.objective}}
+								<br>
 								<br>{{lsn.lessoncontentbody}}
 								<br>
 								<br>Activities:
 								<br>{{#each act}}
 								<li>{{activitycontentbody}}</li>
 								{{/each}}
+								</div>
 								<br>
+							</div>
+							</div>
 
 
+							<div class="col-md-4">
+							<div class="span12" id="assessment">
 								<h4>Assessment</h4>
-								<ol>
+								<ul style="list-style: none; padding-left:0;">
 									<br>{{#each ass}}
-									<li>{{assessmentcontentbody}}</li>
+									<li><input type="checkbox" name="chkbx" value="1">&nbsp;&nbsp;{{assessmentcontentbody}}</li>
 									{{/each}}
-								</ol>
-								<br>
-								<fieldset>
-									<!-- <legend><h3>Assessment</h3></legend>
-							<ol>
-								<br>{{#each ass}}
-								<li>{{assessmentcontentbody}}</li>
-								{{/each}}
-							</ol> -->
-									<legend>Enter score for this assessment:</legend>
+								</ul>
+							</div>
+							<br>
+							</div>
 
-									<input type="text" size="3" value="0" id="score">/ {{ass2.maxscore}}
-									<br>
-									<br>
-									<!-- <label>Engagement
-										<input type="radio" name="Engagement" class="eng" value="1">1
-										<input type="radio" name="Engagement" class="eng" value="2">2
-										<input type="radio" name="Engagement" class="eng" value="3">3
-										<input type="radio" name="Engagement" class="eng" value="4">4
-										<input type="radio" name="Engagement" class="eng" value="5" checked="checked">5
 
-									</label>
-									<br>
-									<label> Retention
-										<input type="radio" name="Retention" value="1">1
-										<input type="radio" name="Retention" value="2">2
-										<input type="radio" name="Retention" value="3">3
-										<input type="radio" name="Retention" value="4">4
-										<input type="radio" name="Retention" value="5" checked="checked">5
-									</label>
-									<br>
-									<label> Accuracy
-										<input type="radio" name="Accuracy" value="1">1
-										<input type="radio" name="Accuracy" value="2">2
-										<input type="radio" name="Accuracy" value="3">3
-										<input type="radio" name="Accuracy" value="4">4
-										<input type="radio" name="Accuracy" value="5" checked="checked">5
-									</label>
-									<br>
-									<label> Fluency
-										<input type="radio" name="Fluency" value="1">1
-										<input type="radio" name="Fluency" value="2">2
-										<input type="radio" name="Fluency" value="3">3
-										<input type="radio" name="Fluency" value="4">4
-										<input type="radio" name="Fluency" value="5" checked="checked">5
-									</label>
-									<br>
-									<label> Creativity
-										<input type="radio" name="Creativity" value="1">1
-										<input type="radio" name="Creativity" value="2">2
-										<input type="radio" name="Creativity" value="3">3
-										<input type="radio" name="Creativity" value="4">4
-										<input type="radio" name="Creativity" value="5" checked="checked">5
-									</label> -->
-								</fieldset>
+							</div> <!-- Second Row Ends -->
+
+						
+
+						<div class="row">
+
+						<div class="col-md-8"> 
+						<div class="span6" style="padding-right:20px; border-right: 1px solid #ccc;">
+
+								<div class="span12" id="rsrc">
+								<h4>Resources</h4>
 								<br>
-								<br>
+								<a href="http://www.teach-this.com/resources/esl/introductions-personal-information" target="_blank">Resource1</a>
+								</div>
+						</div>
+						</div>
+
+							<div class="col-md-4">	
+								
+								<div class="span12" id="notes">
 								<h4>Comments</h4>
-								<textarea rows="5" cols="40" id="commentstextarea" name="commentstextarea" value={{cmt.notes}}>
-								</textarea>
-
-
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="span12" id="current">
-								<h4>Notes</h4>
+								<p>(Comments to be sent to the student's parents periodically)</p>
+								<textarea rows="5" cols="30" id="commentstextarea" name="commentstextarea" placeholder="Start typing here"></textarea>
+								</div>
 								<br>
-								<textarea rows="5" cols="25" id="currentnotes" name="currentnotes" value="Type notes for this session">
-								</textarea>
-								<!-- <input type="textarea" value="something" id="currentnotes"> -->
 
 							</div>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<!-- <br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br> -->
 
-							<div class="span12" id="past">
 
-								<h4>Previous Session Notes</h4>
-								<br>{{dt.notes}}
-							</div>
-						</div>
-					</div>
+						</div> <!-- Last Row Ends -->
+
+					</div> <!-- Container Ends -->	
+					
+					
 					<div class="modal-footer">
 						<!--			<a href="#" class="btn btn-danger remove">Delete</a>btn btn-primary save-->
 						<a href="#" class="btn btn-primary save" id="savesession" data-dismiss="modal">Save</a>
 						<a href="#" class="btn close" data-dismiss="modal">Cancel</a>
 					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-		</div>
-	</div>
-	<!-- /.modal -->
+				</div> <!-- Modal Body Ends -->
+				
+			</div> <!-- Modal-content Ends -->
+			
+		</div> <!-- Modal-dialog Ends -->
+	</div> <!-- Modal Ends -->
+	
 </template>
 
 <!-- Old working Carousel code  -->
@@ -302,3 +272,62 @@
             </tr>
           </tbody>
         </table> -->
+
+
+
+
+<!-- Old code for detailed assessment -->
+
+<!-- <fieldset> -->
+									<!-- <legend><h3>Assessment</h3></legend>
+							<ol>
+								<br>{{#each ass}}
+								<li>{{assessmentcontentbody}}</li>
+								{{/each}}
+							</ol> -->
+									<!-- <legend>Enter score for this assessment:</legend>
+
+									<input type="text" size="3" value="0" id="score">/ {{ass2.maxscore}}
+									<br>
+									<br> -->
+									<!-- <label>Engagement
+										<input type="radio" name="Engagement" class="eng" value="1">1
+										<input type="radio" name="Engagement" class="eng" value="2">2
+										<input type="radio" name="Engagement" class="eng" value="3">3
+										<input type="radio" name="Engagement" class="eng" value="4">4
+										<input type="radio" name="Engagement" class="eng" value="5" checked="checked">5
+
+									</label>
+									<br>
+									<label> Retention
+										<input type="radio" name="Retention" value="1">1
+										<input type="radio" name="Retention" value="2">2
+										<input type="radio" name="Retention" value="3">3
+										<input type="radio" name="Retention" value="4">4
+										<input type="radio" name="Retention" value="5" checked="checked">5
+									</label>
+									<br>
+									<label> Accuracy
+										<input type="radio" name="Accuracy" value="1">1
+										<input type="radio" name="Accuracy" value="2">2
+										<input type="radio" name="Accuracy" value="3">3
+										<input type="radio" name="Accuracy" value="4">4
+										<input type="radio" name="Accuracy" value="5" checked="checked">5
+									</label>
+									<br>
+									<label> Fluency
+										<input type="radio" name="Fluency" value="1">1
+										<input type="radio" name="Fluency" value="2">2
+										<input type="radio" name="Fluency" value="3">3
+										<input type="radio" name="Fluency" value="4">4
+										<input type="radio" name="Fluency" value="5" checked="checked">5
+									</label>
+									<br>
+									<label> Creativity
+										<input type="radio" name="Creativity" value="1">1
+										<input type="radio" name="Creativity" value="2">2
+										<input type="radio" name="Creativity" value="3">3
+										<input type="radio" name="Creativity" value="4">4
+										<input type="radio" name="Creativity" value="5" checked="checked">5
+									</label> -->
+								<!-- </fieldset> -->
