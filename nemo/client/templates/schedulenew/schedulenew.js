@@ -141,9 +141,9 @@ var updateCalEvent = function (id, title) {
 	console.log(id + " " + Session.get('volunteer_id'));
 	StudentVolunteer.insert({
 		student_id: id,
-		volunteer_id: Session.get('volunteer_id'),
-		//start:CalEvents.findOne({_id : id},{start:1,_id:0})
-		//		start: 10
+		volunteer_id: Meteor.userId()
+			//start:CalEvents.findOne({_id : id},{start:1,_id:0})
+			//		start: 10
 	});
 
 	var studentDetails = CalEvents.find({
@@ -155,7 +155,7 @@ var updateCalEvent = function (id, title) {
 
 	SessionList.insert({
 		assigned_student_id: id,
-		volunteer_id: Session.get('volunteer_id'),
+		volunteer_id: Meteor.userId(),
 		date: studentDetails.display_start,
 		time: studentDetails.weekly_time,
 		lesson_id: "L1.0",
