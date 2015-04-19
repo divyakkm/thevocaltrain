@@ -86,8 +86,8 @@ ui@1.0.6-rc.0
 underscore@1.0.3-rc.0
 underscorestring:underscore.string@3.0.3
 url@1.0.4-rc.0
-useraccounts:bootstrap@1.8.1
-useraccounts:core@1.8.1
+useraccounts:bootstrap@1.9.1
+useraccounts:core@1.9.1
 webapp@1.2.0-rc.1
 webapp-hashing@1.0.3-rc.0
 yasinuslu:blaze-meta@0.3.1
