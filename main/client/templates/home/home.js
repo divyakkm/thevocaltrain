@@ -1,3 +1,3 @@
-Template.home.rendered = function () {
-	$('#fullpage').fullpage();
+Template.home.rendered = function() {
+
 };
