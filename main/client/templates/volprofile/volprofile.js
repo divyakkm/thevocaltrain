@@ -36,7 +36,7 @@ Template.showModal.helpers({
 	},
 
 	lsn: function () {
-		//		console.log("inside lsn");
+		console.log("inside lsn");
 		var ref1 = LessonBlock.find({
 			_id: SessionList.find({
 				_id: Session.get('session_id')
@@ -47,29 +47,29 @@ Template.showModal.helpers({
 		// 		class: "myClass anotherClass",
 		// 		value: 123
 		// 	}
-		//		console.log(ref1);
+		console.log("ref1 value"+ref1);
 		return ref1;
 	},
 
 	act: function () {
-		//		console.log("inside act");
+		console.log("inside act");
 		var ref2 = Activity.find({
 			lesson_id: SessionList.find({
 				_id: Session.get('session_id')
 			}).fetch()[0].lesson_id
 		});
-		//		console.log(ref2);
+		console.log("ref2 value"+ref2);
 		return ref2;
 	},
 
 	ass: function () {
-		//		console.log("inside act");
+		console.log("inside ass");
 		var ref3 = Assessment.find({
 			lesson_id: SessionList.find({
 				_id: Session.get('session_id')
 			}).fetch()[0].lesson_id
 		});
-		//		console.log(ref2);
+		console.log("ref3 value"+ref3);
 		return ref3;
 	},
 
@@ -82,12 +82,12 @@ Template.showModal.helpers({
 		}).fetch()[0];
 		//Assessment.find({lesson_id : SessionList.find({_id: "551cae3cb1ddc9927db19e89"}).fetch()[0].lesson_id}).fetch()[0]
 		//});
-		console.log(ref4);
+		console.log("ref4 value"+ref4);
 		return ref4;
 	},
 
 	dt: function () {
-		//console.log("inside dt");
+		console.log("inside dt");
 		// var content = $('#currentnotes').value;
 		// console.log(content);
 		//		 var ref1 = {
@@ -100,7 +100,7 @@ Template.showModal.helpers({
 				submittedAt: -1
 			}
 		}).fetch()[0];
-		//console.log(reff);
+		console.log("reff value"+reff);
 		return reff;
 	}
 });
@@ -111,20 +111,20 @@ Template.showModal.events({
 			console.log(tmpl);
 			comments = tmpl.find('#commentstextarea').value;
 			notes = tmpl.find('#currentnotes').value;
-			score = tmpl.find('#score').value;
+			//score = tmpl.find('#score').value;
 			// eng = tmpl.find('input:radio[name=Engagement]:checked').value;
 			// ret = tmpl.find('input:radio[name=Retention]:checked').value;
 			// acc = tmpl.find('input:radio[name=Accuracy]:checked').value;
 			// flu = tmpl.find('input:radio[name=Fluency]:checked').value;
 			// cre = tmpl.find('input:radio[name=Creativity]:checked').value;
-			console.log(eng);
-			updateSessionList(Session.get('session_id'), comments, notes, score, eng, ret, acc, flu, cre);
+			//console.log(eng);
+			updateSessionList(Session.get('session_id'), comments, notes);
 		}
 		//SessionList.update({_id: "551cae3cb1ddc9927db19e89"}, {$set: {notes: "5"}});
 		//console.log("step 2");
 })
 
-var updateSessionList = function (id, comments, notes, score, eng, ret, acc, flu, cre) {
+var updateSessionList = function (id, comments, notes) {
 	console.log("inside updatesessionlist");
 	SessionList.update({
 		_id: id
@@ -132,8 +132,8 @@ var updateSessionList = function (id, comments, notes, score, eng, ret, acc, flu
 		$set: {
 			submittedAt: new Date(),
 			comments: comments,
-			notes: notes,
-			mainscore: score,
+			notes: notes
+			//mainscore: score,
 			// engagement: eng,
 			// retention: ret,
 			// creativity: cre,
