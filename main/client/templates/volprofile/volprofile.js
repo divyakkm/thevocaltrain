@@ -119,6 +119,8 @@ Template.showModal.events({
 			// cre = tmpl.find('input:radio[name=Creativity]:checked').value;
 			//console.log(eng);
 			updateSessionList(Session.get('session_id'), comments, notes);
+			document.getElementById('commentstextarea').value='';
+			document.getElementById('currentnotes').value='';
 		}
 		//SessionList.update({_id: "551cae3cb1ddc9927db19e89"}, {$set: {notes: "5"}});
 		//console.log("step 2");
