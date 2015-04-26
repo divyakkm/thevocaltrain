@@ -50,13 +50,21 @@ TabularTables.Sessions = new Tabular.Table({
 			data: "submittedAt",
 			title: "Submitted At",
 			visible: false
-		}
+		},
+		{
+			data: 'status',
+			title:'Status'
+		},
+		{
+  			tmpl: Meteor.isClient && Template.moreDetails
+		},
 
-// 	{
-//   tmpl: Meteor.isClient && Template.sessiontable
-// }
+
 	]
 });
+
+
+
 
 VolprofileController = AppController.extend({
 	waitOn: function () {

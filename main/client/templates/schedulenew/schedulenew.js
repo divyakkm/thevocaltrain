@@ -158,7 +158,8 @@ var updateCalEvent = function (id, title) {
 		volunteer_id: Meteor.userId(),
 		date: studentDetails.display_start,
 		time: studentDetails.weekly_time,
-		lesson_id: "L1.0",
+		lesson_id: "L0.0",
+		lesson_name : "Module 0 First day: Building a rapport with the child",
 		assigned_student: studentDetails.title
 	});
 	//	updateCalendar();

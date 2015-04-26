@@ -162,18 +162,18 @@ VolSignUpController = AppController.extend({
 //    }
 // }));
 
-// if (Meteor.isClient) {
-//    console.log("hello client");
-//    // Upon submit use iron router to route to another page:
-//    // "http://stackoverflow.com/questions/21475671/how-to-navigate-to-new-page-when-click-on-submit-button-using-meteor-js"
-//   // Template.insertVolunteerForm.events({
-//             // Display the filled up form here or some sort of confirmation
-//   //   }
-//   // });
-// }
+// // if (Meteor.isClient) {
+// //    console.log("hello client");
+// //    // Upon submit use iron router to route to another page:
+// //    // "http://stackoverflow.com/questions/21475671/how-to-navigate-to-new-page-when-click-on-submit-button-using-meteor-js"
+// //   // Template.insertVolunteerForm.events({
+// //             // Display the filled up form here or some sort of confirmation
+// //   //   }
+// //   // });
+// // }
 
-// if (Meteor.isServer) {
-//   Meteor.startup(function () {
-//     // code to run on server at startup
-//   })
-// }
+// // if (Meteor.isServer) {
+// //   Meteor.startup(function () {
+// //     // code to run on server at startup
+// //   })
+// // }

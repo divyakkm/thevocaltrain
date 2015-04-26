@@ -181,7 +181,27 @@ Template.sessiontable.helpers({
 		return {
 			volunteer_id: Meteor.userId()
 		}
-	}
+	},
+  status: function () {
+    return {status: 'Completed'};
+  }
+});
+
+
+Template.sessiontable.events({
+  'mouseover .odd': function(e) {
+    console.log(this.name);
+    $('.odd').removeClass('highlight');
+    $('.even').removeClass('highlight');
+    $(e.currentTarget).addClass('highlight');
+  },
+
+    'mouseover .even': function(e) {
+    console.log(this.name);
+    $('.even').removeClass('highlight');
+    $('.odd').removeClass('highlight');
+    $(e.currentTarget).addClass('highlight');
+  }
 });
 
 ////////////////////////////// Old session table code ////////////////////////////////////////////
@@ -212,12 +232,6 @@ Template.sessiontable.helpers({
 ////////////////////////////// Carousel code ////////////////////////////////////////////
 
 Template.carousel.rendered = function () {
-
-	// $('#carousel').slick({
-	// 	dots: true,
-	// 	arrows: true
-	// });
-
 	$('#carousel').slick({
 		infinite: true,
 		slidesToShow: 3,
@@ -257,78 +271,78 @@ Template.carousel.rendered = function () {
 
 // ////////////////////////////// Show Student Modal ////////////////////////////////////////////
 
-// Template.showStudentModal.helpers ({
+/*Template.showStudentModal.helpers ({
 
-//   studentlist: function () {
-//      //Create an array to store all the student ids associated with this volunteer 
-//      var studentIdList = [];
+  studentlist: function () {
+     //Create an array to store all the student ids associated with this volunteer 
+     var studentIdList = [];
      
-//      //Query the StudentVolunteer table to get all student ids 
-//      StudentVolunteerDetails = StudentVolunteer.find({volunteer_id: Meteor.userId()}).fetch();
+     //Query the StudentVolunteer table to get all student ids 
+     StudentVolunteerDetails = StudentVolunteer.find({volunteer_id: Meteor.userId()}).fetch();
      
-//      //Push into array 
-//      StudentVolunteerDetails.forEach(function (evt) {
-//       studentIdList.push({
-//         student_id: evt.student_id});
-//       }); 
+     //Push into array 
+     StudentVolunteerDetails.forEach(function (evt) {
+      studentIdList.push({
+        student_id: evt.student_id});
+      }); 
 
-//     if (Session.get('showStudentModal') == 1) {
+    if (Session.get('showStudentModal') == 1) {
 
-//     //Testing - need to change 
-//      var studentid = studentIdList[0].student_id;
-//      console.log(studentid);
-//      // return test
+    //Testing - need to change 
+     var studentid = studentIdList[0].student_id;
+     console.log(studentid);
+     // return test
 
-//      var studentDetails = CalEvents.find({
-//       _id: studentid
-//       }).fetch()[0];
+     var studentDetails = CalEvents.find({
+      _id: studentid
+      }).fetch()[0];
 
-//      var notes = SessionList.find({assigned_student_id: studentid},{sort: {submittedAt: -1}
-//    							}).fetch()[0].notes;
-//      console.log('notes');
-//      console.log(notes);
+     var notes = SessionList.find({assigned_student_id: studentid},{sort: {submittedAt: -1}
+   							}).fetch()[0].notes;
+     console.log('notes');
+     console.log(notes);
 
-//     console.log(studentDetails);
-//    	return studentDetails;
-//     } 
+    console.log(studentDetails);
+   	return studentDetails;
+    } 
 
-//     else if (Session.get('showStudentModal') == 2) {
+    else if (Session.get('showStudentModal') == 2) {
 
-//     //Testing - need to change 
-//      var studentid = studentIdList[1].student_id;
-//      console.log('inside student 2 if');
-//      console.log(studentid);
-//      // return test
+    //Testing - need to change 
+     var studentid = studentIdList[1].student_id;
+     console.log('inside student 2 if');
+     console.log(studentid);
+     // return test
 
-//       var studentDetails = CalEvents.find({
-//       _id: studentid
-//       }).fetch()[0];
+      var studentDetails = CalEvents.find({
+      _id: studentid
+      }).fetch()[0];
 
-//     console.log(studentDetails);
-//    	return studentDetails;
-//    }
+    console.log(studentDetails);
+   	return studentDetails;
+   }
 
-//     else if (Session.get('showStudentModal') == 3) {
+    else if (Session.get('showStudentModal') == 3) {
 
-//     //Testing - need to change 
-//      var studentid = studentIdList[2].student_id;
-//      console.log(studentid);
-//      // return test
+    //Testing - need to change 
+     var studentid = studentIdList[2].student_id;
+     console.log(studentid);
+     // return test
 
-//       var studentDetails = CalEvents.find({
-//       _id: studentid
-//       }).fetch()[0];
+      var studentDetails = CalEvents.find({
+      _id: studentid
+      }).fetch()[0];
 
-//     console.log(studentDetails);
-//    	return studentDetails;
-//    };
-// 	},
+    console.log(studentDetails);
+   	return studentDetails;
+   };
+	},
 
-// 	columnDemo: function () {
-// 		return builtColumn();
-// 	}
+	columnDemo: function () {
+		return builtColumn();
+	}
 
-//   })
+  })*/
 ////////////////////////////// Dynamic Rendering with Divs ////////////////////////////////////////////
 
 Template.carousel.events({
@@ -348,7 +362,16 @@ Template.carousel.events({
 	}
 })
 
+Template.studentPanel.helpers({
 
+	studentlist: function () {
+
+		StudentDetails = CalEvents.find({student_id: StudentVolunteer.
+									find({volunteer_id: Meteor.userId()}).fetch().volunteer_id}).fetch()
+		console.log(StudentDetails);
+		return StudentDetails;
+	}
+});
 
 Template.carousel.helpers({
 
@@ -360,17 +383,34 @@ Template.carousel.helpers({
 		StudentVolunteerDetails = StudentVolunteer.find({
 			volunteer_id: Meteor.userId()
 		}).fetch();
-
-		console.log("trying divs");
-		console.log(StudentVolunteerDetails);
-		return StudentVolunteerDetails;
+		
+		console.log(StudentDetails);
+		return StudentDetails;
 	},
 });
+
+Template.studentPanel.events({
+
+	'click .panel-footer': function () {
+		var student_id = event.target.id;
+		Session.set('student_id', student_id);
+		$('#studentModalid').modal("show");
+		$('.modal-backdrop').remove();
+		//Testing statements
+		var test = event.currentTarget;
+		console.log('test');
+		console.log(test);
+		var test2 = event.target.id;
+		console.log('test2');
+		console.log(test2);
+	}
+})
+
 
 Template.showStudentModal.helpers({
 	studentdetails: function () {
 
-		var studentid = Session.get('student_id');
+	var studentid = Session.get('student_id');
      console.log(studentid);
 
      var studentDetails = CalEvents.find({
@@ -381,9 +421,9 @@ Template.showStudentModal.helpers({
    	return studentDetails;
 	},
 
-	notes: function () {
-		var studentid = Session.get('student_id');
-     console.log(studentid);
+	allnotes: function () {
+	var studentid = Session.get('student_id');
+    console.log(studentid);
 
   	var notes = SessionList.find({assigned_student_id: studentid}).fetch();
      console.log('notes');
@@ -392,7 +432,7 @@ Template.showStudentModal.helpers({
   	return notes;
 	},
 
-		columnDemo: function () {
+	columnDemo: function () {
 		return builtColumn();
 	}
 });
@@ -409,56 +449,86 @@ function builtColumn() {
         },
         
         xAxis: {
-            title: {text: 'Sessions in this Module'}, 
-            categories: ['1', '2', '3', '4', '5', '6']
+        	type: 'category'        
         },
         
 		yAxis: {
-            title: {text: 'Score'},
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
+            title: {text: 'Score'}
         },	
         
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
+        // tooltip: {
+        //     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        //     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        //         '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+        //     footerFormat: '</table>',
+        //     shared: true,
+        //     useHTML: true
+        // },
         
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
+    plotOptions: {
+        series: {
+            point: {
+                events: {
+                    mouseOver: function () {
+                        var chart = this.series.chart;
+                        if (!chart.lbl) {
+                            chart.div = chart.renderer.label('')
+                                .attr({
+                                    padding: 10,
+                                    r: 10,
+                                    fill: Highcharts.getOptions().colors[1]
+                                })
+                                .css({
+                                    color: '#FFFFFF'
+                                })
+                                .add();
+                        }
+                        chart.div
+                            .show()
+                            .attr({ 
+                                text: 'x: ' + this.x + ', y: ' + this.y 
+                            });
+                    }
+                }
+            },
+            events: {
+                mouseOut: function () {
+                    if (this.chart.div) {
+                        this.chart.div.hide();
+                    }
+                }
             }
-        },
-        
-        series: [
-            {
-            name: 'Sync Lesson 0',
-            data: [3]},
+        }
+    },
 
-            {
-            name: 'Async A1',
-            data: [3]},
+    tooltip: {
+        enabled: false
+    },
 
-            {
-            name: 'Async A2',
-            data: [4]}, 
 
-            {
-            name: 'Async A3',
-            data: [2]},
-           
-           {
-            name: 'Sync Lesson 1',
-            data: [3]}
-            ]
+
+        series: [{
+        	name: "Lessons Completed",
+            data: [
+                ['Lesson 0 (live)', 3],
+                ['Lesson 1 (live)', 2],
+                ['Lesson 1 (recorded)', 3],
+                ['Lesson 2 (live)', 3],
+                ['Lesson 2 (recorded)', 4]
+            ],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                format: '{point.y:.0f}', // one decimal
+                y: 10, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
     	}
 	}
 
