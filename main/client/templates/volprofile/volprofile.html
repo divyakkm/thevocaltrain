@@ -85,13 +85,16 @@
 									<!-- </a> -->
 								<!-- </div> -->
 								<h4>Student details</h4>
-								<img src="/images/student1.jpg" width="100px" height="100px" align="left">
-								&nbsp;&nbsp;&nbsp;&nbsp;{{ temp.title }}
-								<br>&nbsp;&nbsp;&nbsp;&nbsp;{{temp.current_city}}, {{temp.current_state}}
-								<br>&nbsp;&nbsp;&nbsp;&nbsp;Grade {{temp.Grade}}
-								<br>&nbsp;&nbsp;&nbsp;&nbsp;Likes {{temp.likes}}
+								<!-- <img src="/images/student1.jpg" width="100px" height="100px" align="left"> -->
+								<div class="col-xs-3">
+								<i class="fa fa-child fa-5x"> </i>
 								</div>
-								<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ temp.title }}
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{temp.current_city}}, {{temp.current_state}}
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grade {{temp.Grade}}
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Likes {{temp.likes}}
+								</div>
+								
 							</div>
 							
 
@@ -111,9 +114,10 @@
 								<div class="span12" id="current">
 								<h4>Current Session Notes</h4>
 								<p>(Notes for self and future volunteers)</p>
-								<textarea rows="5" cols="30" id="currentnotes" name="currentnotes" placeholder="Start typing here"></textarea>
+								<textarea rows="3" cols="30" id="currentnotes" name="currentnotes" placeholder="Start typing here"></textarea>
 								</div>
-								<br>
+							
+
 
 							</div>
 							
@@ -130,6 +134,7 @@
 								<h4>Lesson: {{lsn.name}}</h4>
 								<br>Objective: {{lsn.objective}}
 								<br>
+								<div style="overflow-y: scroll; max-height: 200px;">
 								<br>{{lsn.lessoncontentbody}}
 								<br>
 								<br>Activities:
@@ -137,12 +142,18 @@
 								<li>{{activitycontentbody}}</li>
 								{{/each}}
 								</div>
+								
+								<h4>Resources</h4>
 								<br>
+								<a href="http://www.teach-this.com/resources/esl/introductions-personal-information" target="_blank">Resource1</a>
+								</div>
+								
 							</div>
 							</div>
 
 
 							<div class="col-md-4">
+
 							<div class="span12" id="assessment">
 								<h4>Assessment</h4>
 								<ul style="list-style: none; padding-left:0;">
@@ -151,40 +162,46 @@
 									{{/each}}
 								</ul>
 							</div>
-							<br>
+							
+							
+							<div class="span12" id="notes">
+								<h4>Comments</h4>
+								<p>(Comments to be sent to the student's parents periodically)</p>
+								<textarea rows="3" cols="30" id="commentstextarea" name="commentstextarea" placeholder="Start typing here"></textarea>
+								<br>
+								<br>
+								<input type="checkbox" name="cnfrmchkbx" value="1">&nbsp;&nbsp; Repeat this Lesson
+								</div>
+
+							
+
 							</div>
+
+
 
 
 							</div> <!-- Second Row Ends -->
 
 						
 
-						<div class="row">
+						<!-- <div class="row">
 
-						<div class="col-md-8"> 
-						<div class="span6" style="padding-right:20px; border-right: 1px solid #ccc;">
+						<div class="col-md-8">  -->
+						<!-- <div class="span6" style="padding-right:20px; border-right: 1px solid #ccc;"> -->
 
-								<div class="span12" id="rsrc">
-								<h4>Resources</h4>
-								<br>
-								<a href="http://www.teach-this.com/resources/esl/introductions-personal-information" target="_blank">Resource1</a>
-								</div>
-						</div>
-						</div>
+								
+						<!-- </div> -->
+						<!-- </div>
 
 							<div class="col-md-4">	
 								
-								<div class="span12" id="notes">
-								<h4>Comments</h4>
-								<p>(Comments to be sent to the student's parents periodically)</p>
-								<textarea rows="5" cols="30" id="commentstextarea" name="commentstextarea" placeholder="Start typing here"></textarea>
-								</div>
+								
 								<br>
 
 							</div>
 
 
-						</div> <!-- Last Row Ends -->
+						</div> --> <!-- Last Row Ends -->
 
 					</div> <!-- Container Ends -->	
 					

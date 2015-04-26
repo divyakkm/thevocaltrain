@@ -107,6 +107,9 @@ Template.showModal.helpers({
 
 Template.showModal.events({
 	'click .save': function (evt, tmpl) {
+			bootbox.confirm("Do you want to repeat this lesson?", function(confirmed) {
+        	console.log("Confirmed: "+confirmed);
+    		});
 			console.log("step1");
 			console.log(tmpl);
 			comments = tmpl.find('#commentstextarea').value;

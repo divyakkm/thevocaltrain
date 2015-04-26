@@ -6894,25 +6894,37 @@ button.close {
 
 .modal-open {
 	overflow: hidden;
+
 }
 
 .modal {
-	display: none;
-	/*width:100%;*/
+
+	/*width: 90%;
+	min-height: 80%;
+	left: 5%;*/
 	
+
+	/*NEW CODE*/
+
+	/*OLD CODE*/
+	display: none;
 	overflow: hidden;
 	position: fixed;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
+	z-index: 1050;
+	-webkit-overflow-scrolling: touch;
+	outline: 0;
+
+	/*OLD COMMENTED*/
+	/*width:100%;*/
 	/*margin-left: auto;
 	margin-right: auto;
 	left: 5%;*/
 	
-	z-index: 1050;
-	-webkit-overflow-scrolling: touch;
-	outline: 0;
+	
 }
 
 .span12 {
@@ -6927,6 +6939,23 @@ button.close {
 	padding-bottom: 20px;
 	background-color: #F8F8F8;
 }
+
+.span12spc {
+	/*-moz-box-shadow: 0 0 2px black;
+    -webkit-box-shadow: 0 0 2px black;
+    box-shadow: 0 0 2px black;
+    box-shadow: 1px solid #e5e5e5;*/
+	
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	background-color: #F8F8F8;
+	overflow-y: scroll;
+	max-height: 300px;
+}
+
+
 
 .modal.fade .modal-dialog {
 	-webkit-transform: translate(0, -25%);
@@ -6948,15 +6977,16 @@ button.close {
 .modal-open .modal {
 	overflow-x: hidden;
 	overflow-y: auto;
+	
 }
 
 .modal-dialog {
 	position: relative;
 	/*width: auto;*/
 	
-	width: 100%;
-	/*height: 100%;
-	padding: 0;*/
+	width: 80%;
+	/*height: 100%;*/ /*added*/
+	padding: 0;
 	
 	margin: 10px;
 }
@@ -6964,7 +6994,7 @@ button.close {
 .modal-content {
 	position: relative;
 	/*height: auto;*/
-	
+	max-height: 60%;
 	width: 100%;
 	background-color: #ffffff;
 	border: 1px solid #999999;
@@ -7013,14 +7043,31 @@ button.close {
 }
 
 .modal-body {
-	position: relative;
-	padding: 20px;
+	position: relative; /*originally there*/
+	/*padding: 20px;*/ /*originally there*/
+	overflow-y: auto;
+	max-height: none;
+	/*position: absolute;*/ /*was added*/
+	/*top: 50px;
+	bottom: 50px;
+*/	right: 0px;
+	left: 0px;
+	margin-right: 0px;
+	/*max-height: 80%;*/ /*added*/
+	overflow-y: auto; /*added*/
+
 }
 
 .modal-footer {
 	padding: 20px;
 	text-align: right;
 	border-top: 1px solid #e5e5e5;
+
+	/*Newly added*/
+	position: relative;
+/*	bottom: 0;
+	right: 0;
+	left: 0;*/
 }
 
 .modal-footer .btn + .btn {
