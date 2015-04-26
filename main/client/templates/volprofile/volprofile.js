@@ -456,54 +456,54 @@ function builtColumn() {
             title: {text: 'Score'}
         },	
         
-        // tooltip: {
-        //     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        //     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-        //         '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
-        //     footerFormat: '</table>',
-        //     shared: true,
-        //     useHTML: true
-        // },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
         
-    plotOptions: {
-        series: {
-            point: {
-                events: {
-                    mouseOver: function () {
-                        var chart = this.series.chart;
-                        if (!chart.lbl) {
-                            chart.div = chart.renderer.label('')
-                                .attr({
-                                    padding: 10,
-                                    r: 10,
-                                    fill: Highcharts.getOptions().colors[1]
-                                })
-                                .css({
-                                    color: '#FFFFFF'
-                                })
-                                .add();
-                        }
-                        chart.div
-                            .show()
-                            .attr({ 
-                                text: 'x: ' + this.x + ', y: ' + this.y 
-                            });
-                    }
-                }
-            },
-            events: {
-                mouseOut: function () {
-                    if (this.chart.div) {
-                        this.chart.div.hide();
-                    }
-                }
-            }
-        }
-    },
+    // plotOptions: {
+    //     series: {
+    //         point: {
+    //             events: {
+    //                 mouseOver: function () {
+    //                     var chart = this.series.chart;
+    //                     if (!chart.lbl) {
+    //                         chart.div = chart.renderer.label('')
+    //                             .attr({
+    //                                 padding: 10,
+    //                                 r: 10,
+    //                                 fill: Highcharts.getOptions().colors[1]
+    //                             })
+    //                             .css({
+    //                                 color: '#FFFFFF'
+    //                             })
+    //                             .add();
+    //                     }
+    //                     chart.div
+    //                         .show()
+    //                         .attr({ 
+    //                             text: 'x: ' + this.x + ', y: ' + this.y 
+    //                         });
+    //                 }
+    //             }
+    //         },
+    //         events: {
+    //             mouseOut: function () {
+    //                 if (this.chart.div) {
+    //                     this.chart.div.hide();
+    //                 }
+    //             }
+    //         }
+    //     }
+    // },
 
-    tooltip: {
-        enabled: false
-    },
+    // tooltip: {
+    //     enabled: false
+    // },
 
 
 
