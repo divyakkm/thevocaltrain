@@ -1,5 +1,5 @@
 ////////////////////////////// Set Session Defaults  //////////////////////////////////////////
-
+if (Meteor.isServer) {
 Meteor.subscribe("lesson");
 Meteor.subscribe("assessment");
 Meteor.subscribe("session");
@@ -12,7 +12,7 @@ Session.setDefault('student_id', null);
 Session.setDefault('session_id', null);
 
 Session.setDefault('showStudentModal', 0);
-
+}
 
 ////////////////////////////// Modal code - Session In Progress ///////////////////////////////////////////////////
 

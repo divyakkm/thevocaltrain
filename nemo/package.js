@@ -10,25 +10,27 @@ Package.describe({
 	documentation: 'README.md'
 });
 
-Package.onUse(function (api) {
-	api.versionsFrom('WINDOWS-PREVIEW@0.3.0');
-	//	api.addFiles('flyover-tinytests-tests.js');
-	//api.addFiles('flyover-tinytests.js');
-	//	api.add_files('..\\..\\client\\templates\\volprofile\\volprofile.js');
-	//	api.add_files('..\\..\\client\\templates\\volprofile\\volprofile.html');
-	api.addFiles('volprofile.js');
-	api.addFiles('volprofile.html');
-	console.log("Package OnUse...");
+Package.onUse(function(api) {
+  api.versionsFrom('WINDOWS-PREVIEW@0.3.0');
+  api.use([
+    'mongo',
+    'templating',
+    'insecure',
+    'autopublish'
+  ]);
+  api.addFiles([
+    'volprofile.html',
+    // 'leaderboard.css', // Not required for test
+    'volprofile.js'
+  ]);
 });
 
-Package.onTest(function (api) {
-	api.use('tinytest');
-	api.use(["spacebars", "tinytest", "test-helpers", "jquery"]);
-	api.use("templating", "client");
-	//	api.addFiles('flyover-tinytests-tests.js');
-	// reference the application files you want to test
-	api.addFiles('tests/volprofile.js', 'client');
-	// add stubs
-	//	api.add_files('test-stubs.js', 'client');
-
+Package.onTest(function(api) {
+  api.use([
+    'tinytest',
+    'flyover-tinytests',
+    'jquery'
+  ]);
+  // Place test files in tests/ directory to exclude them from Meteor app
+  api.addFiles('tests/volprofile.js', 'client');
 });
