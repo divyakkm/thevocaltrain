@@ -6936,7 +6936,7 @@ button.close {
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-top: 5px;
-	padding-bottom: 20px;
+	padding-bottom: 15px;
 	background-color: #F8F8F8;
 }
 
@@ -8253,4 +8253,11 @@ a.list-group-item-danger.active:focus {
 
 .popover {
 	color: #2c3e50;
+}
+
+
+/*Added by Sufi */
+.spaceUnder 
+{
+  padding-bottom: 1em;
 }

@@ -355,26 +355,10 @@ Template.carousel.events({
 		Session.set('student_id', student_id);
 		$('#studentModalid').modal("show");
 		$('.modal-backdrop').remove();
-		// Testing statements
-		// var test = event.currentTarget;
-		// console.log('test');
-		// console.log(test);
-		// var test2 = event.target.id;
-		// console.log('test2');
-		// console.log(test2);
 	}
 })
 
-Template.studentPanel.helpers({
 
-	studentlist: function () {
-
-		StudentDetails = CalEvents.find({student_id: StudentVolunteer.
-									find({volunteer_id: Meteor.userId()}).fetch().volunteer_id}).fetch()
-		console.log(StudentDetails);
-		return StudentDetails;
-	}
-});
 
 Template.carousel.helpers({
 
@@ -409,6 +393,42 @@ Template.studentPanel.events({
 	}
 })
 
+Template.studentPanel.helpers({
+
+	studentlist: function() {
+		var studentIdList = [];
+			StudentVolunteerDetails = StudentVolunteer.find({
+				volunteer_id: Meteor.userId()
+			}, {
+				"student_id": 1,
+				"_id": 0,
+				"volunteer_id": 0
+			}).fetch();
+			console.log("Printing sstuff1");
+			console.log(StudentVolunteerDetails);
+			
+			StudentVolunteerDetails.forEach(function (evt) {
+				studentIdList.push(evt.student_id);
+			});
+			console.log(studentIdList);
+			
+			// Create an empty array to store the events
+			var events = [];
+			// Variable to pass events to the calendar
+			// Gets us all of the calendar events and puts them in the array
+			// calEvents = CalEvents.find({assigned:null});
+			calEvents = CalEvents.find({
+				_id: {
+					$in: studentIdList
+				}
+			});
+			console.log('this is our test');
+			console.log(calEvents);
+		return calEvents;
+		}
+});
+
+	
 
 Template.showStudentModal.helpers({
 	studentdetails: function () {
@@ -467,49 +487,7 @@ function builtColumn() {
             shared: true,
             useHTML: true
         },
-        
-    // plotOptions: {
-    //     series: {
-    //         point: {
-    //             events: {
-    //                 mouseOver: function () {
-    //                     var chart = this.series.chart;
-    //                     if (!chart.lbl) {
-    //                         chart.div = chart.renderer.label('')
-    //                             .attr({
-    //                                 padding: 10,
-    //                                 r: 10,
-    //                                 fill: Highcharts.getOptions().colors[1]
-    //                             })
-    //                             .css({
-    //                                 color: '#FFFFFF'
-    //                             })
-    //                             .add();
-    //                     }
-    //                     chart.div
-    //                         .show()
-    //                         .attr({ 
-    //                             text: 'x: ' + this.x + ', y: ' + this.y 
-    //                         });
-    //                 }
-    //             }
-    //         },
-    //         events: {
-    //             mouseOut: function () {
-    //                 if (this.chart.div) {
-    //                     this.chart.div.hide();
-    //                 }
-    //             }
-    //         }
-    //     }
-    // },
-
-    // tooltip: {
-    //     enabled: false
-    // },
-
-
-
+       
         series: [{
         	name: "Lessons Completed",
             data: [

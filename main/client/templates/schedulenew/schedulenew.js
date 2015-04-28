@@ -160,6 +160,7 @@ var updateCalEvent = function (id, title) {
 		time: studentDetails.weekly_time,
 		lesson_id: "L0.0",
 		lesson_name : "Module 0 First day: Building a rapport with the child",
+		status: "Not Started",
 		assigned_student: studentDetails.title
 	});
 	//	updateCalendar();

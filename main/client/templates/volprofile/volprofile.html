@@ -17,7 +17,7 @@
 
 <template name= "studentPanel">
 	<div class="row">
-		{{#each studentlist}}
+			{{#each studentlist}}
                 <div class="col-lg-3">
                     <div class="panel panel-red" >
                         <div class="panel-heading">
@@ -36,7 +36,7 @@
                     </div>
                     <!-- /.col-lg-4 -->
                 </div>
-  {{/each}}
+  		{{/each}}
             </div>
             <!-- /.row -->
 </template>
@@ -267,24 +267,32 @@
 				</div>
 
 				<div class="modal-body">
-					<div>
-						<div class="col-md-3">
-							 <i class="fa fa-child fa-5x"> </i>
+					<div class="row">
+					<div class="col-ld-12">
+						<div class="col-md-4">
+							<div class="span12" id="studentdetails">
+								<h4>Student details</h4>
+									<div>
+										<img src="/images/favicon_child.png" width="80px" height="80px" align="left">
+									</div>
+									<br>&nbsp;&nbsp;&nbsp;&nbsp;City: {{studentdetails.current_city}}, {{studentdetails.current_state}}
+									<br>&nbsp;&nbsp;&nbsp;&nbsp;Grade: {{studentdetails.Grade}}
+									<br>&nbsp;&nbsp;&nbsp;&nbsp;Interests: {{studentdetails.likes}}
+							</div>
+								<br>
 						</div>
 
-						<div class="col-md-3" id="studentdetails">
-							<h4>Student Details</h4>
-							City: {{studentdetails.current_city}} {{studentdetails.current_state}}
-							<br>Grade: {{studentdetails.Grade}}
-							<br>Interests: {{studentdetails.likes}}
-							<br>Dislikes: {{studentdetails.dislikes}}
-						</div>
+						<!-- <div div class="col-md-1"> -->
+							<!-- Padding -->
+						<!-- </div> -->
 
-						<div class="col-md-6" id="about">
-							<h4>About</h4> {{studentdetails.about}} <br><br>
+						<div class="col-md-8 span12" id="about">
+							<h4>About</h4> {{studentdetails.about}} 
 						</div>
-
 					</div>
+					</div>
+
+
 					
 			    <div class="row">
             <div class="col-lg-12">
@@ -324,7 +332,7 @@
 						</div>
 						<div class="col-md-1">
 						</div>
-						<div class="col-md-5">
+						<div class="col-md-5 span12">
 						  <h4> Lesson: Module 1 Primer: Introductions</h4>
 						  <p>Objective: To make the student feel comfortable with you </p>
 						  <p>Activities</p>
