@@ -487,20 +487,33 @@ function builtColumn() {
             shared: true,
             useHTML: true
         },
+        colors: [
+        			'#E5ACB6',
+        			'#E5ACB6',
+					'#3D96AE', 
+					'#E5ACB6', 
+					'#3D96AE'
+					],
+
+        plotOptions: {
+            series: {
+                colorByPoint: true
+            }
+        },
        
         series: [{
         	name: "Lessons Completed",
             data: [
                 ['Lesson 0 (live)', 3],
                 ['Lesson 1 (live)', 2],
-                ['Lesson 1 (recorded)', 3],
+                ['Lesson 1 (recorded)', 3	],
                 ['Lesson 2 (live)', 3],
                 ['Lesson 2 (recorded)', 4]
             ],
             dataLabels: {
                 enabled: true,
                 rotation: -90,
-                color: '#FFFFFF',
+                color: '#262626',
                 align: 'right',
                 format: '{point.y:.0f}', // one decimal
                 y: 10, // 10 pixels down from the top
