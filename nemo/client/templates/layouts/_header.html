@@ -10,6 +10,9 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
+				<a class="navbar-brand" href="{{pathFor 'home'}}">FLYOVER
+<!--					<img src="/images/logo1.png" style="width:160px;height:40px">-->
+				</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="main-nav">
@@ -27,8 +30,8 @@
 				</ul>
 				{{else}}
 				<div class="navbar-right">
-					<a href="{{ pathFor 'atSignIn' }}" class="btn btn-default navbar-btn">Sign in</a>
-					<a href="{{ pathFor 'atSignUp' }}" class="btn btn-primary navbar-btn">Register</a>
+					<a href="{{ pathFor 'atSignIn' }}" class="btn btn-default navbar-btn signin-default" id="signin">Sign in</a>
+					<a href="{{ pathFor 'atSignUp' }}" class="btn btn-default navbar-btn register-default" id="signup">Register</a>
 				</div>
 				{{/if}} {{#if currentUser}}
 				<ul class="nav navbar-nav navbar-right">

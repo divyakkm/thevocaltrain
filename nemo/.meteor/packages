@@ -31,4 +31,5 @@ peppelg:bootstrap-3-modal
 underscore
 maazalik:highcharts
 
-tinytest
+lookback:tooltips
+joshowens:timezone-picker

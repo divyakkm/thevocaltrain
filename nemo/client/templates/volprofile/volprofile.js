@@ -36,7 +36,7 @@ Template.showModal.helpers({
 	},
 
 	lsn: function () {
-		//		console.log("inside lsn");
+		console.log("inside lsn");
 		var ref1 = LessonBlock.find({
 			_id: SessionList.find({
 				_id: Session.get('session_id')
@@ -47,29 +47,29 @@ Template.showModal.helpers({
 		// 		class: "myClass anotherClass",
 		// 		value: 123
 		// 	}
-		//		console.log(ref1);
+		console.log("ref1 value"+ref1);
 		return ref1;
 	},
 
 	act: function () {
-		//		console.log("inside act");
+		console.log("inside act");
 		var ref2 = Activity.find({
 			lesson_id: SessionList.find({
 				_id: Session.get('session_id')
 			}).fetch()[0].lesson_id
 		});
-		//		console.log(ref2);
+		console.log("ref2 value"+ref2);
 		return ref2;
 	},
 
 	ass: function () {
-		//		console.log("inside act");
+		console.log("inside ass");
 		var ref3 = Assessment.find({
 			lesson_id: SessionList.find({
 				_id: Session.get('session_id')
 			}).fetch()[0].lesson_id
 		});
-		//		console.log(ref2);
+		console.log("ref3 value"+ref3);
 		return ref3;
 	},
 
@@ -82,12 +82,12 @@ Template.showModal.helpers({
 		}).fetch()[0];
 		//Assessment.find({lesson_id : SessionList.find({_id: "551cae3cb1ddc9927db19e89"}).fetch()[0].lesson_id}).fetch()[0]
 		//});
-		console.log(ref4);
+		console.log("ref4 value"+ref4);
 		return ref4;
 	},
 
 	dt: function () {
-		//console.log("inside dt");
+		console.log("inside dt");
 		// var content = $('#currentnotes').value;
 		// console.log(content);
 		//		 var ref1 = {
@@ -100,31 +100,36 @@ Template.showModal.helpers({
 				submittedAt: -1
 			}
 		}).fetch()[0];
-		//console.log(reff);
+		console.log("reff value"+reff);
 		return reff;
 	}
 });
 
 Template.showModal.events({
 	'click .save': function (evt, tmpl) {
+			bootbox.confirm("Do you want to repeat this lesson?", function(confirmed) {
+        	console.log("Confirmed: "+confirmed);
+    		});
 			console.log("step1");
 			console.log(tmpl);
 			comments = tmpl.find('#commentstextarea').value;
 			notes = tmpl.find('#currentnotes').value;
-			score = tmpl.find('#score').value;
-			eng = tmpl.find('input:radio[name=Engagement]:checked').value;
-			ret = tmpl.find('input:radio[name=Retention]:checked').value;
-			acc = tmpl.find('input:radio[name=Accuracy]:checked').value;
-			flu = tmpl.find('input:radio[name=Fluency]:checked').value;
-			cre = tmpl.find('input:radio[name=Creativity]:checked').value;
-			console.log(eng);
-			updateSessionList(Session.get('session_id'), comments, notes, score, eng, ret, acc, flu, cre);
+			//score = tmpl.find('#score').value;
+			// eng = tmpl.find('input:radio[name=Engagement]:checked').value;
+			// ret = tmpl.find('input:radio[name=Retention]:checked').value;
+			// acc = tmpl.find('input:radio[name=Accuracy]:checked').value;
+			// flu = tmpl.find('input:radio[name=Fluency]:checked').value;
+			// cre = tmpl.find('input:radio[name=Creativity]:checked').value;
+			//console.log(eng);
+			updateSessionList(Session.get('session_id'), comments, notes);
+			document.getElementById('commentstextarea').value='';
+			document.getElementById('currentnotes').value='';
 		}
 		//SessionList.update({_id: "551cae3cb1ddc9927db19e89"}, {$set: {notes: "5"}});
 		//console.log("step 2");
 })
 
-var updateSessionList = function (id, comments, notes, score, eng, ret, acc, flu, cre) {
+var updateSessionList = function (id, comments, notes) {
 	console.log("inside updatesessionlist");
 	SessionList.update({
 		_id: id
@@ -132,13 +137,13 @@ var updateSessionList = function (id, comments, notes, score, eng, ret, acc, flu
 		$set: {
 			submittedAt: new Date(),
 			comments: comments,
-			notes: notes,
-			mainscore: score,
-			engagement: eng,
-			retention: ret,
-			creativity: cre,
-			accuracy: acc,
-			fluency: flu
+			notes: notes
+			//mainscore: score,
+			// engagement: eng,
+			// retention: ret,
+			// creativity: cre,
+			// accuracy: acc,
+			// fluency: flu
 		}
 	});
 	console.log("done updatesessionlist");
@@ -179,7 +184,27 @@ Template.sessiontable.helpers({
 		return {
 			volunteer_id: Meteor.userId()
 		}
-	}
+	},
+  status: function () {
+    return {status: 'Completed'};
+  }
+});
+
+
+Template.sessiontable.events({
+  'mouseover .odd': function(e) {
+    console.log(this.name);
+    $('.odd').removeClass('highlight');
+    $('.even').removeClass('highlight');
+    $(e.currentTarget).addClass('highlight');
+  },
+
+    'mouseover .even': function(e) {
+    console.log(this.name);
+    $('.even').removeClass('highlight');
+    $('.odd').removeClass('highlight');
+    $(e.currentTarget).addClass('highlight');
+  }
 });
 
 ////////////////////////////// Old session table code ////////////////////////////////////////////
@@ -210,12 +235,6 @@ Template.sessiontable.helpers({
 ////////////////////////////// Carousel code ////////////////////////////////////////////
 
 Template.carousel.rendered = function () {
-
-	// $('#carousel').slick({
-	// 	dots: true,
-	// 	arrows: true
-	// });
-
 	$('#carousel').slick({
 		infinite: true,
 		slidesToShow: 3,
@@ -255,78 +274,78 @@ Template.carousel.rendered = function () {
 
 // ////////////////////////////// Show Student Modal ////////////////////////////////////////////
 
-// Template.showStudentModal.helpers ({
+/*Template.showStudentModal.helpers ({
 
-//   studentlist: function () {
-//      //Create an array to store all the student ids associated with this volunteer 
-//      var studentIdList = [];
+  studentlist: function () {
+     //Create an array to store all the student ids associated with this volunteer 
+     var studentIdList = [];
      
-//      //Query the StudentVolunteer table to get all student ids 
-//      StudentVolunteerDetails = StudentVolunteer.find({volunteer_id: Meteor.userId()}).fetch();
+     //Query the StudentVolunteer table to get all student ids 
+     StudentVolunteerDetails = StudentVolunteer.find({volunteer_id: Meteor.userId()}).fetch();
      
-//      //Push into array 
-//      StudentVolunteerDetails.forEach(function (evt) {
-//       studentIdList.push({
-//         student_id: evt.student_id});
-//       }); 
+     //Push into array 
+     StudentVolunteerDetails.forEach(function (evt) {
+      studentIdList.push({
+        student_id: evt.student_id});
+      }); 
 
-//     if (Session.get('showStudentModal') == 1) {
+    if (Session.get('showStudentModal') == 1) {
 
-//     //Testing - need to change 
-//      var studentid = studentIdList[0].student_id;
-//      console.log(studentid);
-//      // return test
+    //Testing - need to change 
+     var studentid = studentIdList[0].student_id;
+     console.log(studentid);
+     // return test
 
-//      var studentDetails = CalEvents.find({
-//       _id: studentid
-//       }).fetch()[0];
+     var studentDetails = CalEvents.find({
+      _id: studentid
+      }).fetch()[0];
 
-//      var notes = SessionList.find({assigned_student_id: studentid},{sort: {submittedAt: -1}
-//    							}).fetch()[0].notes;
-//      console.log('notes');
-//      console.log(notes);
+     var notes = SessionList.find({assigned_student_id: studentid},{sort: {submittedAt: -1}
+   							}).fetch()[0].notes;
+     console.log('notes');
+     console.log(notes);
 
-//     console.log(studentDetails);
-//    	return studentDetails;
-//     } 
+    console.log(studentDetails);
+   	return studentDetails;
+    } 
 
-//     else if (Session.get('showStudentModal') == 2) {
+    else if (Session.get('showStudentModal') == 2) {
 
-//     //Testing - need to change 
-//      var studentid = studentIdList[1].student_id;
-//      console.log('inside student 2 if');
-//      console.log(studentid);
-//      // return test
+    //Testing - need to change 
+     var studentid = studentIdList[1].student_id;
+     console.log('inside student 2 if');
+     console.log(studentid);
+     // return test
 
-//       var studentDetails = CalEvents.find({
-//       _id: studentid
-//       }).fetch()[0];
+      var studentDetails = CalEvents.find({
+      _id: studentid
+      }).fetch()[0];
 
-//     console.log(studentDetails);
-//    	return studentDetails;
-//    }
+    console.log(studentDetails);
+   	return studentDetails;
+   }
 
-//     else if (Session.get('showStudentModal') == 3) {
+    else if (Session.get('showStudentModal') == 3) {
 
-//     //Testing - need to change 
-//      var studentid = studentIdList[2].student_id;
-//      console.log(studentid);
-//      // return test
+    //Testing - need to change 
+     var studentid = studentIdList[2].student_id;
+     console.log(studentid);
+     // return test
 
-//       var studentDetails = CalEvents.find({
-//       _id: studentid
-//       }).fetch()[0];
+      var studentDetails = CalEvents.find({
+      _id: studentid
+      }).fetch()[0];
 
-//     console.log(studentDetails);
-//    	return studentDetails;
-//    };
-// 	},
+    console.log(studentDetails);
+   	return studentDetails;
+   };
+	},
 
-// 	columnDemo: function () {
-// 		return builtColumn();
-// 	}
+	columnDemo: function () {
+		return builtColumn();
+	}
 
-//   })
+  })*/
 ////////////////////////////// Dynamic Rendering with Divs ////////////////////////////////////////////
 
 Template.carousel.events({
@@ -336,13 +355,6 @@ Template.carousel.events({
 		Session.set('student_id', student_id);
 		$('#studentModalid').modal("show");
 		$('.modal-backdrop').remove();
-		// Testing statements
-		// var test = event.currentTarget;
-		// console.log('test');
-		// console.log(test);
-		// var test2 = event.target.id;
-		// console.log('test2');
-		// console.log(test2);
 	}
 })
 
@@ -358,17 +370,70 @@ Template.carousel.helpers({
 		StudentVolunteerDetails = StudentVolunteer.find({
 			volunteer_id: Meteor.userId()
 		}).fetch();
-
-		console.log("trying divs");
-		console.log(StudentVolunteerDetails);
-		return StudentVolunteerDetails;
+		
+		console.log(StudentDetails);
+		return StudentDetails;
 	},
 });
+
+Template.studentPanel.events({
+
+	'click .panel-footer': function () {
+		var student_id = event.target.id;
+		Session.set('student_id', student_id);
+		$('#studentModalid').modal("show");
+		$('.modal-backdrop').remove();
+		//Testing statements
+		var test = event.currentTarget;
+		console.log('test');
+		console.log(test);
+		var test2 = event.target.id;
+		console.log('test2');
+		console.log(test2);
+	}
+})
+
+Template.studentPanel.helpers({
+
+	studentlist: function() {
+		var studentIdList = [];
+			StudentVolunteerDetails = StudentVolunteer.find({
+				volunteer_id: Meteor.userId()
+			}, {
+				"student_id": 1,
+				"_id": 0,
+				"volunteer_id": 0
+			}).fetch();
+			console.log("Printing sstuff1");
+			console.log(StudentVolunteerDetails);
+			
+			StudentVolunteerDetails.forEach(function (evt) {
+				studentIdList.push(evt.student_id);
+			});
+			console.log(studentIdList);
+			
+			// Create an empty array to store the events
+			var events = [];
+			// Variable to pass events to the calendar
+			// Gets us all of the calendar events and puts them in the array
+			// calEvents = CalEvents.find({assigned:null});
+			calEvents = CalEvents.find({
+				_id: {
+					$in: studentIdList
+				}
+			});
+			console.log('this is our test');
+			console.log(calEvents);
+		return calEvents;
+		}
+});
+
+	
 
 Template.showStudentModal.helpers({
 	studentdetails: function () {
 
-		var studentid = Session.get('student_id');
+	var studentid = Session.get('student_id');
      console.log(studentid);
 
      var studentDetails = CalEvents.find({
@@ -379,9 +444,9 @@ Template.showStudentModal.helpers({
    	return studentDetails;
 	},
 
-	notes: function () {
-		var studentid = Session.get('student_id');
-     console.log(studentid);
+	allnotes: function () {
+	var studentid = Session.get('student_id');
+    console.log(studentid);
 
   	var notes = SessionList.find({assigned_student_id: studentid}).fetch();
      console.log('notes');
@@ -390,7 +455,7 @@ Template.showStudentModal.helpers({
   	return notes;
 	},
 
-		columnDemo: function () {
+	columnDemo: function () {
 		return builtColumn();
 	}
 });
@@ -407,17 +472,11 @@ function builtColumn() {
         },
         
         xAxis: {
-            title: {text: 'Sessions in this Module'}, 
-            categories: ['1', '2', '3', '4', '5', '6']
+        	type: 'category'        
         },
         
 		yAxis: {
-            title: {text: 'Score'},
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
+            title: {text: 'Score'}
         },	
         
         tooltip: {
@@ -428,35 +487,42 @@ function builtColumn() {
             shared: true,
             useHTML: true
         },
-        
+        colors: [
+        			'#E5ACB6',
+        			'#E5ACB6',
+					'#3D96AE', 
+					'#E5ACB6', 
+					'#3D96AE'
+					],
+
         plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
+            series: {
+                colorByPoint: true
             }
         },
-        
-        series: [
-            {
-            name: 'Sync Lesson 0',
-            data: [3]},
-
-            {
-            name: 'Async A1',
-            data: [3]},
-
-            {
-            name: 'Async A2',
-            data: [4]}, 
-
-            {
-            name: 'Async A3',
-            data: [2]},
-           
-           {
-            name: 'Sync Lesson 1',
-            data: [3]}
-            ]
+       
+        series: [{
+        	name: "Lessons Completed",
+            data: [
+                ['Lesson 0 (live)', 3],
+                ['Lesson 1 (live)', 2],
+                ['Lesson 1 (recorded)', 3	],
+                ['Lesson 2 (live)', 3],
+                ['Lesson 2 (recorded)', 4]
+            ],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#262626',
+                align: 'right',
+                format: '{point.y:.0f}', // one decimal
+                y: 10, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
     	}
 	}
 

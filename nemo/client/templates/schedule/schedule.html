@@ -5,7 +5,7 @@
 			<h1>Schedule</h1>
 		</div>
 		<p>
-			Below calendar shows the students you are/will be teaching. To drop a class/module, click on the event and hit Delete.
+			Below calendar shows the students you will be teaching. Each event on the calendar is one class. To drop a class, click on the event and press Delete.
 			<br> <a href="{{ pathFor 'schedulenew' }}">To add a new student to your calendar, please click here.</a>
 			<br>
 		</p>
@@ -37,19 +37,18 @@
 </template>
 
 <template name="modalInner">
-	<div class="modal-content">
-		<div class="modal-header">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-			<h4 class="modal-title">Session Detail</h4>
+			<h4 class="panel-title">Session Detail</h4>
 		</div>
-		<div class="modal-body">
+		<div class="panel-body">
 			Student Name - {{evt.title}}
 			<br> Please click delete to cancel this session with {{evt.title}}. The student will recieve a text notification informing the cancellation.
 		</div>
 		<div class="modal-footer">
-			<a href="#" class="btn btn-danger remove">Drop Session</a>
-			<!--					<a href="#" class="btn btn-primary save">Yes</a>-->
-			<a href="#" class="btn close" data-dismiss="modal">Close</a>
+			<a href="#" class="btn btn-primary remove">Drop Session</a>
+			<a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
 		</div>
 	</div>
 </template>

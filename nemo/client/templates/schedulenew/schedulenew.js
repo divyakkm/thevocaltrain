@@ -116,13 +116,15 @@ Template.schedulenew.rendered = function () {
 						id: evt._id,
 						title: evt.title,
 						start: evt.start,
-						end: evt.end
+						end: evt.end,
+						backgroundColor: '#ff0000'
 					});
 				})
 				// Callback to pass events back to the calendar
 			callback(events);
 		},
-		editable: false
+		editable: false,
+		backgroundColor: '#ff0000'
 	});
 	updateCalendar();
 }
@@ -142,8 +144,6 @@ var updateCalEvent = function (id, title) {
 	StudentVolunteer.insert({
 		student_id: id,
 		volunteer_id: Meteor.userId()
-			//start:CalEvents.findOne({_id : id},{start:1,_id:0})
-			//		start: 10
 	});
 
 	var studentDetails = CalEvents.find({
@@ -158,7 +158,9 @@ var updateCalEvent = function (id, title) {
 		volunteer_id: Meteor.userId(),
 		date: studentDetails.display_start,
 		time: studentDetails.weekly_time,
-		lesson_id: "L1.0",
+		lesson_id: "L0.0",
+		lesson_name : "Module 0 First day: Building a rapport with the child",
+		status: "Not Started",
 		assigned_student: studentDetails.title
 	});
 	//	updateCalendar();
