@@ -53,10 +53,10 @@ TabularTables.Sessions = new Tabular.Table({
 		},
 		{
 			data: 'status',
-			title:'Status'
+			title: 'Status'
 		},
 		{
-  			tmpl: Meteor.isClient && Template.moreDetails
+			tmpl: Meteor.isClient && Template.moreDetails
 		},
 
 

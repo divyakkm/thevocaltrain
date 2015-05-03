@@ -30,8 +30,8 @@
 				</ul>
 				{{else}}
 				<div class="navbar-right">
-					<a href="{{ pathFor 'atSignIn' }}" class="btn btn-default navbar-btn">Sign in</a>
-					<a href="{{ pathFor 'atSignUp' }}" class="btn btn-primary navbar-btn">Register</a>
+					<a href="{{ pathFor 'atSignIn' }}" class="btn btn-default navbar-btn signin-default" id="signin">Sign in</a>
+					<a href="{{ pathFor 'atSignUp' }}" class="btn btn-default navbar-btn register-default" id="signup">Register</a>
 				</div>
 				{{/if}} {{#if currentUser}}
 				<ul class="nav navbar-nav navbar-right">

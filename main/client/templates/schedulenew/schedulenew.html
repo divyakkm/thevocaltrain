@@ -2,7 +2,7 @@
 	{{>_header}} {{#if showEditEventNew}} {{>editEventNew}} {{/if}}
 	<div class="template-home">
 		<div class="page-header">
-			<!--						<h1>Schedule</h1>-->
+			<h1>Schedule</h1>
 		</div>
 		<p>
 			Below calendar shows students who need volunteers to teach them. Each event on the below calendar represents the time the student is free. Click an event to view student details and add them to your calendar. You will be commiting to more time to Flyover by adding new students.
@@ -28,12 +28,12 @@
 <template name="editEventNew">
 	<div class="modal" id="EditEventModalNew">
 		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-					<h4 class="modal-title">Student Details</h4>
+					<h4 class="panel-title">Student Details</h4>
 				</div>
-				<div class="modal-body">
+				<div class="panel-body">
 					Student name - {{evt.title}}
 					<br> Weekly class time - {{evt.weekly_time}} (You will be teaching the student for 30mins each week at this time)
 					<br> Duration - {{evt.display_start}} - {{evt.display_end}} (This module is for 10 weeks.)
