@@ -11,7 +11,7 @@ Light grey #979cb8
 Blue #01abcf
 Yellow #f9ac08
 Magenta #ea3a68
-Green #aacf20
+Green #f9ac08
 /*
 */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
@@ -35,7 +35,7 @@ Green #aacf20
 	-webkit-border-radius: 3px;
 	display: inline-block;
 	cursor: pointer;
-	color: #aacf20;
+	color: #f9ac08;
 	font-weight: bold;
 	text-decoration: none;
 	text-shadow: 0px 1px 0px #ffffff;
@@ -54,7 +54,7 @@ Green #aacf20
 	-webkit-border-radius: 3px;
 	display: inline-block;
 	cursor: pointer;
-	color: #aacf20;
+	color: #f9ac08;
 	font-weight: bold;
 	text-decoration: none;
 	text-shadow: 0px 1px 0px #ffffff;
@@ -1463,13 +1463,13 @@ textarea {
 }
 
 a {
-	color: #aacf20;
+	color: #f9ac08;
 	text-decoration: none;
 }
 
 a:hover,
 a:focus {
-	color: #aacf20;
+	color: #f9ac08;
 	text-decoration: underline;
 }
 
@@ -1792,7 +1792,7 @@ a.bg-primary:hover {
 }
 
 .bg-success {
-	background-color: #aacf20;
+	background-color: #f9ac08;
 }
 
 a.bg-success:hover {
@@ -2989,7 +2989,7 @@ table th[class*="col-"] {
 .table > thead > tr.success > th,
 .table > tbody > tr.success > th,
 .table > tfoot > tr.success > th {
-	background-color: #aacf20;
+	background-color: #f9ac08;
 }
 
 .table-hover > tbody > tr > td.success:hover,
@@ -3514,7 +3514,7 @@ select[multiple].form-group-lg .form-control {
 .has-success .input-group-addon {
 	color: #ffffff;
 	border-color: #ffffff;
-	background-color: #aacf20;
+	background-color: #f9ac08;
 }
 
 .has-success .form-control-feedback {
@@ -3873,8 +3873,8 @@ fieldset[disabled] .btn-primary.active {
 
 .btn-success {
 	color: #ffffff;
-	background-color: #aacf20;
-	border-color: #aacf20;
+	background-color: #f9ac08;
+	border-color: #f9ac08;
 }
 
 .btn-success:hover,
@@ -3884,8 +3884,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success.active,
 .open > .dropdown-toggle.btn-success {
 	color: #ffffff;
-	background-color: #aacf20;
-	border-color: #aacf20;
+	background-color: #f9ac08;
+	border-color: #f9ac08;
 }
 
 .btn-success:active,
@@ -3912,12 +3912,12 @@ fieldset[disabled] .btn-success:active,
 .btn-success.disabled.active,
 .btn-success[disabled].active,
 fieldset[disabled] .btn-success.active {
-	background-color: #aacf20;
-	border-color: #aacf20;
+	background-color: #f9ac08;
+	border-color: #f9ac08;
 }
 
 .btn-success .badge {
-	color: #aacf20;
+	color: #f9ac08;
 	background-color: #ffffff;
 }
 
@@ -4072,7 +4072,7 @@ fieldset[disabled] .btn-danger.active {
 }
 
 .btn-link {
-	color: #aacf20;
+	color: #f9ac08;
 	font-weight: normal;
 	border-radius: 0;
 }
@@ -4096,7 +4096,7 @@ fieldset[disabled] .btn-link {
 
 .btn-link:hover,
 .btn-link:focus {
-	color: #aacf20;
+	color: #f9ac08;
 	text-decoration: underline;
 	background-color: transparent;
 }
@@ -4776,7 +4776,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a:hover,
 .nav .open > a:focus {
 	background-color: #ecf0f1;
-	border-color: #aacf20;
+	border-color: #f9ac08;
 }
 
 .nav .nav-divider {
@@ -5350,7 +5350,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-	color: #aacf20;
+	color: #f9ac08;
 	background-color: transparent;
 }
 
@@ -5364,7 +5364,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-	/*	color: #aacf20;*/
+	/*	color: #f9ac08;*/
 	
 	background-color: transparent;
 }
@@ -5414,7 +5414,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 	}
 	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
 	.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-		color: #aacf20;
+		color: #f9ac08;
 		background-color: transparent;
 	}
 	.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
@@ -5436,7 +5436,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default .navbar-link:hover {
-	color: #aacf20;
+	color: #f9ac08;
 }
 
 .navbar-default .btn-link {
@@ -5445,7 +5445,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 
 .navbar-default .btn-link:hover,
 .navbar-default .btn-link:focus {
-	color: #aacf20;
+	color: #f9ac08;
 }
 
 .navbar-default .btn-link[disabled]:hover,
@@ -5456,7 +5456,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 
 .navbar-inverse {
-	background-color: #aacf20;
+	background-color: #f9ac08;
 	border-color: transparent;
 }
 
@@ -5617,7 +5617,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 	line-height: 1.42857143;
 	text-decoration: none;
 	color: #ffffff;
-	background-color: #aacf20;
+	background-color: #f9ac08;
 	border: 1px solid transparent;
 	margin-left: -1px;
 }
@@ -5640,7 +5640,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > li > a:focus,
 .pagination > li > span:focus {
 	color: #ffffff;
-	background-color: #708914;
+	background-color: #b07904;
 	border-color: transparent;
 }
 
@@ -5652,7 +5652,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .active > span:focus {
 	z-index: 2;
 	color: #ffffff;
-	background-color: #708914;
+	background-color: #b07904;
 	border-color: transparent;
 	cursor: default;
 }
@@ -5664,7 +5664,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
 	color: #ecf0f1;
-	background-color: #aacf20;
+	background-color: #f9ac08;
 	border-color: transparent;
 	cursor: not-allowed;
 }
@@ -5720,7 +5720,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pager li > span {
 	display: inline-block;
 	padding: 5px 14px;
-	background-color: #aacf20;
+	background-color: #f9ac08;
 	border: 1px solid transparent;
 	border-radius: 15px;
 }
@@ -5746,7 +5746,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pager .disabled > a:focus,
 .pager .disabled > span {
 	color: #ffffff;
-	background-color: #aacf20;
+	background-color: #f9ac08;
 	cursor: not-allowed;
 }
 
@@ -5798,7 +5798,7 @@ a.label:focus {
 }
 
 .label-success {
-	background-color: #aacf20;
+	background-color: #f9ac08;
 }
 
 .label-success[href]:hover,
@@ -5956,7 +5956,7 @@ a.badge:focus {
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
-	border-color: #aacf20;
+	border-color: #f9ac08;
 }
 
 .thumbnail .caption {
@@ -6003,8 +6003,8 @@ a.thumbnail.active {
 }
 
 .alert-success {
-	background-color: #aacf20;
-	border-color: #aacf20;
+	background-color: #f9ac08;
+	border-color: #f9ac08;
 	color: #ffffff;
 }
 
@@ -6128,7 +6128,7 @@ a.thumbnail.active {
 }
 
 .progress-bar-success {
-	background-color: #aacf20;
+	background-color: #f9ac08;
 }
 
 .progress-striped .progress-bar-success {
@@ -6313,7 +6313,7 @@ a.list-group-item:focus {
 
 .list-group-item-success {
 	color: #ffffff;
-	background-color: #aacf20;
+	background-color: #f9ac08;
 }
 
 a.list-group-item-success {
@@ -6746,26 +6746,26 @@ a.list-group-item-danger.active:focus {
 }
 
 .panel-success {
-	border-color: #aacf20;
+	border-color: #f9ac08;
 }
 
 .panel-success > .panel-heading {
 	color: #ffffff;
-	background-color: #aacf20;
-	border-color: #aacf20;
+	background-color: #f9ac08;
+	border-color: #f9ac08;
 }
 
 .panel-success > .panel-heading + .panel-collapse > .panel-body {
-	border-top-color: #aacf20;
+	border-top-color: #f9ac08;
 }
 
 .panel-success > .panel-heading .badge {
-	color: #aacf20;
+	color: #f9ac08;
 	background-color: #ffffff;
 }
 
 .panel-success > .panel-footer + .panel-collapse > .panel-body {
-	border-bottom-color: #aacf20;
+	border-bottom-color: #f9ac08;
 }
 
 .panel-info {
@@ -7997,7 +7997,7 @@ button.close {
 
 .navbar-inverse .badge {
 	background-color: #fff;
-	color: #aacf20;
+	color: #f9ac08;
 }
 
 .navbar-brand {
@@ -8021,7 +8021,7 @@ button.close {
 
 .text-success,
 .text-success:hover {
-	color: #aacf20;
+	color: #f9ac08;
 }
 
 .text-danger,
@@ -8175,16 +8175,16 @@ input:focus {
 .has-success .radio-inline,
 .has-success .checkbox-inline,
 .has-success .form-control-feedback {
-	color: #aacf20;
+	color: #f9ac08;
 }
 
 .has-success .form-control,
 .has-success .form-control:focus {
-	border: 2px solid #aacf20;
+	border: 2px solid #f9ac08;
 }
 
 .has-success .input-group-addon {
-	border-color: #aacf20;
+	border-color: #f9ac08;
 }
 
 .nav .open > a,
@@ -8202,7 +8202,7 @@ input:focus {
 .pager .disabled > a:hover,
 .pager .disabled > a:focus,
 .pager .disabled > span {
-	background-color: #aacf20;
+	background-color: #f9ac08;
 }
 
 .close {
@@ -8245,7 +8245,7 @@ a.list-group-item.active:focus {
 }
 
 a.list-group-item-success.active {
-	background-color: #aacf20;
+	background-color: #f9ac08;
 }
 
 a.list-group-item-success.active:hover,

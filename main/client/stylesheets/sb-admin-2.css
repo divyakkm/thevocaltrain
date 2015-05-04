@@ -289,17 +289,17 @@ table.dataTable thead .sorting:after {
 }
 
 .panel-green {
-	border-color: #aacf20;
+	border-color: #f9ac08;
 }
 
 .panel-green .panel-heading {
-	border-color: #aacf20;
+	border-color: #f9ac08;
 	color: #fff;
-	background-color: #aacf20;
+	background-color: #f9ac08;
 }
 
 .panel-green a {
-	color: #aacf20;
+	color: #f9ac08;
 }
 
 .panel-green a:hover {

@@ -455,6 +455,11 @@ Template.showStudentModal.helpers({
   	return notes;
 	},
 
+	lessonChart: function () {
+	return panelColumn();
+	},
+
+
 	columnDemo: function () {
 		return builtColumn();
 	}
@@ -468,7 +473,7 @@ function builtColumn() {
         chart: {type: 'column'},
         
         title: {
-            text: 'Progress Summary'
+            text: 'Overall Progress Summary'
         },
         
         xAxis: {
@@ -488,11 +493,15 @@ function builtColumn() {
             useHTML: true
         },
         colors: [
-        			'#E5ACB6',
-        			'#E5ACB6',
-					'#3D96AE', 
-					'#E5ACB6', 
-					'#3D96AE'
+        			'#1995dc',
+        			'#1995dc',
+					'#aacf20',
+					'#aacf20',
+					'#aacf20', 
+					'#1995dc', 
+					'#aacf20',
+					'#aacf20',
+					'#aacf20',
 					],
 
         plotOptions: {
@@ -506,10 +515,17 @@ function builtColumn() {
             data: [
                 ['Lesson 0 (live)', 3],
                 ['Lesson 1 (live)', 2],
-                ['Lesson 1 (recorded)', 3	],
+                ['Lesson 1A (recorded)', 3],
+                ['Lesson 1B (recorded)', 2],
+                ['Lesson 1C (recorded)', 4],
                 ['Lesson 2 (live)', 3],
-                ['Lesson 2 (recorded)', 4]
+                ['Lesson 2A (recorded)', 2],
+                ['Lesson 2B (recorded)', 2],
+                ['Lesson 2C (recorded)', 3],
+
             ],
+            showInLegend: false,
+            credits: false,
             dataLabels: {
                 enabled: true,
                 rotation: -90,
@@ -525,6 +541,73 @@ function builtColumn() {
         }]
     	}
 	}
+////////////////////////////// Chart within Panel ////////////////////////////////////////////
+
+
+function panelColumn() {
+
+    return {
+        chart: {type: 'column'},
+        
+        title: {
+            text: 'Lesson Progress'
+        },
+        
+        xAxis: {
+        	type: 'category'        
+        },
+        
+		yAxis: {
+            title: {text: 'Score'}
+        },	
+        
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        colors: [
+        			'#1995dc',
+        			'#aacf20',
+					'#aacf20',
+					'#aacf20'
+					],
+
+        plotOptions: {
+            series: {
+                colorByPoint: true
+            }
+        },
+       
+        series: [{
+        	name: "Lessons Completed",
+            data: [
+                ['Live', 2],
+                ['Recorded', 3],
+                ['Recorded', 2],
+                ['Recorded', 4]
+            ],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#262626',
+                align: 'right',
+                format: '{point.y:.0f}', // one decimal
+                y: 10, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }],
+        credits: false
+    	}
+	}
+
+
 
 ////////////////////////////// Common ////////////////////////////////////////////
 

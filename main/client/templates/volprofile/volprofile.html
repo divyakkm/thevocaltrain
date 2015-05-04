@@ -98,6 +98,7 @@
 										<br>{{dt.notes}}
 									</div>
 									<br>
+
 								</div>
 							</div>
 
@@ -166,14 +167,7 @@
 									<br>
 									<input type="checkbox" name="cnfrmchkbx" value="1">&nbsp;&nbsp; Repeat this Lesson
 								</div>
-
-
-
 							</div>
-
-
-
-
 						</div>
 					</div>
 
@@ -217,9 +211,14 @@
 							<div class="col-md-4">
 								<div class="span12" id="studentdetails">
 									<h4>Student details</h4>
-									<div>
+<!-- 									<div>
 										<img src="/images/favicon_child.png" width="80px" height="80px" align="left">
+									</div> -->
+
+									<div class="col-xs-3">
+										<i class="fa fa-child fa-5x"></i>
 									</div>
+
 									<br>&nbsp;&nbsp;&nbsp;&nbsp;City: {{studentdetails.current_city}}, {{studentdetails.current_state}}
 									<br>&nbsp;&nbsp;&nbsp;&nbsp;Grade: {{studentdetails.Grade}}
 									<br>&nbsp;&nbsp;&nbsp;&nbsp;Interests: {{studentdetails.likes}}
@@ -247,9 +246,26 @@
                                     </h4>
 											</div>
 											<div id="collapseOne" class="panel-collapse collapse in">
-												<div class="panel-body">
-													{{notes}}
+												<div class="panel-body col-md-7">
+													<div>
+														<h4> Notes taken during the session:</h4>
+														{{notes}}
+													</div>
+													
+													<div>
+														<h4> Lesson Taught:</h4>
+														<p>Objective: To make the student feel comfortable with you </p>
+														<p>Activities</p>
+														<li>Greet the student, introduce yourself, ask her how her day was and what she did today, tell her about what you did.</li>
+														<li> Use both English and the local language, build a rapport. </li>
+														<li>Ask her to say any sentence of her choice in English and ask her what it means and what each word means.</li>
+													</div>
 												</div>
+
+													<div class="panel-body col-md-5" id="container-column" style="min-width: 310px; height: 400px;">
+													{{>highchartsHelper chartId="lessonChart" chartWidth="31%" charHeight="31%" chartObject=lessonChart}}
+													</div>
+
 											</div>
 											{{/each}}
 										</div>
@@ -260,21 +276,10 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<div class="col-md-6" id="container-column" style="min-width: 310px; height: 400px;">
-								{{>highchartsHelper chartId="test" chartWidth="40%" charHeight="40%" chartObject=columnDemo}}
+							<div class="col-md-12" id="container-column" style="min-width: 310px; height: 400px;">
+								{{>highchartsHelper chartId="chart" class= "chart" chartWidth="60%" charHeight="60%" chartObject=columnDemo}}
 							</div>
-							<div class="col-md-1">
-							</div>
-							<div class="col-md-5 span12">
-								<h4> Lesson: Module 1 Primer: Introductions</h4>
-								<p>Objective: To make the student feel comfortable with you </p>
-								<p>Activities</p>
-								<li>Greet the student, introduce yourself, ask her how her day was and what she did today, tell her about what you did.</li>
-								<li> Use both English and the local language, build a rapport. </li>
-								<li>Explain that you will be teaching her for the next 3 months and that the goal will be to improve her English by learning and practicing together. Sound excited and upbeat and keep telling her how fun it will be.</li>
-								<li>Ask her to say any sentence of her choice in English and ask her what it means and what each word means.</li>
-								<li>Say bye on a happy note, and remind her you will call back soon. Ask her to practice her sentence with others.</li>
-							</div>
+
 						</div>
 					</div>
 
