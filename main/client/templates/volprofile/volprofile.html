@@ -1,0 +1,379 @@
+<template name="volprofile">
+
+	<!-- {{#if showModalEvent}}  -->
+	{{>showModal}}
+	<!-- {{/if}} -->
+	<div class="template-home">
+		<div class="page-header">
+			<h1>Volunteer Profile</h1> </div>
+		<p> Below are the students that you will be teaching. Click to view their details and see their progress. Upcoming classes that you have taught or are about to teach are in the table below </p>
+		<!-- <br> {{> carousel}} {{> showStudentModal}} -->
+		<br> {{>studentPanel}} {{> showStudentModal}}
+		<br> {{> sessiontable}}
+	</div>
+</template>
+
+
+<template name="studentPanel">
+	<div class="row">
+		{{#each studentlist}}
+		<div class="col-lg-3">
+			<div class="panel panel-green">
+				<div class="panel-heading">
+					{{title}}
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-3">
+						<i class="fa fa-child fa-5x"></i>
+					</div>
+					<br> Grade: {{Grade}}
+					<br> City: {{current_city}}, {{current_state}}
+				</div>
+				<a>
+					<div class="panel-footer" id={{_id}}>
+						More Details
+					</div>
+				</a>
+			</div>
+			<!-- /.col-lg-4 -->
+		</div>
+		{{/each}}
+	</div>
+	<!-- /.row -->
+</template>
+
+
+
+
+<template name="sessiontable">
+	<div class="panel panel-success">
+		<div class="panel-heading"> Sessions </div>
+		<div class="panel-body">
+			<div id="sessiontable">
+				<p> Upcoming classes that you have taught or are about to teach are listed in the table below. Click the row to view the lesson plan and record feedback for a session.</p>
+				<!--				{{> tabular table=TabularTables.Sessions selector=selector class="table table-striped table-bordered table-condensed"}}-->
+				{{> tabular table=TabularTables.Sessions selector=selector class="table table-striped table-hover"}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="moreDetails">
+	<i class="fa fa-arrow-circle-right"></i>
+</template>
+
+
+
+<template name="showModal">
+	<!--Modal Dialog-->
+	<div class="modal" id="showModalid">
+		<div class="modal-dialog">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+					Session Feedback Form
+				</div>
+				<div class="panel-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="span6" style="padding-right:20px; border-right: 1px solid #ccc;">
+									<div class="span12" id="studentdetails">
+										<h4>Student details</h4>
+										<div class="col-xs-3">
+											<i class="fa fa-child fa-5x"> </i>
+										</div>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ temp.title }}
+										<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{temp.current_city}}, {{temp.current_state}}
+										<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grade {{temp.Grade}}
+										<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Likes {{temp.likes}}
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="span6" style="padding-right:20px; border-right: 1px solid #ccc;">
+									<div class="span12" id="past">
+										<h4>Previous Session Notes</h4>
+										<br>{{dt.notes}}
+									</div>
+									<br>
+
+								</div>
+							</div>
+
+							<div class="col-md-4">
+
+								<div class="span12" id="current">
+									<h4>Current Session Notes</h4>
+									<p>(Notes for self and future volunteers)</p>
+									<textarea rows="3" cols="30" id="currentnotes" name="currentnotes" placeholder="Start typing here"></textarea>
+								</div>
+
+
+
+							</div>
+
+
+						</div>
+						<!-- First Row Ends -->
+
+						<div class="row">
+
+							<div class="col-md-8">
+								<div class="span6" style="padding-right:20px; border-right: 1px solid #ccc;">
+
+
+									<div class="span12" id="lessn">
+										<h4>Lesson: {{lsn.name}}</h4>
+										<br>Objective: {{lsn.objective}}
+										<br>
+										<div style="overflow-y: scroll; max-height: 200px;">
+											<br>{{lsn.lessoncontentbody}}
+											<br>
+											<br>Activities:
+											<br>{{#each act}}
+											<li>{{activitycontentbody}}</li>
+											{{/each}}
+										</div>
+
+										<h4>Resources</h4>
+										<br>
+										<a href="http://www.teach-this.com/resources/esl/introductions-personal-information" target="_blank">Resource1</a>
+									</div>
+
+								</div>
+							</div>
+
+
+							<div class="col-md-4">
+
+								<div class="span12" id="assessment">
+									<h4>Assessment</h4>
+									<ul style="list-style: none; padding-left:0;">
+										<br>{{#each ass}}
+										<li>
+											<input type="checkbox" name="chkbx" value="1">&nbsp;&nbsp;{{assessmentcontentbody}}</li>
+										{{/each}}
+									</ul>
+								</div>
+
+
+								<div class="span12" id="notes">
+									<h4>Comments</h4>
+									<p>(Comments to be sent to the student's parents periodically)</p>
+									<textarea rows="3" cols="30" id="commentstextarea" name="commentstextarea" placeholder="Start typing here"></textarea>
+									<br>
+									<br>
+									<input type="checkbox" name="cnfrmchkbx" value="1">&nbsp;&nbsp; Repeat this Lesson
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<a href="#" class="btn btn-primary" id="savesession" data-dismiss="modal">Save</a>
+						<a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+
+<template name="carousel">
+	<div id="carousel">
+		<!-- <div id="student"> -->
+		{{#each studentlist}}
+		<div class="student_div" id={{student_id}}>
+			<img src="/images/icon1.png" width="100px" height="100px">
+			<!-- <p>{{student_id}}</p> -->
+		</div>
+		{{/each}}
+	</div>
+	<!-- </div> -->
+</template>
+
+
+<template name="showStudentModal">
+	<!--Modal Dialog-->
+	<div class="modal" id="studentModalid">
+		<div class="modal-dialog">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+					<h2 class="modal-title">{{studentdetails.title}}</h2>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="span12" id="studentdetails">
+									<h4>Student details</h4>
+<!-- 									<div>
+										<img src="/images/favicon_child.png" width="80px" height="80px" align="left">
+									</div> -->
+
+									<div class="col-xs-3">
+										<i class="fa fa-child fa-5x"></i>
+									</div>
+
+									<br>&nbsp;&nbsp;&nbsp;&nbsp;City: {{studentdetails.current_city}}, {{studentdetails.current_state}}
+									<br>&nbsp;&nbsp;&nbsp;&nbsp;Grade: {{studentdetails.Grade}}
+									<br>&nbsp;&nbsp;&nbsp;&nbsp;Interests: {{studentdetails.likes}}
+								</div>
+								<br>
+							</div>
+							<div class="col-md-8 span12" id="about">
+								<h4>About</h4> {{studentdetails.about}}
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4>Previous Session Notes</h4>
+								</div>
+								<div class="panel-body">
+									<div class="panel-group" id="accordion">
+										<div class="panel panel-default">
+											{{#each allnotes}}
+											<div class="panel-heading">
+												<h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">{{lesson_id}} - {{lesson_name}}</a>
+                                    </h4>
+											</div>
+											<div id="collapseOne" class="panel-collapse collapse in">
+												<div class="panel-body col-md-7">
+													<div>
+														<h4> Notes taken during the session:</h4>
+														{{notes}}
+													</div>
+													
+													<div>
+														<h4> Lesson Taught:</h4>
+														<p>Objective: To make the student feel comfortable with you </p>
+														<p>Activities</p>
+														<li>Greet the student, introduce yourself, ask her how her day was and what she did today, tell her about what you did.</li>
+														<li> Use both English and the local language, build a rapport. </li>
+														<li>Ask her to say any sentence of her choice in English and ask her what it means and what each word means.</li>
+													</div>
+												</div>
+
+													<div class="panel-body col-md-5" id="container-column" style="min-width: 310px; height: 400px;">
+													{{>highchartsHelper chartId="lessonChart" chartWidth="31%" charHeight="31%" chartObject=lessonChart}}
+													</div>
+
+											</div>
+											{{/each}}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-12" id="container-column" style="min-width: 310px; height: 400px;">
+								{{>highchartsHelper chartId="chart" class= "chart" chartWidth="60%" charHeight="60%" chartObject=columnDemo}}
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<!-- /.modal-body -->
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+</template>
+
+
+
+<!-- Code that can used for a table -->
+<!--         <table class="table table-striped" id="tblGrid">
+          <thead id="tblHead">
+            <tr>
+              <th>Lesson Name</th>
+              <th>Assessment Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Long Island, NY, USA</td>
+              <td>3</td>
+              <td class="text-right">45001</td>
+            </tr>
+            <tr><td>Chicago, Illinois, USA</td>
+              <td>5</td>
+              <td class="text-right">76455</td>
+            </tr>
+            <tr><td>New York, New York, USA</td>
+              <td>10</td>
+              <td class="text-right">39097</td>
+            </tr>
+          </tbody>
+        </table> -->
+
+
+
+
+<!-- Old code for detailed assessment -->
+
+<!-- <fieldset> -->
+<!-- <legend><h3>Assessment</h3></legend>
+							<ol>
+								<br>{{#each ass}}
+								<li>{{assessmentcontentbody}}</li>
+								{{/each}}
+							</ol> -->
+<!-- <legend>Enter score for this assessment:</legend>
+
+									<input type="text" size="3" value="0" id="score">/ {{ass2.maxscore}}
+									<br>
+									<br> -->
+<!-- <label>Engagement
+										<input type="radio" name="Engagement" class="eng" value="1">1
+										<input type="radio" name="Engagement" class="eng" value="2">2
+										<input type="radio" name="Engagement" class="eng" value="3">3
+										<input type="radio" name="Engagement" class="eng" value="4">4
+										<input type="radio" name="Engagement" class="eng" value="5" checked="checked">5
+
+									</label>
+									<br>
+									<label> Retention
+										<input type="radio" name="Retention" value="1">1
+										<input type="radio" name="Retention" value="2">2
+										<input type="radio" name="Retention" value="3">3
+										<input type="radio" name="Retention" value="4">4
+										<input type="radio" name="Retention" value="5" checked="checked">5
+									</label>
+									<br>
+									<label> Accuracy
+										<input type="radio" name="Accuracy" value="1">1
+										<input type="radio" name="Accuracy" value="2">2
+										<input type="radio" name="Accuracy" value="3">3
+										<input type="radio" name="Accuracy" value="4">4
+										<input type="radio" name="Accuracy" value="5" checked="checked">5
+									</label>
+									<br>
+									<label> Fluency
+										<input type="radio" name="Fluency" value="1">1
+										<input type="radio" name="Fluency" value="2">2
+										<input type="radio" name="Fluency" value="3">3
+										<input type="radio" name="Fluency" value="4">4
+										<input type="radio" name="Fluency" value="5" checked="checked">5
+									</label>
+									<br>
+									<label> Creativity
+										<input type="radio" name="Creativity" value="1">1
+										<input type="radio" name="Creativity" value="2">2
+										<input type="radio" name="Creativity" value="3">3
+										<input type="radio" name="Creativity" value="4">4
+										<input type="radio" name="Creativity" value="5" checked="checked">5
+									</label> -->
+<!-- </fieldset> -->

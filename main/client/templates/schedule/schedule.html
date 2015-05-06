@@ -1,0 +1,54 @@
+<template name="schedule">
+	{{#if showEditEvent}} {{>editEvent}} {{/if}}
+	<div class="template-home">
+		<div class="page-header">
+			<h1>Schedule</h1>
+		</div>
+		<p>
+			Below calendar shows the students you will be teaching. Each event on the calendar is one class. To drop a class, click on the event and press Delete.
+			<br> <a href="{{ pathFor 'schedulenew' }}">To add a new student to your calendar, please click here.</a>
+			<br>
+		</p>
+	</div>
+	<!--Sees to it, that everytime something is entered the calendar gets re rendered automatically-->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8" style="width:100%">
+				<div id="calendar">
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+	</div>
+
+</template>
+
+<template name="editEvent">
+	<!--Modal Dialog-->
+	<div class="modal" id="EditEventModal">
+		<div class="modal-dialog">
+			{{>modalInner}}
+		</div>
+	</div>
+	<!-- /.modal -->
+</template>
+
+<template name="modalInner">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+			<h4 class="panel-title">Session Detail</h4>
+		</div>
+		<div class="panel-body">
+			Student Name - {{evt.title}}
+			<br> Please click delete to cancel this session with {{evt.title}}. The student will recieve a text notification informing the cancellation.
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn btn-primary remove">Drop Session</a>
+			<a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+</template>
