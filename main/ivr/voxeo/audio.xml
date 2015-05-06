@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1" xmlns="http://www.w3.org/2001/06/grammar">
+
+  <meta name="maintainer" content="YOUREMAILADDRESS@HERE.com"/>
+  <property name="universals" value="help"/>
+
+
+  <link next="#MainMenu">
+    <grammar xml:lang="en-US" root = "MENU">
+     	 
+	  <rule id="MENU" scope = "public">
+	    <one-of>
+	      <item>
+    		<item> main </item>
+    		<item repeat="0-1"> menu </item>
+    	  </item>
+    	</one-of>
+   	   </rule>
+      </grammar>
+  </link>
+
+  <form id="MainMenu">
+    <block>
+      <audio src="helloworld.wav"/>
+    </block>
+
+    <field name="CatOrDog"> 
+      <audio src="menu.wav"/>
+      
+    <grammar xml:lang="en-US" root = "MYRULE">
+     <rule id="MYRULE">
+	  	<one-of>
+    		<item>
+    		  <one-of>
+    		  	<item> cat </item>
+    		  	<item> kitty </item>
+    		  	<item> kitten </item>
+    		  	<item> meow </item>
+    		  	<item> cat person </item>
+    		  </one-of>
+    		  <tag> out.CatOrDog = "Cat";</tag>
+    		</item>
+    		
+    		<item>
+    		  <one-of>
+    		  	<item> dog </item>
+    		  	<item> pooch </item>
+    		  	<item> puppy </item>
+    		  	<item> doggie </item>
+    		  	<item> dog person </item>
+    		  </one-of>
+    		  <tag> out.CatOrDog = "Dog";</tag>
+    		</item>
+    	</one-of>
+    </rule>
+   </grammar>
+
+      <noinput>
+       <prompt>
+        I did not hear anything.  Please try again.
+       </prompt>
+        <reprompt/>
+      </noinput>
+  
+      <nomatch>
+       <prompt>
+        I did not recognize that pet choice.  Please try again.
+       </prompt>	
+        <reprompt/>
+      </nomatch>
+  
+      <help>
+       <prompt>
+        Just say Cat or Dog.
+       </prompt>
+        <reprompt/>
+      </help>
+    </field>
+    <filled namelist="CatOrDog">
+      <if cond="CatOrDog == 'Cat'">
+        <goto next="#Cat"/>
+      <elseif cond="CatOrDog == 'Dog'"/>
+        <goto next="#Dog"/>
+      </if> 
+    </filled> 
+  </form>
+  
+  <form id="Cat">
+    <field name="BackToMain">
+     <prompt>
+      Cats rule.  They are the superior lifeform on earth.  
+      If you wish to try again, please say "Main".
+     </prompt>
+    </field>
+    <filled namelist="BackToMain">
+      <if cond="BackToMain == 'Yes'">
+        <goto next="#MainMenu"/>          
+      </if> 
+    </filled> 
+  </form>
+
+  <form id="Dog">
+    <field name="BackToMain">
+     <prompt>
+      Dogs.  One wonders how they became so popular.
+      If you wish to try again, please say Main.
+     </prompt>
+    </field>
+    <filled namelist="BackToMain">
+      <if cond="BackToMain == 'Yes'">
+        <goto next="#MainMenu"/>          
+      </if> 
+    </filled> 
+  </form>
+</vxml>

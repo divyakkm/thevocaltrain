@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1">
+
+  <meta name="maintainer" content="YOUREMAILADDRESS@HERE.com"/>
+
+  <form id="CallTransfer">
+   <block>
+	<!-- *************************************************************************** -->
+	<!-- TRANSFER  sample code as performed by Snoop Doggy Dogg  -->
+	<!-- *************************************************************************** -->
+    <prompt>
+     Hello. Please wait while I try to call Siddharth's number
+    </prompt>
+   </block>
+
+   <transfer name="MyCall" dest="tel:+14439946671" bridge="true" connecttimeout="60s">
+
+	<filled>
+
+	    <if cond="MyCall == 'noanswer'">
+	     <prompt>
+	      We are in condition one. Phone is noanswer.
+	     </prompt>
+	    <exit/>
+
+    	<elseif cond="MyCall == 'busy'"/>
+	     <prompt>
+ 	      We are in condition two. Person did not busy.
+	     </prompt>
+
+	    <elseif cond="MyCall == 'far_end_disconnect'"/>
+	     <prompt> 
+	      We are in condition three. Person disconnected.
+	     </prompt>
+
+	   <elseif cond="MyCall == 'near_end_disconnect'"/>
+	    <prompt> 
+	    	We are in condition four. You disconnected.
+ 	     <!--submit next ="MyCoolCleanupPage.cgi"/-->
+ 	   </prompt>
+
+	    </if>
+        </filled>
+  
+   </transfer>
+  </form>
+</vxml>

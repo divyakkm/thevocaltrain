@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ccxml version="1.0" xmlns="http://www.w3.org/2002/09/ccxml">
+ 
+	<var name="caller1id" />
+	<var name="caller2id" />
+	<var name="confid" />
+	<var name="state0" expr="'not_inited'" />
+	<var name="incomingcall" />
+	<var name="callcount" expr="0" />
+ 
+	<eventprocessor statevariable="state0">
+		<transition event="ccxml.loaded">
+		</transition>
+ 
+		<transition event="connection.alerting" name="event$">
+			<script>
+				var myObj = new Object();
+				myObj.value1 = 'result1';
+				myObj.value2 = 'result2';
+			</script>
+			<assign name="state0" expr="'accepting'" />
+			<assign name="incomingcall" expr="event$.connectionid" />
+			<accept/>
+		</transition>
+		 
+		<transition event="connection.connected" state="accepting">
+			<assign name="callcount" expr="callcount+1" />
+			<dialogstart src="'null://?text=Please wait for all parties to join&amp;termdigits=1&amp;voice=English-SAPI'" type="'application/x-texttospeech'" />
+			<log expr="'*** CREATING CONFERENCE ***'" />
+			<createconference conferenceid="confid" hints="myObj" />
+		</transition>
+ 
+		<transition event="dialog.exit" state="accepting">
+			<assign name="state0" expr="'joining0'" />
+			<join id1="confid" id2="incomingcall" />
+		</transition>
+ 
+		<transition event="conference.created">
+		</transition>
+		 
+		<transition event="conference.joined" state="joining0">
+			<assign name="state0" expr="'calling1'" />
+			<log expr="'*** DIALING FIRST PARTY ***'" />
+			<createcall dest="'tel:+14439946671'" callerid="'1112223333'" connectionid="caller1id" />
+		</transition>
+ 
+		<transition event="connection.connected" state="calling1">
+			<assign name="callcount" expr="callcount+1" />
+			<assign name="state0" expr="'calling2'" />
+			<dialogstart src="'null://?text=Please wait for all parties to join&amp;termdigits=1&amp;voice=English-SAPI'" type="'application/x-texttospeech'" />
+		</transition>
+ 
+		<transition event="dialog.exit" state="calling2">
+			<join id1="confid" id2="caller1id" />
+		</transition>
+ 
+		<transition event="conference.joined" state="calling2">
+			<log expr="'*** DIALING SECOND PARTY ***'" />
+			<createcall dest="'tel:+14159993161'" callerid="'3334445555'" connectionid="caller2id" />
+		</transition>
+ 
+		<transition event="connection.connected" state="calling2">
+			<assign name="callcount" expr="callcount+1" />
+			<assign name="state0" expr="'joining2'" />
+			<log expr="'*** JOINING SECOND PARTY: ' + confid" />
+			<join id1="confid" id2="caller2id" />
+		</transition>
+ 
+		<transition event="conference.joined" state="joining2">
+			<log expr="'*** ALL PARTIES JOINED IN CONFERENCE ***'" />
+			<send data="'deletemyconference'" delay="'600s'" target="session.id" />
+		</transition>
+ 
+		<transition event="connection.disconnected">
+			<assign name="callcount" expr="callcount-1" />
+			<if cond="callcount == 1">
+				<!-- One person is still on the conference - disconnect them -->
+				<destroyconference conferenceid="confid" hints="myObj" />
+				<exit />
+			</if>
+		</transition>
+ 
+		<transition event="deletemyconference">
+			<destroyconference conferenceid="confid" />
+			<exit/>
+		</transition>
+ 
+		<transition event="error.conference.join" state="joining1">
+			<log expr="'*** ERROR CONNECTING SECOND PARTY ***'" />
+			<exit />
+		</transition>
+ 
+		<transition event="error.conference.join" state="joining2">
+			<log expr="'*** ERROR CONNECTING THIRD PARTY ***'" />
+			<exit />
+		</transition>
+ 
+		<transition event="conference.destroyed">
+			<log expr="'*** CONFERENCE DESTROYED ***'" />
+			<exit />
+		</transition>
+ 
+		<transition event="error.*">
+			<log expr="'*** ERROR DETECTED: '+ event$.name" />
+			<exit />
+		</transition>
+	</eventprocessor>
+</ccxml>

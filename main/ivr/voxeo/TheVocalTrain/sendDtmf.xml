@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ccxml version="1.0" xmlns:voxeo="http://community.voxeo.com/xmlns/ccxml">
+ 
+<meta name="author" content="Jeff Menkel" />
+<meta name="copyright" content="2007 Voxeo Corporation" />
+<meta name="maintainer" content="YOUR_EMAIL@HERE.COM" />
+<var name="initState" expr="'state_1'" />
+<var name="MyCallID" />
+ 
+<eventprocessor statevariable="initState">
+  <transition event="connection.alerting" state="state_1">
+   <log expr="'***** Inside alerting *****'" />
+   <assign name="MyCallID" expr="event$.connectionid" />
+   <send data="'MyEvent'" target="session.id" />
+  </transition>
+ 
+  <transition event="MyEvent">
+    <log expr="'***** Inside myevent *****'" />
+    <accept connectionid="MyCallID" />
+  </transition>
+ 
+  <transition event="connection.connected" state="state_1">
+   <log expr="'***** CALL WAS ANSWERED *****'" />
+   <dialogstart src="'dtmf://12345?pause=200&amp;duration=100'" type="'application/x-senddtmf'" />
+  </transition>
+ 
+  <transition event="error.dialog.notstarted'" state="state_1">
+    <log expr="'****** ERROR.DIALOGNOTSTARTED.NAME = ' + event$.name" />
+  </transition>
+ 
+  <transition event="dialog.exit">
+   <log expr="'***** CALL EXITING *****'" />
+   <exit/>
+  </transition>
+</eventprocessor>
+</ccxml>

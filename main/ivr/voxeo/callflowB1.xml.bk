@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<vxml version = "2.1">
+
+  <meta name="maintainer" content="YOUREMAILADDRESS@HERE.com"/>
+
+  <var name="MyFavoriteActor"  expr="'Tony Danza'"/>
+  <var name="MyFavoriteTVShow" expr="'Who\'s the boss'"/>
+  <var name="TonysSATScore"    expr="1600"/>
+  
+  <form>
+    <block>
+      <goto next="callflowB2.xml"/>
+    </block>
+  </form>
+</vxml>
+
+

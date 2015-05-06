@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ccxml version="1.0" xmlns="http://www.w3.org/2002/09/ccxml">
+
+
+<!-- Connection ID Vars -->
+<var name="call_0"/>
+<var name="myConfID"/>
+<!-- Storage variables -->
+<var name="myVar1" expr="'foo1'"/> 
+<var name="myVar2" expr="'foo2'"/>
+<var name="callerID" expr="'foo3'"/>
+<var name="callerName" expr="'undefined'" />
+<var name="fetch1" expr="'some_fetch_id'"/>
+<!-- Dialog ID Vars -->
+<var name="getConfID_Dlg"/>
+<var name="joinTheConf_Dlg"/>
+<var name="leftTheConf_Dlg"/>
+<var name="noInput_Dlg"/>
+<!-- Lesson 1 Dialog variables -->
+<var name="playLesson_Dlg"/>
+<var name="playLesson1_Dlg"/>
+<var name="quizInstruction_Dlg"/>
+<var name="playLesson1_q1_Dlg"/>
+<var name="playLesson1_q2_Dlg"/>
+<var name="playLesson1_q3_Dlg"/>
+<var name="playLesson1_q4_Dlg"/>
+<var name="playGoodbye_Dlg"/>
+<!-- <var name="playMessage_Dlg"/> -->
+<!-- Lesson 1 response variables -->
+<var name="Lesson1_response1"/>
+<var name="Lesson1_response2"/>
+<var name="Lesson1_response3"/>
+<var name="Lesson1_response4"/>
+
+<!-- App Vars -->
+<var name="nextEvent"/>
+<var name="audioPath" expr="'audio/'"/>
+<var name="state_0" expr="'init'"/>
+<!-- <var name="filename" /> -->
+<script src="myScript.js" />
+
+<!-- Javascript code -->
+<!-- <script>
+  function getNameFrom(callerID)
+  {
+      var callerName = null;
+      callerName = json.callerID;
+      return callerName
+  }
+  var data = '{"5105299695":"Siddharth", "4439946671":"Sufia"}';
+  var jsonData = JSON.parse(data);
+</script> -->
+
+<eventprocessor statevariable="state_0">
+
+<!-- *********************** -->
+<!-- Connection Events -->
+<!-- *********************** -->
+  <transition state="init" event="connection.alerting">
+    <assign name="call_0" expr="event$.connectionid"/>
+    <accept connectionid="call_0"/>
+  </transition>
+
+  <transition state="init" event="connection.connected">
+    <log expr="'*** CALL CONNECTED ***'"/>
+    <!-- ToDo - Sid - Call recording not working, need to debug -->
+    <!-- <assign name="filename" expr="event$.connection._RecordCall(100,'TestRecording')" />
+    <log expr="'Recording to filename '+filename" /> -->
+    <assign name="state_0" expr="'connected'"/>
+    <assign name="callerID" expr="event$.connection.remote"/>
+    <send name="'getConfID'" target="session.id" targettype="'ccxml'"/>
+    <!-- Remove -->
+    <!-- <send name="'playMessage'" target="session.id" targettype="'ccxml'"/> -->
+  </transition>
+
+  <transition event="connection.disconnected">
+    <log expr="'*** CALL DISCONNECTED ***'"/>
+    <exit/>
+  </transition>
+
+<!-- *********************** -->
+<!-- User Defined Events -->
+<!-- *********************** -->
+<!-- Remove -->
+  <!-- <transition event="playMessage">
+    <assign name="state_0" expr="'playMessage'"/>
+    <dialogstart src="audioPath + 'song.wav?text=Hello Su fiia, currently you cannot access the playlist to listen to songs. Please finish your final project work first to get the access. Goodbye.'"
+                type="'audio/wav'"
+                dialogid="playMessage_Dlg"
+                connectionid="call_0"/>
+  </transition> -->
+
+  <transition event="getConfID">
+    <assign name="state_0" expr="'getConfID'"/>
+    <assign name="callerName" expr="getNameFrom(callerID)"/>
+    <log expr="'*** callerID: [' + callerID + '] ***'"/>
+    <log expr="'*** callerName: [' + callerName + '] ***'"/>
+    <if cond="callerName == 'undefined'">
+      <log expr="'*** Caller is NOT registered with the system ***'"/>
+      <dialogstart src="audioPath + 'playMessage.wav?text=Hello, thank you for calling us. Looks like you have not registered with us. We will call you on this number to get your details. Have a great day. Goodbye.'"
+                type="'audio/wav'"
+                dialogid="playMessage_Dlg"
+                connectionid="call_0"/>
+    <else/>
+      <log expr="'*** Caller is registered with the system ***'"/>
+      <dialogstart  src="audioPath + 'AsyncL1/intro_gyaan.mp3?termdigits=%23&amp;maxtime=90000&amp;text=Hello ' + callerName + ' Enter your conference I D followed by the pound key. Enter 2 as conference I D for completing your English lessons.'"
+                  type="'application/x-fetchdigits'"
+                  dialogid="getConfID_Dlg"
+                  connectionid="call_0"/>
+    </if>
+    <!-- <dialogstart  src="audioPath + 'enterConferenceID.wav?termdigits=%23&amp;maxtime=10000&amp;text=Hello ' + callerName + ' Enter your conference I D followed by the pound key. Enter 555 as conference I D for completing your English lessons.'"
+                  type="'application/x-fetchdigits'"
+                  dialogid="getConfID_Dlg"
+                  connectionid="call_0"/> -->
+  </transition>
+
+  <transition event="joinTheConf">
+    <assign name="state_0" expr="'joinTheConf'"/>
+    <dialogstart src="audioPath + 'joinTheConference.wav?text=You will now join the conference. Press the pound key to exit without disconnecting.'"
+                type="'audio/wav'"
+                dialogid="joinTheConf_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+  <transition event="leftTheConf">
+    <assign name="state_0" expr="'leftTheConf'"/>
+    <dialogstart src="audioPath + 'leftTheConference.wav?termdigits=123&amp;maxtime=30000&amp;text=You have left the conference. Press one to disconnect. Press two to rejoin, or press three to join a different conference.'"
+                type="'application/x-fetchdigits'"
+                dialogid="leftTheConf_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+  <transition event="playNoInput">
+    <assign name="state_0" expr="'playNoInput'"/>
+    <dialogstart src="audioPath + 'noInput.wav?text=I am sorry. I did not hear anything.'"
+                type="'audio/wav'"
+                dialogid="noInput_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+  <transition event="playLesson">
+    <assign name="state_0" expr="'playLesson'"/>
+    <dialogstart src="audioPath + 'AsyncL1/playlesson.mp3?termdigits=123456&amp;maxtime=90000&amp;text=There are 3 lessons in this module. Enter lesson number to complete the lesson. Press 6 to disconnect'"
+                type="'application/x-fetchdigits'"
+                dialogid="playLesson_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+  <transition event="playLesson1">
+    <assign name="state_0" expr="'playLesson1'"/>
+    <!-- <dialogstart src="audioPath + 'Lesson1/intro_music.mp3?text=This is lesson 1 prompt'" -->
+    <dialogstart src="audioPath + 'AsyncL1/AsyncL1Prompt.mp3?text=This is lesson 1 prompt'"
+                type="'audio/wav'"
+                dialogid="playLesson1_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+  <transition event="quizInstruction">
+    <assign name="state_0" expr="'quizInstruction'"/>
+    <!-- <dialogstart src="audioPath + 'Lesson1/quiz_instructuion.mp3?text=This is quiz instruction'" -->
+    <dialogstart src="audioPath + 'Lesson2/quiz_instruction_final.mp3?text=This is quiz instruction'"
+                type="'audio/wav'"
+                dialogid="quizInstruction_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+  <transition event="playLesson1_q1">
+    <assign name="state_0" expr="'playLesson1_q1'"/>
+    <!-- <dialogstart src="audioPath + 'Lesson1/lesson1_q1.mp3?termdigits=1234&amp;maxtime=30000&amp;text=This is first question'" -->
+    <dialogstart src="audioPath + 'AsyncL1/AsyncL1Q1.mp3?termdigits=1234&amp;maxtime=90000&amp;text=This is first question'"
+                type="'application/x-fetchdigits'"
+                dialogid="playLesson1_q1_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+  <transition event="playLesson1_q2">
+    <assign name="state_0" expr="'playLesson1_q2'"/>
+    <!-- <dialogstart src="audioPath + 'Lesson1/lesson1_q2.mp3?termdigits=1234&amp;maxtime=30000&amp;text=This is first question'" -->
+    <dialogstart src="audioPath + 'AsyncL1/AsyncL1Q2.mp3?termdigits=1234&amp;maxtime=90000&amp;text=This is second question'"
+                type="'application/x-fetchdigits'"
+                dialogid="playLesson1_q2_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+  <!-- <transition event="playLesson1_q3">
+    <assign name="state_0" expr="'playLesson1_q3'"/>
+    <dialogstart src="audioPath + 'Lesson1/lesson1_q3.mp3?termdigits=1234&amp;maxtime=30000&amp;text=This is first question'"
+                type="'application/x-fetchdigits'"
+                dialogid="playLesson1_q3_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+  <transition event="playLesson1_q4">
+    <assign name="state_0" expr="'playLesson1_q4'"/>
+    <dialogstart src="audioPath + 'Lesson1/lesson1_q4.mp3?termdigits=1234&amp;maxtime=30000&amp;text=This is first question'"
+                type="'application/x-fetchdigits'"
+                dialogid="playLesson1_q4_Dlg"
+                connectionid="call_0"/>
+  </transition> -->
+  
+  <transition event="playGoodbye" >
+    <assign name="state_0" expr="'playGoodbye'"/>
+    <fetch next="'asynchronousLesson.php'" fetchid="fetch1" method="'get'" namelist="Lesson1_response1 Lesson1_response2 callerID"/>
+    <!-- <send target="'asynchronousLesson.php'" event="'http.get'" namelist="Lesson1_response1 Lesson1_response2 Lesson1_response3 Lesson1_response4 callerID"/> -->
+    <dialogstart src="audioPath + 'AsyncL1/playgoodbye.mp3?text=Good job ' + callerName + '  Thank you for completing the lesson. Please complete the other lessons also if you have not completed them.'"
+                type="'audio/wav'"
+                dialogid="playGoodbye_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+
+<!-- *********************** -->
+<!-- Dialog Exit Events -->
+<!-- *********************** -->
+  <transition state="getConfID" event="dialog.exit">
+    <!-- We should check here if user is not registered then he should be given an option to register.
+    Can redirect and use createcall for that. Or can call on that number to register a student.
+    Automate this process of calling them back. -->
+    <if cond="event$.values.digits == ''">
+      <log expr="'*** USER DID NOT ENTER CONFERENCE ID ***'"/>
+      <assign name="nextEvent" expr="'getConfID'"/>
+      <send name="'playNoInput'" target="session.id" targettype="'ccxml'"/>
+    <elseif cond="event$.values.digits == '2'"/>
+      <log expr="'*** USER ENTERED CONFERENCE ID 2 ***'"/>
+      <log expr="'***** EVENT$.CONFERENCEID = ' + event$.conferenceid" />
+      <log expr="'***** EVENT$.CONNECTIONID = ' + event$.connectionid" />
+      <!-- <assign name="callerID" expr="event$.connection.remote"/> -->
+      <!-- Redirection using <fetch> is not working. Check syntax for <goto> -->
+      <!-- Putting redirection on hold for now. Start the dialog here itself for asynchronous lessons -->
+      <!-- <fetch next="'asynchronousLesson.php'" fetchid="fetch1" method="'get'" namelist="myVar1 myVar2 callerID"/> -->
+      <!-- <send target="'getvalues.php'" name="what_i_sent" namelist="myVar1 myVar2" targettype="'basichttp'"/> -->
+      <log expr="'***** Starting asynchronous lessons *****'" />
+      <assign name="nextEvent" expr="'playLesson'"/>
+      <send name="'playLesson'" target="session.id" targettype="'ccxml'"/>
+      <!-- <dialogstart src="'dtmf://12345?pause=200&amp;duration=100'" type="'application/x-senddtmf'" /> -->
+      <!-- <goto next="asynchronous.php"/> -->
+    <else/>
+      <log expr="'*** CONFERENCE ID ENTERED: [' + event$.values.digits + '] ***'"/>
+      <createconference conferenceid="myConfID" confname="event$.values.digits"/>
+    </if>
+  </transition>
+
+  <transition event="fetch.done">
+    <goto fetchid="event$.fetchid" />
+  </transition>
+ 
+  <transition event="error.fetch">
+    <log expr="'*** AN ERROR OCCURRED DURING THE FETCH ***'" />
+  </transition>
+
+  <transition state="joinTheConf" event="dialog.exit">
+    <log expr="'*** JOINING CONFERENCE ***'"/>
+    <join id1="call_0" id2="myConfID" entertone="'true'" exittone="'true'" voxeo-termdigits="'#'"/>
+  </transition>
+
+  <transition state="leftTheConf" event="dialog.exit">
+    <log expr="'*** USER PRESSED: [' + event$.values.termdigit + '] ***'"/>
+    <if cond="event$.values.termdigit == 1">
+      <log expr="'*** USER CHOSE TO DISCONNECT ***'"/>
+      <disconnect connectionid="call_0"/>
+    <elseif cond="event$.values.termdigit == 2"/>
+      <log expr="'*** USER CHOSE TO REJOIN CONFERENCE ***'"/>
+      <send name="'joinTheConf'" target="session.id" targettype="'ccxml'"/>
+    <elseif cond="event$.values.termdigit == 3"/>
+      <log expr="'*** USER CHOSE TO JOIN NEW CONFERENCE ***'"/>
+      <send name="'getConfID'" target="session.id" targettype="'ccxml'"/>
+    <else/>
+      <log expr="'*** USER DID NOT PRESS A TERMDIGIT ***'"/>
+      <assign name="nextEvent" expr="'leftTheConf'"/>
+      <send name="'playNoInput'" target="session.id" targettype="'ccxml'"/>
+    </if>
+  </transition>
+
+  <transition state="playLesson" event="dialog.exit">
+    <log expr="'*** USER PRESSED: [' + event$.values.termdigit + '] ***'"/>
+    <if cond="event$.values.termdigit == 1">
+      <log expr="'*** USER CHOSE LESSON 1 ***'"/>
+      <send name="'playLesson1'" target="session.id" targettype="'ccxml'"/>
+    <elseif cond="event$.values.termdigit == 2"/>
+      <log expr="'*** USER CHOSE LESSON 2 ***'"/>
+      <send name="'playLesson1'" target="session.id" targettype="'ccxml'"/>
+    <elseif cond="event$.values.termdigit == 3"/>
+      <log expr="'*** USER CHOSE LESSON 3 ***'"/>
+      <send name="'playLesson1'" target="session.id" targettype="'ccxml'"/>
+    <!-- <elseif cond="event$.values.termdigit == 4"/>
+      <log expr="'*** USER CHOSE LESSON 4 ***'"/>
+      <send name="'playLesson1'" target="session.id" targettype="'ccxml'"/>
+    <elseif cond="event$.values.termdigit == 5"/>
+      <log expr="'*** USER CHOSE LESSON 5 ***'"/>
+      <send name="'playLesson1'" target="session.id" targettype="'ccxml'"/> -->
+    <elseif cond="event$.values.termdigit == 6"/>
+      <log expr="'*** USER CHOSE TO DISCONNECT ***'"/>
+      <disconnect connectionid="call_0"/>
+    <else/>
+      <log expr="'*** USER DID NOT PRESS A TERMDIGIT ***'"/>
+      <assign name="nextEvent" expr="'leftTheConf'"/>
+      <send name="'playNoInput'" target="session.id" targettype="'ccxml'"/>
+    </if>
+  </transition>
+
+  <transition state="playNoInput" event="dialog.exit">
+    <log expr="'*** NOINPUT DIALOG COMPLETE / THROWING NEXT EVENT: [' + nextEvent + '] ***'"/>
+    <send name="nextEvent" target="session.id" targettype="'ccxml'"/>
+  </transition>
+
+  <transition state="playLesson1" event="dialog.exit">
+    <log expr="'*** Lesson 1 prompt played. Play Quiz prompt now ***'"/>
+    <send name="'quizInstruction'" target="session.id" targettype="'ccxml'"/>
+  </transition>
+
+  <transition state="quizInstruction" event="dialog.exit">
+    <log expr="'*** Quiz instruction played. Play Question 1 now ***'"/>
+    <send name="'playLesson1_q1'" target="session.id" targettype="'ccxml'"/>
+  </transition>
+  
+  <transition state="playLesson1_q1" event="dialog.exit">
+    <log expr="'*** USER PRESSED: [' + event$.values.termdigit + '] ***'"/>
+    <if cond="event$.values.termdigit == 1">
+      <log expr="'*** User chose incorrect response ***'"/>
+    <elseif cond="event$.values.termdigit == 2"/>
+      <log expr="'*** User chose incorrect response ***'"/>
+    <elseif cond="event$.values.termdigit == 3"/>
+      <log expr="'*** User chose correct response ***'"/>
+    <elseif cond="event$.values.termdigit == 4"/>
+      <log expr="'*** User chose incorrect response ***'"/>
+    <else/>
+      <log expr="'*** USER DID NOT PRESS A TERMDIGIT ***'"/>
+    </if>
+    <assign name="Lesson1_response1" expr="event$.values.termdigit"/>
+    <send name="'playLesson1_q2'" target="session.id" targettype="'ccxml'"/>
+  </transition>
+
+  <transition state="playLesson1_q2" event="dialog.exit">
+    <log expr="'*** USER PRESSED: [' + event$.values.termdigit + '] ***'"/>
+    <if cond="event$.values.termdigit == 1">
+      <log expr="'*** User chose incorrect response ***'"/>
+    <elseif cond="event$.values.termdigit == 2"/>
+      <log expr="'*** User chose incorrect response ***'"/>
+    <elseif cond="event$.values.termdigit == 3"/>
+      <log expr="'*** User chose incorrect response ***'"/>
+    <elseif cond="event$.values.termdigit == 4"/>
+      <log expr="'*** User chose correct response ***'"/>
+    <else/>
+      <log expr="'*** USER DID NOT PRESS A TERMDIGIT ***'"/>
+    </if>
+    <assign name="Lesson1_response2" expr="event$.values.termdigit"/>
+    <!-- <send name="'playLesson1_q3'" target="session.id" targettype="'ccxml'"/> -->
+    <send name="'playGoodbye'" target="session.id" targettype="'ccxml'"/>
+  </transition>
+
+  <!-- <transition state="playLesson1_q3" event="dialog.exit">
+    <log expr="'*** USER PRESSED: [' + event$.values.termdigit + '] ***'"/>
+    <if cond="event$.values.termdigit == 1">
+      <log expr="'*** User chose incorrect response ***'"/>
+    <elseif cond="event$.values.termdigit == 2"/>
+      <log expr="'*** User chose incorrect response ***'"/>
+    <elseif cond="event$.values.termdigit == 3"/>
+      <log expr="'*** User chose incorrect response ***'"/>
+    <elseif cond="event$.values.termdigit == 4"/>
+      <log expr="'*** User chose correct response ***'"/>
+    <else/>
+      <log expr="'*** USER DID NOT PRESS A TERMDIGIT ***'"/>
+    </if>
+    <assign name="Lesson1_response3" expr="event$.values.termdigit"/>
+    <send name="'playLesson1_q4'" target="session.id" targettype="'ccxml'"/>
+  </transition>
+
+  <transition state="playLesson1_q4" event="dialog.exit">
+    <log expr="'*** USER PRESSED: [' + event$.values.termdigit + '] ***'"/>
+    <if cond="event$.values.termdigit == 1">
+      <log expr="'*** User chose incorrect response ***'"/>
+    <elseif cond="event$.values.termdigit == 2"/>
+      <log expr="'*** User chose correct response ***'"/>
+    <elseif cond="event$.values.termdigit == 3"/>
+      <log expr="'*** User chose incorrect response ***'"/>
+    <elseif cond="event$.values.termdigit == 4"/>
+      <log expr="'*** User chose incorrect response ***'"/>
+    <else/>
+      <log expr="'*** USER DID NOT PRESS A TERMDIGIT ***'"/>
+    </if>
+    <assign name="Lesson1_response4" expr="event$.values.termdigit"/>
+    <send name="'playGoodbye'" target="session.id" targettype="'ccxml'"/>
+  </transition> -->
+
+  <transition state="playGoodbye" event="dialog.exit">
+    <log expr="'*** Lesson 1 completed ***'"/>
+    <disconnect connectionid="call_0"/>
+  </transition>
+
+
+<!-- *********************** -->
+<!-- Conference Events -->
+<!-- *********************** -->
+  <transition event="conference.created">
+    <log expr="'*** CONFERENCE CREATED ***'"/>
+    <send name="'joinTheConf'" target="session.id" targettype="'ccxml'"/>
+  </transition>
+
+  <transition event="conference.joined">
+    <log expr="'*** CALL JOINED TO CONFERENCE ***'"/>
+  </transition>
+
+  <transition event="conference.unjoined">
+    <log expr="'*** CALL UNJOINED FROM CONFERENCE ***'"/>
+    <send name="'leftTheConf'" target="session.id" targettype="'ccxml'"/>
+  </transition>
+
+
+<!-- *********************** -->
+<!-- General Exceptions -->
+<!-- *********************** -->
+
+  <transition event="error.*">
+    <log expr="'*** AN ERROR HAS OCCURRED: [' + event$.reason + '] ***'"/>
+    <exit/>
+  </transition>
+</eventprocessor>
+
+</ccxml>

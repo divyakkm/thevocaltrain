@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ccxml version="1.0">
+ 
+	<var name="initState" expr="'state_1'"/>
+	<var name="MyCallID"/>
+	<var name="call_0"/>
+	<log expr="'***** Reached asynchronous.xml 1 *****'" />
+	<send name="'MyEvent'" target="session.id" />
+	<assign name="call_0" expr="event$.connectionid"/>
+	<!-- <dialogstart src="'null://?text=Pleased to meet you.'" type="'application/x-texttospeech'"/> -->
+	<log expr="'***** Reached asynchronous.xml 2 *****'" />
+	<log expr="'***** EVENT$.CONFERENCEID = ' + event$.conferenceid" />
+	<log expr="'***** EVENT$.CONNECTIONID = ' + event$.connectionid" />
+
+	<!-- <dialogstart src="'dialog.vxml'" type="'application/voicexml+xml'" /> -->
+	<!-- <dialogstart src="'null://?text=Pleased to meet you.'" type="'application/x-texttospeech'" /> -->
+	<eventprocessor>
+		<!-- <log expr="'***** in eventprocessor *****'" /> -->
+		<transition event="connection.connected"> 
+			<log expr="'***** in transistion 1 *****'" />
+  			<assign name="connection_id" expr="event$.connectionid"/> 
+		</transition> 
+
+		<transition event="MyEvent">
+			<log expr="'***** in transistion 2 *****'" />
+			<log expr="'***** EVENT$.CONFERENCEID = ' + event$.conferenceid" />
+			<log expr="'***** EVENT$.CONNECTIONID = ' + event$.connectionid" />
+			<dialogstart src="'null://?text=Pleased to meet you.'" type="'application/x-texttospeech'" connectionid="event$.connectionid" dialogid="blah"/>
+			<exit/>
+		</transition>
+	</eventprocessor>
+	 
+	<!-- <eventprocessor statevariable="initState">
+		<transition event="connection.alerting" state="state_1">
+			<assign name="MyCallID" expr="event$.connectionid" />
+			<send name="'MyEvent'" target="session.id" />
+		</transition>
+ 
+		<transition event="MyEvent">
+			<accept connectionid="MyCallID" />
+		</transition>
+		 
+		<transition event="connection.connected" state="state_1">
+			<log expr="'***** CALL WAS ANSWERED *****'" />
+			<dialogstart src="'dialog.vxml'" type="'application/voicexml+xml'" />
+		</transition>
+		 
+		<transition event="error.dialog.notstarted" state="state_1">
+			<log expr="'****** ERROR.DIALOGNOTSTARTED.NAME = ' + event$.name" />
+		</transition>
+		 
+		<transition event="dialog.exit">
+			<log expr="'***** CALL EXITING *****'" />
+			<exit/>
+		</transition>
+	</eventprocessor> -->
+</ccxml>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NOTE THAT WE *MUST* DECLARE THE xmlns ATTRIBUTE --> 
+<ccxml version="1.0" xmlns:voxeo="http://community.voxeo.com/xmlns/ccxml"> 
+
+  <var name="state0" expr="'init'"/>
+
+  <eventprocessor statevariable="state0">
+    <transition state="'init'" event="connection.CONNECTION_ALERTING" name="evt">
+      <log expr="'---- assigning incoming callid to [line_0] ----'"/>
+      <var name="line_0" expr="evt.callid"/> 
+      <log expr="'---- creating conference ----'"/>
+      <createconference id="smallConf"/> 
+    </transition>
+    
+    <transition state="'init'" event="ccxml.conference.created">
+      <assign name="state0" expr="'docalls'"/>
+      <log expr="'---- conference created and its ID is [' + smallConf + '] ----'"/>
+      <log expr="'---- accepting incoming call [line_0] ----'"/>
+      <accept callid="line_0"/>  
+      <log expr="'---- making outbound calls ----'"/>
+      <createcall dest="'tel:+14439946671'" name="line_1"/> 
+      <createcall dest="'tel:+14159993161'" name="line_2"/> 
+      <!-- <createcall dest="'4078351113'" name="line_3"/>  -->
+
+    </transition>
+  
+    <transition event="connection.CONNECTION_CONNECTED" name="evt">
+      <log expr="'---- call leg ' + evt.callid + ' has been answered ----'"/>  
+      <join sessionid1="evt.callid" sessionid2="smallConf"/> 
+    </transition>
+
+    <transition event="ccxml.conference.joined" name="evt">
+      <log expr="'---- call leg ' + evt.callid + ' has joined the conference ----'"/> 
+    </transition>
+    
+    <transition event="ccxml.conference.unjoined" name="evt">
+      <log expr="'---- call leg ' + evt.callid + ' has unjoined the conference ----'"/> 
+    </transition>    
+
+    <transition event="call.CALL_INVALID" name="evt">
+      <if cond="evt.callid == line_0">        
+        <destroyconference id="smallConf"/>
+        <assign name="state0" expr="'conferencedestroyed'"/> 
+      </if>
+    </transition>    
+    
+    <transition event="ccxml.conference.destroyed">
+      <exit/> 
+    </transition>
+
+    <transition state="'docalls'" event="error.*" name="evt">
+      <log expr="'---- the problem was ' + evt.error + ' ----'"/> 
+      <log expr="'---- killing the conference as a result ----'"/> 
+      <voxeo:sendemail to="'yourEmail@there.com'" 
+                        from="'myApp@here.com'" 
+                        type="'debug'" 
+                        body=" 'conference error detected ! ' "/>
+      <destroyconference id="smallConf"/>
+      <exit/> 
+    </transition>
+
+    <transition event="error.*" name="evt">
+      <log expr="'---- an error has occurred (' + evt.error + ') ----'"/>
+              <voxeo:sendemail to="'yourEmail@there.com'" 
+                        from="'myApp@here.com'" 
+                        type="'debug'" 
+                        body=" 'generic error detected ! ' "/>
+      <exit/>
+    </transition>
+
+  </eventprocessor>    
+</ccxml>

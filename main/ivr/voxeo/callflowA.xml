@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+<playtext>Hello Welcome to this application.</playtext>
+<playaudio>http://people.ischool.berkeley.edu/~siddharth/voxeo/helloworld.wav</playaudio>
+</Response>

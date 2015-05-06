@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<vxml version = "2.1" application="callflowB1.xml">
+
+  <meta name="maintainer" content="YOUREMAILADDRESS@HERE.com"/>
+
+  <form>
+    <block>
+     <prompt>
+      Hello World.
+      My favorite actor is <value expr="application.MyFavoriteActor"/>
+      and my favorite TV show is <value expr="application.MyFavoriteTVShow"/>
+      Tony's SAT score was <value expr="application.TonysSATScore"/>
+     </prompt>
+    </block>
+  </form>
+</vxml>

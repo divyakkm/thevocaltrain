@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ccxml xmlns="http://www.w3.org/2002/09/ccxml" version="1.0">
+ 
+	<var name="inboundID" />
+	<var name="outboundID" />
+	<var name="initState" expr="'state1'" />
+	 
+	<eventprocessor statevariable="initState">
+		<transition state="state1" event="connection.alerting">
+			<log expr="'***** INBOUND CONNECTION ALERTING *****'" />
+			<log expr="'*** The called ID is ' + event$.connection.local + ' ***'" />
+			<log expr="'*** The caller ID is ' + event$.connection.remote + ' ***'" />
+			<assign name="inboundID" expr="event$.connectionid" />
+			<accept connectionid="inboundID" />
+			<assign name="initState" expr="'state2'" />
+		</transition>
+ 
+		<transition state="state2" event="connection.connected">
+			<assign name="initState" expr="'state3'" />
+			<log expr="'***** CONNECTION.CONNECTED: INBOUND *****'" />
+			<createcall dest="'tel:+14159993161'" callerid="'1112223333'" connectionid="outboundID" timeout="'30s'" />
+		</transition>
+ 
+		<transition state="state3" event="connection.progressing">
+			<log expr="'***** CONNECTION.PROGRESSING *****'" />
+			<dialogstart src="'someFile.wav?text=This is an automated call from the H.A.L. 9000 computer system to commander David Bowman. This message is to inform you that all pod bay doors are now closed, and re entry to the Discovery spacecraft is forbidden. This message is too important to jeapordize it to human error. This conversation can serve no further purpose. Goodbye.'" type="'audio/wav'" />
+			<assign name="initState" expr="'state4'" />
+		</transition>
+ 
+		<transition state="state4" event="connection.connected">
+			<assign name="initState" expr="'state5'" />
+			<log expr="'***** CONNECTION.CONNECTED: INBOUND *****'" />
+			<join id1="inboundID" id2="outboundID" duplex="'full'" />
+		</transition>
+ 
+		<transition state="state5" event="conference.joined">
+			<log expr="'***** CONFERENCE JOINED: INBOUND LEG TO OUTBOUND LEG *****'" />
+		</transition>
+ 
+		<transition event="connection.disconnected">
+			<log expr="'***** CONNECTION.DISCONNECTED *****'" />
+			<exit/>
+		</transition>
+	</eventprocessor>
+</ccxml>
+ 
+<!-- createcall element ani spoofing sample -->
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<ccxml xmlns="http://www.w3.org/2002/09/ccxml" version="1.0">
+ 
+<var name="inboundID" />
+<var name="outboundID" />
+<var name="initState" expr="'state1'" />
+<var name="phoneNumber" expr="'4071234455'" />
+<var name="ani" expr="'4075551234'" />
+ 
+<eventprocessor statevariable="initState">
+<transition state="state1" event="connection.alerting" name="evt">
+<log expr="'***** INBOUND CONNECTION ALERTING *****'" />
+<assign name="inboundID" expr="evt.connectionid" />
+<accept connectionid="inboundID" />
+<assign name="initState" expr="'state2'" />
+</transition>
+ 
+<transition state="state2" event="connection.connected" name="evt">
+<assign name="initState" expr="'state3'" />
+<log expr="'***** CONNECTION.CONNECTED: INBOUND *****'" />
+<createcall dest="'tel:1' + phoneNumber + 'callerid=' + ani" connectionid="outboundID" timeout="'30s'" />
+</transition>
+ 
+<transition state="state3" event="connection.progressing" name="evt">
+<log expr="'***** CONNECTION.PROGRESSING *****'" />
+<assign name="initState" expr="'state4'" />
+</transition>
+ 
+<transition state="state4" event="connection.connected" name="evt">
+<assign name="initState" expr="'state5'" />
+<log expr="'***** CONNECTION.CONNECTED: INBOUND *****'" />
+<join id1="inboundID" id2="outboundID" duplex="'full'" />
+</transition>
+ 
+<transition state="state5" event="conference.joined" name="evt">
+<log expr="'***** CONFERENCE JOINED: INBOUND LEG TO OUTBOUND LEG *****'" />
+</transition>
+ 
+<transition event="connection.disconnected">
+<log expr="'***** CONNECTION.DISCONNECTED *****'" />
+<exit/>
+</transition>
+</eventprocessor>
+</ccxml> -->

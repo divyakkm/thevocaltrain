@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ccxml version="1.0">
+
+
+<!-- Connection ID Vars -->
+<var name="call_0"/>
+<var name="myConfID"/>
+<!-- Dialog ID Vars -->
+<var name="getConfID_Dlg"/>
+<var name="joinTheConf_Dlg"/>
+<var name="leftTheConf_Dlg"/>
+<var name="noInput_Dlg"/>
+
+
+<!-- App Vars -->
+<var name="nextEvent"/>
+<var name="audioPath" expr="'audio/'"/>
+<var name="state_0" expr="'init'"/>
+
+
+<eventprocessor statevariable="state_0">
+
+<!-- *********************** -->
+<!-- Connection Events -->
+<!-- *********************** -->
+  <transition state="init" event="connection.alerting">
+    <assign name="call_0" expr="event$.connectionid"/>
+    <accept connectionid="call_0"/>
+  </transition>
+
+  <transition state="init" event="connection.connected">
+    <log expr="'*** CALL CONNECTED ***'"/>
+    <assign name="state_0" expr="'connected'"/>
+    <send name="'getConfID'" target="session.id" targettype="'ccxml'"/>
+  </transition>
+
+  <transition event="connection.disconnected">
+    <log expr="'*** CALL DISCONNECTED ***'"/>
+    <exit/>
+  </transition>
+
+<!-- *********************** -->
+<!-- User Defined Events -->
+<!-- *********************** -->
+  <transition event="getConfID">
+    <assign name="state_0" expr="'getConfID'"/>
+    <dialogstart  src="audioPath + 'enterConferenceID.wav?termdigits=%23&amp;maxtime=10000&amp;text=Enter your conference I D followed by the pound key.'"
+                  type="'application/x-fetchdigits'"
+                  dialogid="getConfID_Dlg"
+                  connectionid="call_0"/>
+  </transition>
+
+  <transition event="joinTheConf">
+    <assign name="state_0" expr="'joinTheConf'"/>
+    <dialogstart src="audioPath + 'joinTheConference.wav?text=You will now join the conference. Press the pound key to exit without disconnecting.'"
+                type="'audio/wav'"
+                dialogid="joinTheConf_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+  <transition event="leftTheConf">
+    <assign name="state_0" expr="'leftTheConf'"/>
+    <dialogstart src="audioPath + 'leftTheConference.wav?termdigits=123&amp;maxtime=30000&amp;text=You have left the conference. Press one to disconnect. Press two to rejoin, or press three to join a different conference.'"
+                type="'application/x-fetchdigits'"
+                dialogid="leftTheConf_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+  <transition event="playNoInput">
+    <assign name="state_0" expr="'playNoInput'"/>
+    <dialogstart src="audioPath + 'noInput.wav?text=I am sorry. I did not hear anything.'"
+                type="'audio/wav'"
+                dialogid="noInput_Dlg"
+                connectionid="call_0"/>
+  </transition>
+
+
+<!-- *********************** -->
+<!-- Dialog Exit Events -->
+<!-- *********************** -->
+  <transition state="getConfID" event="dialog.exit">
+    <if cond="event$.values.digits == ''">
+      <log expr="'*** USER DID NOT ENTER CONFERENCE ID ***'"/>
+      <assign name="nextEvent" expr="'getConfID'"/>
+      <send name="'playNoInput'" target="session.id" targettype="'ccxml'"/>
+    <else/>
+      <log expr="'*** CONFERENCE ID ENTERED: [' + event$.values.digits + '] ***'"/>
+      <createconference conferenceid="myConfID" confname="event$.values.digits"/>
+    </if>
+  </transition>
+
+  <transition state="joinTheConf" event="dialog.exit">
+    <log expr="'*** JOINING CONFERENCE ***'"/>
+    <join id1="call_0" id2="myConfID" entertone="'true'" exittone="'true'" voxeo-termdigits="'#'"/>
+  </transition>
+
+  <transition state="leftTheConf" event="dialog.exit">
+    <log expr="'*** USER PRESSED: [' + event$.values.termdigit + '] ***'"/>
+    <if cond="event$.values.termdigit == 1">
+      <log expr="'*** USER CHOSE TO DISCONNECT ***'"/>
+      <disconnect connectionid="call_0"/>
+    <elseif cond="event$.values.termdigit == 2"/>
+      <log expr="'*** USER CHOSE TO REJOIN CONFERENCE ***'"/>
+      <send name="'joinTheConf'" target="session.id" targettype="'ccxml'"/>
+    <elseif cond="event$.values.termdigit == 3"/>
+      <log expr="'*** USER CHOSE TO JOIN NEW CONFERENCE ***'"/>
+      <send name="'getConfID'" target="session.id" targettype="'ccxml'"/>
+    <else/>
+      <log expr="'*** USER DID NOT PRESS A TERMDIGIT ***'"/>
+      <assign name="nextEvent" expr="'leftTheConf'"/>
+      <send name="'playNoInput'" target="session.id" targettype="'ccxml'"/>
+    </if>
+  </transition>
+
+  <transition state="playNoInput" event="dialog.exit">
+    <log expr="'*** NOINPUT DIALOG COMPLETE / THROWING NEXT EVENT: [' + nextEvent + '] ***'"/>
+    <send name="nextEvent" target="session.id" targettype="'ccxml'"/>
+  </transition>
+
+
+<!-- *********************** -->
+<!-- Conference Events -->
+<!-- *********************** -->
+  <transition event="conference.created">
+    <log expr="'*** CONFERENCE CREATED ***'"/>
+    <send name="'joinTheConf'" target="session.id" targettype="'ccxml'"/>
+  </transition>
+
+  <transition event="conference.joined">
+    <log expr="'*** CALL JOINED TO CONFERENCE ***'"/>
+  </transition>
+
+  <transition event="conference.unjoined">
+    <log expr="'*** CALL UNJOINED FROM CONFERENCE ***'"/>
+    <send name="'leftTheConf'" target="session.id" targettype="'ccxml'"/>
+  </transition>
+
+
+<!-- *********************** -->
+<!-- General Exceptions -->
+<!-- *********************** -->
+
+  <transition event="error.*">
+    <log expr="'*** AN ERROR HAS OCCURRED: [' + event$.reason + '] ***'"/>
+    <exit/>
+  </transition>
+</eventprocessor>
+
+</ccxml>
