@@ -211,7 +211,7 @@
 							<div class="col-md-4">
 								<div class="span12" id="studentdetails">
 									<h4>Student details</h4>
-<!-- 									<div>
+									<!-- 									<div>
 										<img src="/images/favicon_child.png" width="80px" height="80px" align="left">
 									</div> -->
 
@@ -248,10 +248,9 @@
 											<div id="collapseOne" class="panel-collapse collapse in">
 												<div class="panel-body col-md-7">
 													<div>
-														<h4> Notes taken during the session:</h4>
-														{{notes}}
+														<h4> Notes taken during the session:</h4> {{notes}}
 													</div>
-													
+
 													<div>
 														<h4> Lesson Taught:</h4>
 														<p>Objective: To make the student feel comfortable with you </p>
@@ -262,9 +261,9 @@
 													</div>
 												</div>
 
-													<div class="panel-body col-md-5" id="container-column" style="min-width: 310px; height: 400px;">
-													{{>highchartsHelper chartId="lessonChart" chartWidth="31%" charHeight="31%" chartObject=lessonChart}}
-													</div>
+												<div class="panel-body col-md-5" id="container-column" style="min-width: 310px; height: 400px;">
+													{{>highchartsHelper chartId="lessonChart" chartWidth="100%" charHeight="100%" chartObject=lessonChart}}
+												</div>
 
 											</div>
 											{{/each}}
